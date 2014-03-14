@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#from types import MethodType
-#import inspect
 import sys
 import os.path
 import importlib
