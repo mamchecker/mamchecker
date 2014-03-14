@@ -1,0 +1,7 @@
+_*
+!__*
+*.pyc
+__pycache__
+.d8_history
+.coverage*
+.doit.db
