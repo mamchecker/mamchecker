@@ -1,0 +1,9 @@
+[submodule "sympy"]
+	path = sympy
+	url = https://github.com/mamchecker/sympy
+[submodule "bottle"]
+	path = bottle
+	url = https://github.com/mamchecker/bottle
+[submodule "simpleauth"]
+	path = simpleauth
+	url = https://github.com/mamchecker/simpleauth
