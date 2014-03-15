@@ -23,28 +23,32 @@ from webob.exc import HTTPNotFound, HTTPBadRequest
 
 re_id = re.compile(r"^[^\d\W]\w*\.[^\d\W]\w*$", re.UNICODE)
 
+
 class Page(PageBase):
 
     def __init__(self, _request):
-        super(self.__class__,self).__init__(_request)
+        super(self.__class__, self).__init__(_request)
         self.problem = None
         self.problem_set = None
 
-    def get_data(self,problemkey=None):
+    def get_data(self, problemkey=None):
 
-        key = problemkey or self.request.query_string.startswith('key=') and self.request.query_string[4:]
+        key = problemkey or self.request.query_string.startswith(
+            'key=') and self.request.query_string[4:]
 
         if key:
             self.problem = ndb.Key(urlsafe=key).get()
-            if self.problem: #else it was deleted from db
+            if self.problem:  # else it was deleted from db
                 if self.problem._get_kind() != 'Problem':
                     raise HTTPNotFound('No such problem')
                 self.request.query_string = self.problem.query_string
-        else:#get existing unanswered if query_string is same
+        else:  # get existing unanswered if query_string is same
             q = Problem.gql(
-                    "WHERE query_string = :1 AND lang = :2 AND answered = NULL AND ANCESTOR IS :3",
-                    self.request.query_string,self.request.lang,self.request.student.key)
-            fch = q.fetch(1)#first of query, None possible
+                "WHERE query_string = :1 AND lang = :2 AND answered = NULL AND ANCESTOR IS :3",
+                self.request.query_string,
+                self.request.lang,
+                self.request.student.key)
+            fch = q.fetch(1)  # first of query, None possible
             self.problem = fch[0] if fch else None
 
         if self.problem:
@@ -52,48 +56,60 @@ class Page(PageBase):
             while keyOK and keyOK.get().userkey != self.request.student.userkey:
                 keyOK = keyOK.parent()
             if not keyOK:
-                logging.warning("%s not for %s",keyparams(self.problem.key),keyparams(self.request.student.key))
+                logging.warning(
+                    "%s not for %s", keyparams(
+                        self.problem.key), keyparams(
+                        self.request.student.key))
                 raise HTTPBadRequest('no permission')
-            self.problem_set = Problem.query(Problem.collection == self.problem.key).order(Problem.nr)
-        elif problemkey is None:#XXX: Make deleting empty a cron job
-            #remove unanswered problems for this username
-            #timedelta to have the same problem after returning from a followed link
+            self.problem_set = Problem.query(
+                Problem.collection == self.problem.key).order(
+                Problem.nr)
+        elif problemkey is None:  # XXX: Make deleting empty a cron job
+            # remove unanswered problems for this username
+            # timedelta to have the same problem after returning from a
+            # followed link
             age = datetime.datetime.now() - datetime.timedelta(days=1)
-            q = Problem.gql("WHERE answered = NULL AND created < :1 AND ANCESTOR IS :2",
-                    age,self.request.student.key)
+            q = Problem.gql(
+                "WHERE answered = NULL AND created < :1 AND ANCESTOR IS :2",
+                age,
+                self.request.student.key)
             delete_all(q)
-            q = Problem.gql("WHERE allempty = True AND answered != NULL AND ANCESTOR IS :1",
-                    self.request.student.key)
+            q = Problem.gql(
+                "WHERE allempty = True AND answered != NULL AND ANCESTOR IS :1",
+                self.request.student.key)
             delete_all(q)
 
-    def load_content(self,layout='content',rebase=True):
+    def load_content(self, layout='content', rebase=True):
         ''' evaluates the templates with includes therein and zips them to db entries
 
-        examples: 
+        examples:
             mamchecker/test/test_content.py
 
         '''
 
         tplid = self.check_query(self.request.query_string)
         _chain = []
-        withempty,noempty = self.make_summary()
+        withempty, noempty = self.make_summary()
         nrs = counter()
         problems_cntr = counter()
         SimpleTemplate.overrides = {}
         problem_set_iter = None
-        
+
         def _new(rsv):
             nr = nrs.next()
-            problem, pkwargs = Problem.from_resolver(rsv,nr,self.request.student.key)
+            problem, pkwargs = Problem.from_resolver(
+                rsv, nr, self.request.student.key)
             if not self.problem:
                 self.problem = problem
             else:
                 problem.collection = self.problem.key
             if problem.points:
                 problems_cntr.next()
-            problem.put()#TODO: shouln't it be possible to define given() ... in the template itself
+            # TODO: shouln't it be possible to define given() ... in the
+            # template itself
+            problem.put()
             SimpleTemplate.overrides.update(pkwargs)
-            _chain[-1]=SimpleTemplate.overrides.copy()
+            _chain[-1] = SimpleTemplate.overrides.copy()
 
         def _zip(rsv):
             if not self.current or rsv.query_string != self.current.query_string:
@@ -103,107 +119,124 @@ class Page(PageBase):
                     ms += self.current.query_string
                 logging.info(ms)
                 raise HTTPBadRequest(ms)
-            d = rsv.load()#for the things not stored in db, like 'names'
+            d = rsv.load()  # for the things not stored in db, like 'names'
             pkwargs = d.__dict__.copy()
-            pkwargs.update(#from db
-                {s:v.__get__(self.current,self.current._get_kind()) for s,v in self.current._properties.items()}
-                )
+            pkwargs.update(  # from db
+                {s: v.__get__(self.current, self.current._get_kind())
+                 for s, v in self.current._properties.items()}
+            )
             pkwargs.update({
                 'lang': self.request.lang,
                 'g': self.current.given,
-                'request':self.request})
+                'request': self.request})
             if self.current.points:
                 problems_cntr.next()
             if self.current.answered:
-                sw,sn = self.make_summary(self.current)
-                pkwargs.update({'summary':(sw,sn)})
+                sw, sn = self.make_summary(self.current)
+                pkwargs.update({'summary': (sw, sn)})
                 withempty.__iadd__(sw)
                 noempty.__iadd__(sn)
             SimpleTemplate.overrides.update(pkwargs)
-            _chain[-1]=SimpleTemplate.overrides.copy()
+            _chain[-1] = SimpleTemplate.overrides.copy()
             try:
                 self.current = next(problem_set_iter)
             except StopIteration:
                 self.current = None
 
-        def lookup(query_string,_in=True,to_do=None):
+        def lookup(query_string, _in=True, to_do=None):
             if not _in:
                 cm1 = _chain[-1]
-                if cm1==query_string or isinstance(cm1,dict) and cm1['query_string']==query_string:
+                if cm1 == query_string or isinstance(cm1, dict) and cm1['query_string'] == query_string:
                     del _chain[-1]
-                    if _chain and isinstance(_chain[-1],dict):
+                    if _chain and isinstance(_chain[-1], dict):
                         SimpleTemplate.overrides = _chain[-1].copy()
                 return
             if query_string in _chain:
                 return
-            if any([dc['query_string']==query_string for dc in _chain if isinstance(dc,dict)]):
+            if any([dc['query_string'] == query_string for dc in _chain if isinstance(dc, dict)]):
                 return
             _chain.append(query_string)
-            rsv = resolver(query_string,self.request.lang)
+            rsv = resolver(query_string, self.request.lang)
             if not rsv.templatename and re_id.match(query_string):
-                raise HTTPNotFound('✘ '+query_string)
+                raise HTTPNotFound('✘ ' + query_string)
             if to_do and '.' in query_string:
                 to_do(rsv)
             res = rsv.templatename
             return res
 
-        env = {} 
+        env = {}
         stdout = []
 
-        if tplid and isinstance(tplid,str) or self.problem:
+        if tplid and isinstance(tplid, str) or self.problem:
             def prebase(to_do):
                 del _chain[:]
                 env.clear()
                 env.update({
-                    'query_string':self.request.query_string,
-                    'lang':self.request.lang,
-                    'scripts':{}})
-                if '\n' in tplid: lookup(self.request.query_string,True,to_do)
-                tpl = get_tpl(tplid,template_lookup=lambda n,i=True:lookup(n,i,to_do))
+                    'query_string': self.request.query_string,
+                    'lang': self.request.lang,
+                    'scripts': {}})
+                if '\n' in tplid:
+                    lookup(self.request.query_string, True, to_do)
+                tpl = get_tpl(
+                    tplid,
+                    template_lookup=lambda n,
+                    i=True: lookup(
+                        n,
+                        i,
+                        to_do))
                 try:
-                    tpl.execute(stdout,env)
+                    tpl.execute(stdout, env)
                 except AttributeError:
                     c = self.current or self.problem
-                    logging.info('DB given does not fit to template '+str(c.given)if c else '')
-                    if c: c.key.delete()
+                    logging.info(
+                        'DB given does not fit to template ' + str(c.given)if c else '')
+                    if c:
+                        c.key.delete()
                     raise
-                if '\n' in tplid: lookup(self.request.query_string,False,to_do)
+                if '\n' in tplid:
+                    lookup(self.request.query_string, False, to_do)
 
             if not self.problem:
                 prebase(_new)
             else:
                 if not self.problem_set:
                     self.problem_set = Problem.query(
-                            Problem.collection == self.problem.key).order(Problem.nr)
+                        Problem.collection == self.problem.key).order(
+                        Problem.nr)
                 problem_set_iter = self.problem_set.iter()
                 self.current = self.problem
                 try:
                     prebase(_zip)
                 except HTTPBadRequest:
-                    #database entry is out-dated
-                    delete_all(Problem.query(Problem.collection == self.problem.key))
+                    # database entry is out-dated
+                    delete_all(
+                        Problem.query(
+                            Problem.collection == self.problem.key))
                     self.problem.key.delete()
                     self.problem = None
                     prebase(_new)
             content = ''.join(stdout)
         else:
-            content = filteredcontent(self.request.lang,tplid)
+            content = filteredcontent(self.request.lang, tplid)
 
         nrs.close()
 
         if rebase:
             SimpleTemplate.overrides = {}
-            del stdout[:] #the script functions will write into this
-            tpl = get_tpl(layout, template_lookup = mklookup(self.request.lang))
-            env.update(dict(content = content, 
-                summary = (withempty,noempty),
-                problem = self.problem,
-                problemkey = self.problem and self.problem.key.urlsafe(),
-                with_problems = problems_cntr.next()>0,
-                assignable = assignable,
-                request = self.request
-                ))
-            tpl.execute(stdout,env)
+            del stdout[:]  # the script functions will write into this
+            tpl = get_tpl(layout, template_lookup=mklookup(self.request.lang))
+            env.update(
+                dict(
+                    content=content,
+                    summary=(
+                        withempty,
+                        noempty),
+                    problem=self.problem,
+                    problemkey=self.problem and self.problem.key.urlsafe(),
+                    with_problems=problems_cntr.next() > 0,
+                    assignable=assignable,
+                    request=self.request))
+            tpl.execute(stdout, env)
             problems_cntr.close()
             return ''.join(stdout)
         else:
@@ -249,36 +282,36 @@ class Page(PageBase):
 
         '''
 
-        codemarkers = set(StplParser.default_syntax)-set([' '])
-        if set(qs)&codemarkers:
+        codemarkers = set(StplParser.default_syntax) - set([' '])
+        if set(qs) & codemarkers:
             raise HTTPBadRequest('Wrong characters in query.')
 
-        qparsed = parse_qsl(qs,True)
+        qparsed = parse_qsl(qs, True)
 
         if not qparsed:
             return qparsed
 
-        if any(['.' not in qa for qa,qb in qparsed]):
+        if any(['.' not in qa for qa, qb in qparsed]):
             raise HTTPNotFound('There is no top level content.')
-        if any([not author_folder(qa.split('.')[0]) for qa,qb in qparsed]):
+        if any([not author_folder(qa.split('.')[0]) for qa, qb in qparsed]):
             raise HTTPNotFound('No content.')
 
         cnt = len(qparsed)
-        if (cnt > 1 or 
-                (cnt == 1 and 
-                len(qparsed[0]) == 2 and 
-                qparsed[0][1] and 
-                int(qparsed[0][1])>1)):
+        if (cnt > 1 or
+                (cnt == 1 and
+                 len(qparsed[0]) == 2 and
+                 qparsed[0][1] and
+                 int(qparsed[0][1]) > 1)):
             res = []
             icnt = counter()
             for q, i in qparsed:
-                if not i: i = '1'
+                if not i:
+                    i = '1'
                 for ii in range(int(i)):
-                    res.append(Util.inc(q,icnt))
+                    res.append(Util.inc(q, icnt))
             return '\n'.join(res)
         else:
             return qparsed[0][0]
-        
 
     def get_response(self):
         '''
@@ -291,14 +324,14 @@ class Page(PageBase):
         self.get_data()
         return self.load_content()
 
-    def check_answers(self,problem):
-        rsv = resolver(problem.query_string,problem.lang)
+    def check_answers(self, problem):
+        rsv = resolver(problem.query_string, problem.lang)
         d = rsv.load()
         problem.answered = datetime.datetime.now()
         if problem.results:
             problem.answers = [self.request.get(q) for q in problem.inputids]
-            na = d.norm(problem.answers) 
-            problem.oks = d.equal(na,problem.results)
+            na = d.norm(problem.answers)
+            problem.oks = d.equal(na, problem.results)
         problem.put()
 
     def post_response(self):
@@ -311,18 +344,19 @@ class Page(PageBase):
         True
 
         '''
-        problemkey = self.request.get('problemkey') or (self.problem and self.problem.key.urlsafe())
+        problemkey = self.request.get('problemkey') or (
+            self.problem and self.problem.key.urlsafe())
         self.get_data(problemkey)
         if self.problem and not self.problem.answered:
-            withempty,noempty = Page.make_summary()
+            withempty, noempty = Page.make_summary()
             for p in self.problem_set.iter():
                 self.check_answers(p)
-                sw,sn = self.make_summary(p)
+                sw, sn = self.make_summary(p)
                 withempty.__iadd__(sw)
                 noempty.__iadd__(sn)
             if withempty.counted > 0:
-                self.problem.answers = [Util.summary(withempty,noempty)]
-                #else cleaning empty answers would remove this
+                self.problem.answers = [Util.summary(withempty, noempty)]
+                # else cleaning empty answers would remove this
             self.check_answers(self.problem)
         return self.load_content()
 
@@ -340,15 +374,17 @@ class Page(PageBase):
         def smry(f):
             try:
                 nq = len(f(p.inputids))
-                foks = f(p.oks or [False]*nq) 
+                foks = f(p.oks or [False] * nq)
                 fpoints = f(p.points)
                 cnt = 1
             except:
-                cnt,nq,foks,fpoints = 0,0,[],[]
+                cnt, nq, foks, fpoints = 0, 0, [], []
             return Struct(counted=cnt,
-                    oks=sum(foks),
-                    of=len(foks),
-                    points=sum([foks[i]*fpoints[i] for i in range(nq)]),
-                    allpoints=sum(fpoints))
-        return smry(lambda c:c), smry(lambda c:[cc for i,cc in enumerate(c) if p.answers[i]])
-
+                          oks=sum(foks),
+                          of=len(foks),
+                          points=sum([foks[i] * fpoints[i] for i in range(nq)]),
+                          allpoints=sum(fpoints))
+        return smry(
+            lambda c: c), smry(
+            lambda c: [
+                cc for i, cc in enumerate(c) if p.answers[i]])

@@ -5,16 +5,17 @@ import logging
 from mamchecker.util import PageBase
 from mamchecker.hlp import import_module
 from google.appengine.api import mail
-via_email = True#!!else everybody can change the password
+via_email = True  # !!else everybody can change the password
 
 py_test = os.environ.get('SERVER_SOFTWARE', '').startswith('py.test')
 
+
 class Page(PageBase):
-    
+
     def __init__(self, _request):
-        super(self.__class__,self).__init__(_request)
+        super(self.__class__, self).__init__(_request)
         username = self.request.get('username')
-        self.params = {'username':username, 'not_found':False }
+        self.params = {'username': username, 'not_found': False}
 
     def post_response(self):
         username = self.request.get('username')
@@ -30,7 +31,9 @@ class Page(PageBase):
         user_id = user.get_id()
         token = self.user_model.create_signup_token(user_id)
 
-        relative_url = 'verification?type=p&user_id={}&signup_token={}'.format(user_id,token)
+        relative_url = 'verification?type=p&user_id={}&signup_token={}'.format(
+            user_id,
+            token)
 
         email = ''
         try:
@@ -39,11 +42,16 @@ class Page(PageBase):
             logging.warning('!! no email for password change !!')
 
         if not py_test and via_email and email:
-            confirmation_url = self.request.application_url+'/'+self.request.lang+'/'+relative_url
+            confirmation_url = self.request.application_url + \
+                '/' + self.request.lang + '/' + relative_url
             logging.info(confirmation_url)
-            m = import_module('forgot.'+self.request.lang)
-            mail.send_mail(m.sender_address, email, m.subject, m.body%confirmation_url)
+            m = import_module('forgot.' + self.request.lang)
+            mail.send_mail(
+                m.sender_address,
+                email,
+                m.subject,
+                m.body %
+                confirmation_url)
             self.redirect('message?msg=j')
-        else: 
+        else:
             self.redirect(relative_url)
-  
