@@ -10,7 +10,6 @@ from itertools import chain
 from bottle import SimpleTemplate
 from urlparse import parse_qsl
 
-#_initshell.py to initialize manually
 from mamchecker.hlp import int_to_base26, datefmt
 from mamchecker.kinds import make_kind0
 
@@ -36,7 +35,6 @@ class User(webapp2_extras.appengine.auth.models.User):
     current_student = ndb.KeyProperty(kind = 'Student')
 
     def set_password(self, raw_password):
-        #raw_password = "tstthis"
         self.password = security.generate_password_hash(raw_password, length=12)
     @classmethod
     def get_by_auth_token(cls, user_id, token, subject='auth'):
@@ -104,7 +102,6 @@ def add_student(studentpath, color=None, user=None):
     return self
 
 #dict(filter(lambda x:isinstance(x[1],ndb.ComputedProperty),Problem._properties.iteritems()))
-#[k for k,v in Problem._properties.iteritems() if isinstance(v,ndb.ComputedProperty)]
 class Problem(Base):#parent: Student
     query_string = ndb.StringProperty()
     lang = ndb.StringProperty()
@@ -145,7 +142,6 @@ class Problem(Base):#parent: Student
         return problem, pkwargs
 
 #e=myself.key
-#dir(e)
 keyparams = lambda k: '&'.join([r+'='+str(v) for r,v in k.pairs()])
 #keyparams(e)
 ctxkey = lambda x: ndb.Key(*list(chain(*zip(problemCtx[:len(x)],x))))
@@ -376,9 +372,6 @@ class Assignment(Base):#parent: Student
     query_string = ndb.StringProperty()
     due = ndb.DateTimeProperty()
 
-#teacherkey = ctxkey(['5ec07249','af76','56f2'])
-#teacher = teacherkey.get()
-#ass = list(assignable(teacherkey,teacher.userkey))
 def assignable(teacherkey, userkey):
     for st in depth_1st(keys=[teacherkey], models=[Teacher,Class,Student], userkey=userkey):
         yield st
@@ -404,38 +397,13 @@ def normqs(qs):
         return qparsed[0][0]
     return qs
 
-#assign_to_student(student.key.urlsafe(), 'r.i&r.u', 1)
-#assign_to_student(student.key.urlsafe(), 'r.s&r.v', 0)
-#assign_to_student(student.key.urlsafe(), 'r.x=2', 0)
 def assign_to_student(studentkeyurlsafe, query_string, duedays):
     now = datetime.datetime.now()
     studentkey = ndb.Key(urlsafe=studentkeyurlsafe)
     Assignment(parent=studentkey, query_string = normqs(query_string), 
             due = now + datetime.timedelta(days = int(duedays))).put()
 
-#studentkey = ctxkey(['5ec07249','af76','56f2','7','6'])
-#assign_to_student(studentkey.urlsafe(),'r.i=3',1)
-
-#alla=Assignment.query().iter(keys_only=True)
-#na = next(alla)
-#na.parent()==studentkey
-#allb=Assignment.query(ancestor=studentkey).iter(keys_only=True)
-#nb = next(allb)
-
-#follow a..
-#Key('School', '5ec07249', 'Period', 'af76', 'Teacher', '56f2', 'Class', '7', 'Student', '6', 'Assignment', 4783425336639488)
-#Key('School', '5ec07249', 'Period', 'af76', 'Teacher', '56f2', 'Class', '7', 'Student', '6')
-#na1 = next(alla)
-#na2 = next(alla)
-
-#at = list(assigntable(student))
-#s = at[0]
-#studentkey = ctxkey(['5ec07249','af76','56f2','7','6'])
-#userkey = studentkey.get().userkey
-#list(assigntable(studentkey,userkey))
 def assigntable(studentkey,userkey):
-    #studentkey = student.key
-    #akey=list(depth_1st(keys=[studentkey], models=[Student,Assignment]))[0]
     for e in depth_1st(keys=[studentkey], models=[Student,Assignment], userkey=userkey):
         yield e
 

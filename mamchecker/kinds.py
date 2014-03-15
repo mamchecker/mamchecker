@@ -8,8 +8,7 @@ make_kinda = lambda lang:{v:k for k,v in enumerate(kinds[lang])}
 
 kinds = {
 
-#order cannot be changed, because index is used in html files via kinda()
-#TODO: is this ok?
+#order must not be changed, because index is used in html files via kinda()
 'de':
 ['Übungen', 'Inhalte', 'Kurse', 'Informelles', 'Zusammenfassungen', 'Formelles', 'Fragmente',
 'Bemerkungen', 'Zitate', 'Definitionen', 'Theoreme', 'Korollare', 'Lemmas',

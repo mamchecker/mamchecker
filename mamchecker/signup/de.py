@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 sender_address = "Mamchecker Support <roland.puntaier@gmail.com>"
 subject = "Mamchecker: Bestätige deine Registrierung"
 body = """

@@ -16,13 +16,6 @@ from mamchecker.kinds import make_kinda, make_kind0, CtxStrings
 from mamchecker.model import studentCtx, Student, myself
 
 class Util:
-    #query_string,lang='r.a=3','de'
-    #blank = webapp2.Request.blank('/'+lang+'/?'+query_string)
-    #request, response = webapp2.RequestContext(app,blank.environ).__enter__()
-    #util = Util(request)
-    #request.lang = 'de'
-
-    #util.translate('Period')
     def __init__(self,request):
         self.request = request
     def query(self):
@@ -43,7 +36,6 @@ class Util:
         res.append('</div>')
         return '\n'.join(res)
     def translate(self,word):
-        #word = 'School'
         try:
             idx = studentCtx.index(word)
             res = CtxStrings[self.request.lang][idx]
