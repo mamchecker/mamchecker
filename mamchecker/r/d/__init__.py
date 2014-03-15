@@ -30,10 +30,10 @@ def calc(g):
     # r,u,u2,t=230,940,773.54,26
     r, u, u2, t = g.r, g.u, g.u2, g.t
     c = 1e3 * t / (r * log(u / u2))
-    return ['e^(-t/(R*C))', 
-            c, 
+    return ['e^(-t/(R*C))',
+            c,
             1e-6 * c * u,
-            1e-6 * c * u2, 
+            1e-6 * c * u2,
             1e-3 * r * c * log(2)]
 
 
