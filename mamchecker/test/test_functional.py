@@ -198,7 +198,7 @@ class TestRegistered(object):
         self._store('resp',self.resp.goto('/de/content'))
         assert "Übungen" in self.resp
         curx = self.resp.lxml
-        probs = curx.xpath('//a[contains(@href,"de/?")]/@href')
+        probs = curx.xpath('//a[contains(@href,"de/?r.b")]/@href')
         assert probs
         for prob in probs:
             #prob = '/de/?r.bu'
