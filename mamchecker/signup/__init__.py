@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
+import logging
+import os
 from mamchecker.util import PageBase
 from mamchecker.hlp import import_module
-import logging
 from google.appengine.api import mail
 
 via_email = True #main purpose: to allow recovering password (see forgot/__init__.py)
+
+py_test = os.environ.get('SERVER_SOFTWARE', '').startswith('py.test')
 
 class Page(PageBase):
 
@@ -40,8 +43,9 @@ class Page(PageBase):
         token = self.user_model.create_signup_token(user_id)
         relative_url = 'verification?type=v&user_id={}&signup_token={}'.format(user_id,token)
 
-        if via_email:
+        if not py_test and via_email:
             confirmation_url = self.request.application_url+'/'+self.request.lang+'/'+relative_url
+            logging.info(confirmation_url)
             m = import_module('signup.'+self.request.lang)
             mail.send_mail(m.sender_address, email, m.subject, m.body % confirmation_url)
             self.redirect('message?msg=j')

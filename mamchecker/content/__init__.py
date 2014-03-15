@@ -14,7 +14,7 @@ from google.appengine.ext import ndb
 
 from bottle import SimpleTemplate, get_tpl, StplParser
 
-from mamchecker.hlp import Struct, resolver, mklookup, counter, contentfolder
+from mamchecker.hlp import Struct, resolver, mklookup, counter, author_folder
 from mamchecker.util import PageBase, Util
 
 from mamchecker.model import Problem, filteredcontent, delete_all, assignable, studentCtx, keyparams
@@ -260,7 +260,7 @@ class Page(PageBase):
 
         if any(['.' not in qa for qa,qb in qparsed]):
             raise HTTPNotFound('There is no top level content.')
-        if any([not contentfolder(qa.split('.')[0]) for qa,qb in qparsed]):
+        if any([not author_folder(qa.split('.')[0]) for qa,qb in qparsed]):
             raise HTTPNotFound('No content.')
 
         cnt = len(qparsed)

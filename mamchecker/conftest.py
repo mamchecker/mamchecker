@@ -5,10 +5,13 @@
 import sys
 import os, os.path
 import pytest
+import re
 
-from mamchecker.hlp import contentfolder
-
+#not debug in app.py
 os.environ.update({'SERVER_SOFTWARE':'py.test2'})
+
+from mamchecker.languages import languages
+from mamchecker.hlp import author_folder
 
 sys.path += ['/opt/google-appengine-python']
 sys.path += ['/opt/google-appengine-python/lib/webapp2-2.5.2/']
@@ -46,9 +49,14 @@ def pytest_generate_tests(metafunc):
     if 'allcontent' in metafunc.fixturenames:
         root = os.path.dirname(__file__)
         def gen():
-            for fn,full in ((fn,os.path.join(root,fn)) for fn in os.listdir(root) if contentfolder(fn,True)):
-                for fs in (fs for fs in os.listdir(full) if contentfolder(fs,True)):
-                    yield ('.'.join([fn,fs]),'en')#TODO all langs
+            for fn,full in ((fn,os.path.join(root,fn)) for fn in os.listdir(root) if author_folder(fn,True)):
+                for fs in os.listdir(full):
+                    if re.match('[a-z]+',fs):
+                        contentf = os.path.join(full,fs)
+                        for ff in os.listdir(contentf):
+                            m = re.match('_*([a-z]+)\.html',ff)
+                            if m and m.group(1) in languages:
+                                yield ('.'.join([fn,fs]),m.group(1))
         #list(gen())
         metafunc.parametrize("allcontent", gen())
 

@@ -92,7 +92,8 @@ class TestRegistered(object):
         assert '404' in r.status
     def test_register(self):
         self._signup()
-        #self.resp.showbrowser()
+        #'message?msg=j' then email with link to verification
+        #this is skipped via
         assert '/de/verification' in self.resp.request.url
     def test_logout(self):
         r = self.resp.goto('/de/logout')

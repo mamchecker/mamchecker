@@ -341,7 +341,7 @@ datefmt = lambda dt: dt.isoformat(' ').split('.')[0]
 _no_test = ['content', 'contexts', 'done', 'edits', 'forgot', 'login', 'main', 'message',
     'password', 'signup', 'static', 'todo', 'verification']
 
-contentfolder = lambda fn,withtest=False: (fn not in _no_test+(['test'] if withtest else [])
+author_folder = lambda fn,withtest=False: (fn not in _no_test+(['test'] if withtest else [])
                                             and
                                             not fn.startswith('_') and
                                             '.' not in fn)
