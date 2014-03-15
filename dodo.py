@@ -337,7 +337,7 @@ def task_initdb():
                     except KeyError:
                         print(full)
                         raise
-                    inits.append('index_add(u"{0}", u"{1}", "{2}", "{3}",\n    u"{4}")'.format(
+                    inits.append('index_add(u"{0}", u"{1}", "{2}", "{3}",\n        u"{4}")'.format(
                         adir+'.'+anid
                         ,lang
                         ,defs['kind']
