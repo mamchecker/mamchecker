@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from mamchecker.util import PageBase
+from mamchecker.hlp import import_module
 import logging
+from google.appengine.api import mail
 
 via_email = True #main purpose: to allow recovering password (see forgot/__init__.py)
-from google.appengine.api import mail
 
 class Page(PageBase):
 
@@ -40,17 +41,8 @@ class Page(PageBase):
         relative_url = 'verification?type=v&user_id={}&signup_token={}'.format(user_id,token)
 
         if via_email:
-            #TODO: localize
             confirmation_url = self.request.application_url+'/'+self.request.lang+'/'+relative_url
             m = import_module('signup.'+self.request.lang)
-#            sender_address = "Mamchecker Support <roland.puntaier@gmail.com>"
-#            subject = "Mamchecker: Confirm your registration"
-#            body = """
-#Thank you for creating an account! Please confirm your email address by
-#clicking on the link below:
-#
-#%s
-#"""
             mail.send_mail(m.sender_address, email, m.subject, m.body % confirmation_url)
             self.redirect('message?msg=j')
         else:

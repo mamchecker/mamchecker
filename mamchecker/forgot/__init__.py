@@ -29,17 +29,16 @@ class Page(PageBase):
 
         relative_url = 'verification?type=p&user_id={}&signup_token={}'.format(user_id,token)
 
-        if via_email:
+        email = ''
+        try:
+            email = user.email_address
+        except:
+            logging.warning('!! no email for password change !!')
+
+        if via_email and email:
             confirmation_url = self.request.application_url+'/'+self.request.lang+'/'+relative_url
             m = import_module('forgot.'+self.request.lang)
-#            sender_address = "Mamchecker Support <roland.puntaier@gmail.com>"
-#            subject = "Mamchecker: Password Reset"
-#            body = """
-#Please click at the link to reset your password:
-#
-#%s
-#""" % confirmation_url
-            mail.send_mail(m.sender_address, user.email_adress, m.subject, m.body%confirmation_url)
+            mail.send_mail(m.sender_address, email, m.subject, m.body%confirmation_url)
             self.redirect('message?msg=j')
         else: 
             self.redirect(relative_url)
