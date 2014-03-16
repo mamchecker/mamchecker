@@ -17,19 +17,19 @@ Github Links
 This file is the main github README file as well as part of mamchecker's ``meta`` content.
 For further background follow these links to github.
 
-- `purpose <https://github.com/mamchecker/mamchecker/mamchecker/r/cz/en.rst>`_
+- `purpose <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/cz/en.rst>`_
 
-- `ideas <https://github.com/mamchecker/mamchecker/mamchecker/r/da/en.rst>`_
+- `ideas <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/da/en.rst>`_
 
-- `queries (this file up-to-date) <https://github.com/mamchecker/mamchecker/mamchecker/r/db/en.rst>`_
+- `queries (this file up-to-date) <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/db/en.rst>`_
 
-- `query rights <https://github.com/mamchecker/mamchecker/mamchecker/r/de/en.rst>`_
+- `query rights <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/de/en.rst>`_
 
-- `participate <https://github.com/mamchecker/mamchecker/mamchecker/r/dc/en.rst>`_
+- `participate <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/dc/en.rst>`_
 
-- `history <https://github.com/mamchecker/mamchecker/mamchecker/r/df/en.rst>`_
+- `history <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/df/en.rst>`_
 
-- `try in class <https://github.com/mamchecker/mamchecker/mamchecker/r/dd/en.rst>`_
+- `try in class <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/dd/en.rst>`_
 
 URL
 ...
