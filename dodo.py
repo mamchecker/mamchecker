@@ -2,7 +2,8 @@
 '''
 doit utility::
 
-Do this after having changed a rst file:
+Do this after having changed a rst file.
+Start this from below mamchecker/mamchecker.
 
 $ doit -kd. html
 
