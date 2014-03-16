@@ -1,7 +1,7 @@
 .. raw:: html
 
-    %path = "Mathematics/Logarithmus"
-    %kind = kinda["Content"]
+    %path = "maths/logarithm"
+    %kind = kinda["content"]
     %level = 10
     <!-- html -->
     
@@ -14,7 +14,7 @@ So from the result there are two way back: either to the basis or the exponent.
 - To get the basis one forms the power of the result with the reciprocal of the exponent,
   i.g. `(3^2)^{\frac{1}{2}} = 3`. This is also called root.
 
-- To get the exponent there is the **Logarithmus**, e.g. `\log_{3}(3^2)=2`.
+- To get the exponent there is the **logarithm**, e.g. `\log_{3}(3^2)=2`.
 
 From the calculation rules of exponents with same basis, e.g. `2^32^2=2^{3+2}` 
 and `\frac{2^3}{2^2}=2^{3-2}` follow the logarithm rules that make 
@@ -31,7 +31,7 @@ The repetition of multiplication (power) becomes repetition of addition (multipl
     \end{matrix}
 
 
-From the last rule it follows, how to calculate any logarithm with just one logarithm.
+From the last rule it follows how to calculate any logarithm with just one logarithm.
 
 .. math::
 

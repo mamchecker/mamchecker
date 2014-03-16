@@ -1,7 +1,7 @@
 .. raw:: html
 
-    %path = "Mathematics/Entropy"
-    %kind = kinda["Content"]
+    %path = "maths/entropy"
+    %kind = kinda["content"]
     %level = 12
     <!-- html -->
 

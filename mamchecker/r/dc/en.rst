@@ -1,7 +1,7 @@
 .. raw:: html
 
     %path = "participate"
-    %kind = kinda["Meta"]
+    %kind = kinda["meta"]
     %level = 0
     <!-- html -->
 

@@ -8,8 +8,6 @@
 .. role:: asis(raw)
     :format: html latex
 
-.. contents::
-
 URL
 ...
 

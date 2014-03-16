@@ -28,6 +28,7 @@ def python_path():
     # there is oauth2 and httplib2 and simpleauth symlink
     add(os.path.join('simpleauth', 'example', 'lib'))
 
+#sys.path
 python_path()
 
 # execute the following in vim py to use google appengine in vim

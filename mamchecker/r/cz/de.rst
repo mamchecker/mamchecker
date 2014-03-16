@@ -1,6 +1,6 @@
 .. raw:: html
 
-    %path = "Einleitung/Ziel"
+    %path = "Ziele"
     %kind = kinda["Meta"]
     %level = 0
     <!-- html -->
@@ -10,28 +10,75 @@
 
 .. contents::
 
-Correcting exercises can be automated. 
+Es gibt viele Internetportale mit Lerninhalten und Übungen und
+im englischen Sprachraum noch viel mehrere. Es ist offensichtlich,
+dass das Internet für Lehren und Lernen noch viel Potential hat.
 
-This way the teacher is faster to find
-those students that have not yet memorized something 
-or have not yet understood a concept or a relationship.
+Mamchecker ist ein neuer Zugang.
 
-This can be done immediately after the presentation
-in the same hour. This way
+Die wichtigsten Ziele sind:
 
-- The students have no time to copy from others.
-- They also do not need to humilate themselves by disclosing that they have not yet understood.
-- The students need to pay attention because they will have to know immediately afterwards.
+- Automatisches Verbessern der Übungen
 
-The time spent by a teacher to correct exercise is 
-better invested in a good preparation: 
+- Infrastruktur zum Organisieren von Lehrhierarchien
+  (Schule, Periode, Lehrer, Klasse, Student)
 
-- how to motivate the students and a topic,
-- how to present the topic as easy as possible. 
-- which questions to ask to practice and verify that the students have understood.
+- Es soll Lehrern ermöglichen schnell die Übungen der Schüler zu überprüfen
 
-Mamcheckers provides a infrustructure 
+- Die Verwendung ist natürlich nicht auf die Schule beschränkt.
+  In Universitäten, Nachhilfeinstituten, für Autodidakten und Firmen,...
+  gibt es Anwendungsmöglichkeiten von Mamchecker.
 
-- to quickly bring randomized exercise onto the web (via github)
-- students answer questions via the browser on their smartphones
-- the teacher can immediately afterwards see, who answered correctly or who has not yet answered.
+- Austausch von Übungen über `github <https://github.com>`_.
+
+- Die Werte in Übungen werden zufällig generiert. Dadurch kann eine Übung
+  wiederverwendet werden. Schüler, die in der Klasse nebeneinander sitzen,
+  haben andere Angaben und können dadurch nicht voneinander abschauen.
+
+- Übungen für Lernende zur Verfügung stellen, die ihr Verständnis überprüfen wollen.
+
+Mamchecker kann im Fernstudium und auch in der Klasse verwendet werden.
+
+In der Klasse können die Schüler den Browser auf ihrem Smartphone verwenden,
+um Übungen zu beantworten. Lehrer können so gleich sehen,
+wer richtig geantwortet hat und wer noch nicht geantwortet hat.
+
+Dadurch kann der Lehrer schnell jene Schüler herausfinden, die etwas noch nicht
+memorisiert haben oder eine Konzept oder eine Beziehung noch nicht verstanden
+haben.
+
+Die Schüler können die Übungen gleich nach der Erklärung des Lehrers
+in derselben Stunde in der Klasse machen.
+
+Dadurch 
+
+- müssen die Schüler aufpassen, weil sie wissen, dass sie das gleich brauchen werden.
+
+- haben die Schüler auch nicht die Möglichkeit von anderen abzuschreiben,
+  wie manche es für Übungen machen, die für die nächste Schulstunde aufgeben werden.
+
+- Schüler müssen nicht zugeben, dass sie nicht verstanden haben,
+  weil der Lehrer es sowieso sieht, wenn sie die Übungen nicht schaffen.
+  Manche Schüler sind zu schüchtern zum Fragen. Und es gibt noch andere Gründe,
+  warum es zu lange unbemerkt bleibt, dass sie etwas nicht verstanden haben.
+
+Der Lehrer kann nicht alle Übungen in der Klasse gleichzeitig überprüfen,
+aber Software kann das.
+
+In der Klasse hintereinander Übungen zu überprüfen, würde die Schüler
+aufhalten. Wenn der Lehrer Übungen nach Hause nimmt, dann ist das ein
+langer Aufschub des Feedbacks für die Schüler.
+
+Mehr Parallelität in der Klasse ist sehr wichtig, damit die Schüler die Zeit
+dort nicht nutzlos verbringen.
+
+Die Zeit, welche der Lehrer zum Korrigieren brauchen,
+kann auch besser investiert werden in eine gute Vorbereitung:
+
+- wie man die Schüler motivieren könnte
+
+- wie man das Thema so leicht wie möglich erklären könnte
+
+- welche Fragen man den Schülern zum Üben und zum Überprüfen ihres
+  Verständnisses geben könnte
+

@@ -247,31 +247,31 @@ def index_add(query, lang, kind, level, path):
         level=int(level),
         path=path)
 
-
 def kvld(p_ll):  # key_value_leaf_depth
     '''
-    >>> p_ll = [('a/b','ab'),('a/c','ac'),('n/b','nb')]
+    >>> p_ll = [('a/b','ab'),('n/b','nb'),('A/c','ac')]
     >>> list(kvld(p_ll))
-    [('a', 'ab', False, '1a'), ('b', 'ab', True, '2a'), ('c', 'ac', True, '2b'), ('n', 'nb', False, '1b'), ('b', 'nb', True, '2c')]
+    [('a', 'ab', False, '1a'), ('b', 'ab', True, '2a'), ('c', 'ac', True, '2b'), ('n', 'nb', False, '1b'), ('b', 'nb', True, '2a')]
 
     '''
-    previous_set = set([])
+    previous = []
     depths = []
-    for p, ll in p_ll:
+    for p, ll in sorted(p_ll,key=lambda v:v[0].lower()):
         keypath = p.split('/')
-        this = set([])
+        this = []
         nkeys = len(keypath)
         for depth, kk in enumerate(keypath):
             if depth >= len(depths):
                 depths.append(0)
-            this.add(kk)
-            if this < previous_set:
+            this.append(kk)
+            if [x.lower() for x in this] < [x.lower() for x in previous]:
                 continue
             else:
+                del depths[depth+1:]
                 lvl_idx = str(depth + 1) + int_to_base26(depths[depth])
                 depths[depth] = depths[depth] + 1
                 yield (kk, ll, depth == nkeys - 1, lvl_idx)
-                previous_set = this.copy()
+                previous = this[:]
 
 
 def filteredcontent(lang, opt=[]):

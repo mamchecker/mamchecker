@@ -16,9 +16,9 @@ kinds = {
      'Propositionen', 'Axiome', 'Vermutungen', 'Behauptungen', 'Identitäten', 'Paradoxien', 'Meta'],
 
     'en':
-    ['Problems', 'Content', 'Courses', 'Informal', 'Summaries', 'Formal', 'Fragments',
-     'Remarks', 'Citations', 'Definitions', 'Theorems', 'Corollaries', 'Lemmas',
-     'Propositions', 'Axioms', 'Conjectures', 'Claims', 'Identities', 'Paradoxes', 'Meta']
+    ['problems', 'content', 'courses', 'informal', 'summaries', 'formal', 'fragments',
+     'remarks', 'citations', 'definitions', 'theorems', 'corollaries', 'lemmas',
+     'propositions', 'axioms', 'conjectures', 'claims', 'identities', 'paradoxes', 'meta']
 
 }
 

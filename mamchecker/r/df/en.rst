@@ -1,7 +1,7 @@
 .. raw:: html
 
     %path = "history"
-    %kind = kinda["Meta"]
+    %kind = kinda["meta"]
     %level = 0
     <!-- html -->
 
@@ -21,6 +21,8 @@ During my teaching job it was still in a very unsophisticated state,
 but it was usable already. During that time I added mostly exercises, some summaries
 or other texts that did fit into the topics in class.
 
+The name came about from this school's abbreviation of the subject mathematics as MAM.
+
 Since summer 2013 I restructured the code and added user management 
 and I translated the exercises and texts into English.
 
@@ -31,6 +33,8 @@ usable for others.
 So I hope 
 
 - that other do agree with the basic idea and approach 
+
 - that learners as well as teachers find the existing implementation usable
-- and that they use it and extend it.
+
+- and that they use it and extend it
 

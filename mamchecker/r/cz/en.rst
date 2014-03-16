@@ -1,7 +1,7 @@
 .. raw:: html
 
     %path = "purpose"
-    %kind = kinda["Meta"]
+    %kind = kinda["meta"]
     %level = 0
     <!-- html -->
 
@@ -9,54 +9,72 @@
     :format: html latex
 
 
-Correcting exercises can be automated.
+There are a lot of portals in the internet with content to explore and
+exercises for self check. It is obvious that the internet
+has still huge potentials in teaching and learning. 
 
-There are a lot of portals in the internet with content to explore and exercises for self check.
-This falls into a similar category, but with its own approach.
+Mamchecker is yet another approach.
 
 The main purpose:
 
-- Share exercise: everybody can to contribute exercises and content via github.
-  Teachers, tutors, coaches, students, professors, autodidacts, ... well anybody
+- Automatically correct exercises
+
+- Infrastructure to organize teaching hierarchies (school, period, teacher, class, student)
+
+- allow teachers to quickly check the exercises of students
+
+- The use is of course not confined to schools. At universities, in private coaching, 
+  for autodidacts and companies, ... there are possible applications for Mamchecker.
+
+  Teachers, professors, tutors, coaches, students, autodidacts, ... 
   can add exercises.
 
+- Share exercise via `github <https://github.com>`_.
+
 - Exercise numbers are randomly generated. This way an exercise can be reused.
-  Students sitting next to each others will have different numbers and therefore
-  cannot just copy the results.
+  Students sitting next to each others in class will have different numbers and
+  therefore cannot copy the results.
 
-- Provide exercises to everybody who learns and wants to test himself.
+- Provide exercises to learners who want to check their understanding.
 
-- Help coaches to check the exercise given to student.
-  
-The communication between coaches and students is a main design factor. 
+Mamchecker can be used remotely as well as in class.
 
-Coaches can use Mamchecker remotely, but they can also use it in class.
-In class students can use the browser on their smartphones to get and answer exercises.
-The teachers can immediately see, who answered correctly or who has not yet answered.
+In class students can use the browser on their smartphones to answer exercises.
+Teachers can immediately see, who answered correctly or who has not yet answered.
 
 This way the teacher is faster to find
-those students that have not yet memorized something 
+those students who have not yet memorized something 
 or have not yet understood a concept or a relationship.
 
-Students can do exercises immediately after the presentation in class in the same hour. This way
-the students
+Students can do exercises immediately after the teacher's explanation in class in the
+same lesson. This way the students
 
-- have no time to copy from others
-- do not need to humiliate themselves by disclosing that they have not understood
-- do not need to overcome their shyness or uneasiness to hold up the whole class
-- need to pay attention because they will have to know immediately afterwards
+- need to pay attention, because they will have to know immediately afterwards
 
-The teacher cannot look at the exercises at the same time, the software can.
-To do it sequentially in class would holds up the students. 
+- have no time to copy from others as some do with exercises only due in the
+  next lesson
+
+- do not need to admit that they have not understood, 
+  because the teacher sees, if they are unable to do the exercise.
+  Some students are too shy to ask. And there are other reasons,
+  why student's incomprehension can stay unnoticed for too long.
+
+The teacher cannot look at all the exercises of a class at the same time, 
+but the software can.
+
+To do it sequentially in class would hold up the students. 
 If the teacher takes the exercises home
-there is an unwanted delay.
-The time spent by a teacher to correct exercise is 
-better invested in a good preparation: 
-
-- how to motivate the students and a topic,
-- how to present the topic as easy as possible. 
-- which questions to ask to practice and verify that the students have understood.
+there is an unwanted delay in feedback for the students.
 
 More parallelism in class is very important in order to make the time spent
 there by the students worthwhile.
+
+The time spent by a teacher to correct exercise is also
+better invested in a good preparation: 
+
+- how to motivate the students
+
+- how to present the topic as easy as possible
+
+- which questions to ask to practice and verify that the students have understood
 

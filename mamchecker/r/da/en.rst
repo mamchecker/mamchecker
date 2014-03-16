@@ -1,7 +1,7 @@
 .. raw:: html
 
     %path = "ideas"
-    %kind = kinda["Meta"]
+    %kind = kinda["meta"]
     %level = 0
     <!-- html -->
 

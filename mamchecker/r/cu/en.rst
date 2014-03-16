@@ -1,7 +1,7 @@
 .. raw:: html
 
-    %path = "Mathematics/Functionen Theorie/Integral von 1÷z"
-    %kind = kinda["Content"]
+    %path = "maths/function theory/integral of 1÷z"
+    %kind = kinda["content"]
     %level = 12
     <!-- html -->
 

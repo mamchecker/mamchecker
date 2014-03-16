@@ -1,7 +1,7 @@
 .. raw:: html
 
-    %path = "Mathematics/Stuctures/Group"
-    %kind = kinda["Content"]
+    %path = "maths/stuctures/group"
+    %kind = kinda["content"]
     %level = 10
     <!-- html -->
 
