@@ -11,8 +11,8 @@
 Mamchecker is on `appspot <https://mamchecker.appspot.com>`_ for tests within the free 
 `appengine quotas <https://developers.google.com/appengine/docs/quotas>`_.
 
-Links in github
-...............
+Github Links 
+............
 
 This file is the main github README file as well as part of mamchecker's ``meta`` content.
 For further background follow these links to github.
