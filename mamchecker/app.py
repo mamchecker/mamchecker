@@ -13,7 +13,6 @@ import sys
 import os
 import os.path
 import logging
-import datetime
 
 
 def python_path():
@@ -47,8 +46,6 @@ python_path()
 #>> finrequest = requestdummy()
 #>> finalize = gaetestbed(finrequest)
 # finalize()
-
-from bottle import template
 
 import webapp2
 from webapp2_extras import sessions
@@ -236,7 +233,7 @@ class PageHandler(webapp2.RequestHandler, SimpleAuthHandler, AuthUser):
         if not self.request.pagename:
             self.request.pagename = 'content'
         if self.request.pagename not in PAGES:
-            self.redirect(self.uri_for('entry_lang',lang=self.request.lang))
+            self.redirect(self.uri_for('entry_lang', lang=self.request.lang))
             return
         studentres = set_student(self.request, self.user, self.session)
         if isinstance(studentres, str):
@@ -290,8 +287,8 @@ def _error(request, response, exception, status):
     response.set_status(status)
 
 
-def make_app(debug=debug):
-    app = webapp2.WSGIApplication([
+def make_app(debug_=debug):
+    app_ = webapp2.WSGIApplication([
         webapp2.Route('', handler=PageHandler, name='entry'),
         webapp2.Route('/', handler=PageHandler, name='entry_'),
         webapp2.Route('/<lang:[^/]+>', handler=PageHandler, name='entry_lang'),
@@ -304,10 +301,10 @@ def make_app(debug=debug):
         webapp2.Route('/auth/<provider>/callback',
             handler='mamchecker.app.PageHandler:_auth_callback', name='callback'),
         webapp2.Route('/<lang:[^/]+>/<pagename:[^?]+>', handler=PageHandler, name='page'),
-    ], config=app_config, debug=debug)
-    app.error_handlers[400] = lambda q, a, e: _error(q, a, e, 400)
-    app.error_handlers[404] = lambda q, a, e: _error(q, a, e, 404)
-    app.error_handlers[500] = lambda q, a, e: _error(q, a, e, 500)
-    return app
+    ], config=app_config, debug=debug_)
+    app_.error_handlers[400] = lambda q, a, e: _error(q, a, e, 400)
+    app_.error_handlers[404] = lambda q, a, e: _error(q, a, e, 404)
+    app_.error_handlers[500] = lambda q, a, e: _error(q, a, e, 500)
+    return app_
 
 app = make_app()

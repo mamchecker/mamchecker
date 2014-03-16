@@ -1,4 +1,33 @@
 # -*- coding: utf-8 -*-
+'''
+doit utility::
+
+Do this after having changed a rst file:
+
+$ doit -kd. html
+
+Do this after having changed the header (path, kind, level) in a html or rst file.
+
+$ doit initdb
+
+Do this after any changes, especially in the main code
+
+$ doit test
+$ doit cov
+
+coverage2 is the python2 version.
+py.test2 is the python2 version.
+
+Do this to add new content
+
+$ doit -kd. new
+$ doit -kd. problem
+$ doit -kd. rst
+
+task_included is internal.
+
+'''
+
 import os, os.path 
 import fnmatch, shutil
 from subprocess import check_output, CalledProcessError
@@ -354,6 +383,7 @@ def task_initdb():
             f.write('\n\n')
             f.write('available_langs = ')
             f.write(pprint.pformat(available_langs,width=1))
+            f.write('\n')
 
         #assert that languages does not need more localization
         langdicts = [(k,o) for k,o in languages.__dict__.iteritems() 

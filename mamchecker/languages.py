@@ -11,23 +11,25 @@ kinds = {
     # order must not be changed, because index is used in html files via
     # kinda()
     'de':
-    ['Übungen', 'Inhalte', 'Kurse', 'Informelles', 'Zusammenfassungen', 'Formelles', 'Fragmente',
-     'Bemerkungen', 'Zitate', 'Definitionen', 'Theoreme', 'Korollare', 'Lemmas',
-     'Propositionen', 'Axiome', 'Vermutungen', 'Behauptungen', 'Identitäten', 'Paradoxien', 'Meta'],
+    ['Übungen', 'Inhalte', 'Kurse', 'Informelles', 'Zusammenfassungen',
+        'Formelles', 'Fragmente', 'Bemerkungen', 'Zitate', 'Definitionen',
+        'Theoreme', 'Korollare', 'Lemmas', 'Propositionen', 'Axiome',
+        'Vermutungen', 'Behauptungen', 'Identitäten', 'Paradoxien', 'Meta'],
 
     'en':
-    ['problems', 'content', 'courses', 'informal', 'summaries', 'formal', 'fragments',
-     'remarks', 'citations', 'definitions', 'theorems', 'corollaries', 'lemmas',
-     'propositions', 'axioms', 'conjectures', 'claims', 'identities', 'paradoxes', 'meta']
+    ['problems', 'content', 'courses', 'informal', 'summaries', 'formal',
+        'fragments', 'remarks', 'citations', 'definitions', 'theorems',
+        'corollaries', 'lemmas', 'propositions', 'axioms', 'conjectures',
+        'claims', 'identities', 'paradoxes', 'meta']
 
 }
 
-def make_kind0(lang): 
+def make_kind0(lang):
     '''from kind integer to kind string
     '''
     return {k: v for k, v in enumerate(kinds[lang])}
 
-def make_kinda(lang): 
+def make_kinda(lang):
     '''from kind string to kind integer
     '''
     return {v: k for k, v in enumerate(kinds[lang])}
@@ -63,8 +65,7 @@ languages = {'ab': 'Abkhazian',
              'be': 'Byelorussian (Belarusian)',
              'km': 'Cambodian',
              'ca': 'Catalan',
-             'zh': 'Chinese (Simplified)',
-             'zh': 'Chinese (Traditional)',
+             'zh': 'Chinese',
              'co': 'Corsican',
              'hr': 'Croatian',
              'cs': 'Czech',

@@ -8,6 +8,29 @@
 .. role:: asis(raw)
     :format: html latex
 
+Mamchecker is on `appspot <https://mamchecker.appspot.com>`_ for tests within the free 
+`appengine quotas <https://developers.google.com/appengine/docs/quotas>`_.
+
+Links in github
+...............
+
+This file is the main github README file as well as part of mamchecker's ``meta`` content.
+For further background follow these links to github.
+
+- `purpose <https://github.com/mamchecker/mamchecker/mamchecker/r/cz/en.rst>`_
+
+- `ideas <https://github.com/mamchecker/mamchecker/mamchecker/r/da/en.rst>`_
+
+- `queries (this file up-to-date) <https://github.com/mamchecker/mamchecker/mamchecker/r/db/en.rst>`_
+
+- `query rights <https://github.com/mamchecker/mamchecker/mamchecker/r/de/en.rst>`_
+
+- `participate <https://github.com/mamchecker/mamchecker/mamchecker/r/dc/en.rst>`_
+
+- `history <https://github.com/mamchecker/mamchecker/mamchecker/r/df/en.rst>`_
+
+- `try in class <https://github.com/mamchecker/mamchecker/mamchecker/r/dd/en.rst>`_
+
 URL
 ...
 
@@ -118,4 +141,5 @@ contexts
 
 These contexts/roles can also be accessed via a drop down menu when hovering over the student ID.
 Then the currently open page will be reopened with the new context/role.
+
 

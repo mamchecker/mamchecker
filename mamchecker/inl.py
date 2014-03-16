@@ -1,13 +1,27 @@
 # -*- coding: utf-8 -*-
+'''
+sphinx extensions for mamchecker.
+
+inlining
+
+:inl: for fragments
+
+:inline: for non-fragments
+
+and linking in rst files
+
+:lnk: 
+
+'''
+
 
 from docutils import nodes
 from sphinx.util.compat import Directive
 
-'''usage :inl:`r.cp`
-to inline fragments'''
-
 
 class inl(nodes.Inline, nodes.Element):
+    '''usage :inl:`r.cp`
+    to inline fragments'''
     pass
 
 
@@ -25,11 +39,9 @@ def depart_inl_node(self, node):
     self.body.append('</span>')
 
 
-'''usage :inline:`r.cp`
-to inline non-fragments'''
-
-
 class inline(nodes.Inline, nodes.Element):
+    '''usage :inline:`r.cp`
+    to inline non-fragments'''
     pass
 
 
@@ -53,11 +65,10 @@ def visit_inline_node(self, node):
 def depart_inline_node(self, node):
     self.body.append('</div>')
 
-'''usage :lnk:`r.cp`
-to reference content or excercises'''
-
 
 class lnk(nodes.Inline, nodes.Element):
+    '''usage :lnk:`r.cp`
+    to reference content or excercises'''
     pass
 
 

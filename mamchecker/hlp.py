@@ -387,5 +387,16 @@ PAGES = [
     'todo',
     'verification']
 
-author_folder = lambda fn, withtest=False: (
-    fn not in PAGES + (['test'] if withtest else []) and not fn.startswith('_') and '.' not in fn)
+def author_folder(fn, withtest=False):
+    ''' checks whether fn is an author's content folder
+    >>> author_folder('_no')
+    False
+    >>> author_folder('yes')
+    True
+    >>> author_folder('main') # is in PAGES
+    False
+    >>> author_folder('n.o')
+    False
+    '''
+    return (fn not in PAGES + (['test'] if withtest else [])
+            and not fn.startswith('_') and '.' not in fn)

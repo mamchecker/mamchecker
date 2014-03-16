@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+'''
+
+Utility
+
+'''
 
 from sympy.parsing.sympy_parser import parse_expr
 from sympy import Poly, latex
@@ -13,10 +18,12 @@ from bottle import SimpleTemplate, template
 
 from mamchecker.hlp import listable, mklookup, counter, Struct
 from mamchecker.languages import make_kinda, make_kind0, CtxStrings
-from mamchecker.model import studentCtx, Student, myself
+from mamchecker.model import studentCtx, Student
 
 
 class Util:
+    ''' A Util instance named ``util`` is available in html files.
+    '''
 
     def __init__(self, request):
         self.request = request
@@ -99,11 +106,11 @@ class Util:
 
     @staticmethod
     def tx(fun):
-        return lambda term: '\(' + fun(term) + '\)'
+        return lambda term: r'\(' + fun(term) + r'\)'
 
     @staticmethod
     def Tx(fun):
-        return lambda term: '\[' + fun(term) + '\]'
+        return lambda term: r'\[' + fun(term) + r'\]'
 
     @staticmethod
     def J(*args):

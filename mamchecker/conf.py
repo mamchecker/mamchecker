@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+'''
+Sphinx setting.
+'''
+
 
 import os.path
 import sys
@@ -33,9 +38,9 @@ latex_elements = {
     # The font size ('10pt', '11pt' or '12pt').
     #'pointsize': '10pt',
 
-    'preamble': '''\usepackage{amsfonts}\usepackage{amssymb}\usepackage{amsmath}\usepackage{siunitx}\usepackage{tikz}'''
+    'preamble': '''\\usepackage{amsfonts}\\usepackage{amssymb}\\usepackage{amsmath}\\usepackage{siunitx}\\usepackage{tikz}'''
     + '''
-    \usetikzlibrary{''' + tikz_tikzlibraries + '''}'''
+    \\usetikzlibrary{''' + tikz_tikzlibraries + '''}'''
 }
 
 # latex

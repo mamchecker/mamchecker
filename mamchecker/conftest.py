@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+'''
+This initializes py.test.
+
+The system must have py.test2, i.e. the python2 version.
+'''
 
 # http://alex.cloudware.it/2012/02/your-app-engine-app-in-python-shell.html
 
