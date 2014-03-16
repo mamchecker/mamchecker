@@ -1,7 +1,23 @@
 # -*- coding: utf-8 -*-
+"""
+The content page is the default, if no page specified.
 
-#/<lang>/[content][?(<author>.<id>[=<cnt>])&...]
-#/<lang>/content[?<filter>=<value>&...]
+Apart from content ids::
+
+    /<lang>/[content][?(<author>.<id>[=<cnt>])&...]
+
+    /en/?r.a=2&r.bu
+
+one can also filter the index of all content::
+
+    /<lang>/content[?<filter>=<value>&...]
+
+    /en/content?level=10&kind=1&path=maths&link=r
+
+See ``filteredcontent`` for that.
+
+"""
+
 
 import os
 import os.path
@@ -14,10 +30,20 @@ from google.appengine.ext import ndb
 
 from bottle import SimpleTemplate, get_tpl, StplParser
 
-from mamchecker.hlp import Struct, resolver, mklookup, counter, author_folder
+from mamchecker.hlp import (Struct,
+        resolver,
+        mklookup,
+        counter,
+        author_folder)
+
 from mamchecker.util import PageBase, Util
 
-from mamchecker.model import Problem, filteredcontent, delete_all, assignable, studentCtx, keyparams
+from mamchecker.model import (Problem,
+        filteredcontent,
+        delete_all,
+        assignable,
+        studentCtx,
+        keyparams)
 
 from webob.exc import HTTPNotFound, HTTPBadRequest
 
@@ -25,14 +51,16 @@ re_id = re.compile(r"^[^\d\W]\w*\.[^\d\W]\w*$", re.UNICODE)
 
 
 class Page(PageBase):
+    'Entry points are ``get_response`` and ``post_response``.'
 
     def __init__(self, _request):
         super(self.__class__, self).__init__(_request)
         self.problem = None
         self.problem_set = None
 
-    def get_data(self, problemkey=None):
-
+    def _get_problem(self, problemkey=None):
+        '''init the problem from DB if it exists
+        '''
         key = problemkey or self.request.query_string.startswith(
             'key=') and self.request.query_string[4:]
 
@@ -96,6 +124,7 @@ class Page(PageBase):
         problem_set_iter = None
 
         def _new(rsv):
+            'create new problem(s) in db'
             nr = nrs.next()
             problem, pkwargs = Problem.from_resolver(
                 rsv, nr, self.request.student.key)
@@ -112,6 +141,7 @@ class Page(PageBase):
             _chain[-1] = SimpleTemplate.overrides.copy()
 
         def _zip(rsv):
+            'zip template with problem(s) from db'
             if not self.current or rsv.query_string != self.current.query_string:
                 ms = 'query string ' + rsv.query_string
                 ms += ' not in sync with database '
@@ -144,16 +174,20 @@ class Page(PageBase):
                 self.current = None
 
         def lookup(query_string, _in=True, to_do=None):
+            'Template lookup. This is an extension to bottle SimpleTemplate'
             if not _in:
                 cm1 = _chain[-1]
-                if cm1 == query_string or isinstance(cm1, dict) and cm1['query_string'] == query_string:
+                if (cm1 == query_string or
+                    isinstance(cm1, dict) and
+                    cm1['query_string'] == query_string):
                     del _chain[-1]
                     if _chain and isinstance(_chain[-1], dict):
                         SimpleTemplate.overrides = _chain[-1].copy()
                 return
             if query_string in _chain:
                 return
-            if any([dc['query_string'] == query_string for dc in _chain if isinstance(dc, dict)]):
+            if any([dc['query_string'] == query_string
+                for dc in _chain if isinstance(dc, dict)]):
                 return
             _chain.append(query_string)
             rsv = resolver(query_string, self.request.lang)
@@ -169,6 +203,7 @@ class Page(PageBase):
 
         if tplid and isinstance(tplid, str) or self.problem:
             def prebase(to_do):
+                'template creation for either _new or _zip'
                 del _chain[:]
                 env.clear()
                 env.update({
@@ -269,6 +304,9 @@ class Page(PageBase):
         Traceback (most recent call last):
             ...
         HTTPNotFound: There is no top level content.
+        >>> qs = 'level=2&kind=1&path=Maths&link=r'
+        >>> Page.check_query(qs)
+        [('level', '2'), ('kind', '1'), ('path', 'Maths'), ('link', 'r')]
         >>> qs = 'level.x=2&todo.tst=3'
         >>> Page.check_query(qs)
         Traceback (most recent call last):
@@ -291,6 +329,11 @@ class Page(PageBase):
         if not qparsed:
             return qparsed
 
+        indexquery = [(qa, qb) for qa, qb in qparsed if qa in
+                ['level','kind','path','link']]
+        if indexquery:
+            return indexquery
+
         if any(['.' not in qa for qa, qb in qparsed]):
             raise HTTPNotFound('There is no top level content.')
         if any([not author_folder(qa.split('.')[0]) for qa, qb in qparsed]):
@@ -307,24 +350,18 @@ class Page(PageBase):
             for q, i in qparsed:
                 if not i:
                     i = '1'
-                for ii in range(int(i)):
+                for _ in range(int(i)):
                     res.append(Util.inc(q, icnt))
             return '\n'.join(res)
         else:
             return qparsed[0][0]
 
     def get_response(self):
-        '''
-        >>> from mamchecker.test.hlp import newuserpage
-        >>> self = newuserpage('r.a','de')
-        >>> "Winkel" in self.get_response()
-        True
-
-        '''
-        self.get_data()
+        self._get_problem()
         return self.load_content()
 
     def check_answers(self, problem):
+        'compare answer to result'
         rsv = resolver(problem.query_string, problem.lang)
         d = rsv.load()
         problem.answered = datetime.datetime.now()
@@ -335,18 +372,10 @@ class Page(PageBase):
         problem.put()
 
     def post_response(self):
-        '''
-        >>> from mamchecker.test.hlp import newuserpage
-        >>> self = newuserpage('r.a','de')
-        >>> assert self.get_response()
-        >>> resp = self.post_response()#answers will be empty
-        >>> 'wrong' in resp
-        True
-
-        '''
+        'answers a POST request'
         problemkey = self.request.get('problemkey') or (
             self.problem and self.problem.key.urlsafe())
-        self.get_data(problemkey)
+        self._get_problem(problemkey)
         if self.problem and not self.problem.answered:
             withempty, noempty = Page.make_summary()
             for p in self.problem_set.iter():
@@ -363,7 +392,8 @@ class Page(PageBase):
     @staticmethod
     def make_summary(p=None):
         '''
-        >>> p = Problem(inputids=list('abc'),oks=[True,False,True],points=[2]*3,answers=['1','','1'])
+        >>> p = Problem(inputids=list('abc'),
+        ...         oks=[True,False,True],points=[2]*3,answers=['1','','1'])
         >>> f = lambda c:c
         >>> withempty,noempty = Page.make_summary(p)
         >>> sfmt = u"{oks}/{of}->{points}/{allpoints}"
@@ -372,6 +402,7 @@ class Page(PageBase):
 
         '''
         def smry(f):
+            'used to increment a summary'
             try:
                 nq = len(f(p.inputids))
                 foks = f(p.oks or [False] * nq)
@@ -384,7 +415,5 @@ class Page(PageBase):
                           of=len(foks),
                           points=sum([foks[i] * fpoints[i] for i in range(nq)]),
                           allpoints=sum(fpoints))
-        return smry(
-            lambda c: c), smry(
-            lambda c: [
-                cc for i, cc in enumerate(c) if p.answers[i]])
+        return (smry(lambda c: c),
+            smry(lambda c: [cc for i, cc in enumerate(c) if p.answers[i]]))

@@ -245,7 +245,7 @@ def newproblem(init_starter=init_starter,lang_starter=lang_starter):
 rst_starter = '''.. raw:: html
 
     %path = "path/goes/here"
-    %kind = kinda["<choose from kinds.py/kinds[lang]>"]
+    %kind = kinda["<choose from languages.py/kinds[lang]>"]
     %level = 0 #in school years
     <!-- html -->
 
@@ -284,8 +284,8 @@ def task_rst():
 
 def task_initdb():
 
-    from mamchecker.kinds import make_kinda
-    from mamchecker.languages import languages
+    import mamchecker.languages as languages
+    import pprint
 
     def make_initdb():
         with open(authors_file,'r') as f:
@@ -294,8 +294,9 @@ def task_initdb():
         inits = ['# -*- coding: utf-8 -*-',
                  '# generated file',
                  'from mamchecker.model import Index, index_add, delete_all',
-                 'delete_all(Index.query())']
+                 'delete_all(Index.query())','']
 
+        available_langs = set([])
         for author in authors:
             #author = authors[0]
             adir = author['author_id']
@@ -312,7 +313,8 @@ def task_initdb():
                         lng,ext = lng_ext 
                         return ext == 'html' and lng.strip('_')
                 problemdir = os.path.join(authordir,anid)
-                langfiles = [fl for fl in os.listdir(problemdir) if langcode(fl) in languages]
+                langfiles = [fl for fl in os.listdir(problemdir) 
+                        if langcode(fl) in languages.languages]
                 for langfile in langfiles:
                     #langfile = langfiles[0]
                     full = os.path.join(problemdir,langfile)
@@ -331,7 +333,8 @@ def task_initdb():
                                 break#level must be last define
                     deftext = u'\n'.join(defines)
                     lang = langcode(langfile)
-                    defs = {'kinda':make_kinda(lang)}
+                    available_langs.add(lang)
+                    defs = {'kinda':languages.make_kinda(lang)}
                     try:
                         exec deftext in defs
                     except KeyError:
@@ -348,6 +351,16 @@ def task_initdb():
         initdb = os.path.join(sphinxbase,'initdb.py')
         with open(initdb, 'w') as f:
             f.write('\n'.join(inits))
+            f.write('\n\n')
+            f.write('available_langs = ')
+            f.write(pprint.pformat(available_langs,width=1))
+
+        #assert that languages does not need more localization
+        langdicts = [(k,o) for k,o in languages.__dict__.iteritems() 
+                if not k.startswith('__') and isinstance(o,dict)]
+        for k,o in langdicts:
+            extendlangs = available_langs - set(o.keys())
+            assert not extendlangs, k + ' in languages.py needs ' + ','.join(extendlangs)
 
     return {'actions':[make_initdb]}
 

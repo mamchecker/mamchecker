@@ -1,5 +1,45 @@
 # -*- coding: utf-8 -*-
 
+'''
+EACH DICT MUST CONTAIN AT LEAST ALL AVAILABLE LANGUAGES (see initdb.py and dodo.py)
+'''
+
+# >= contents is content
+# >= fragments is fragment
+kinds = {
+
+    # order must not be changed, because index is used in html files via
+    # kinda()
+    'de':
+    ['Übungen', 'Inhalte', 'Kurse', 'Informelles', 'Zusammenfassungen', 'Formelles', 'Fragmente',
+     'Bemerkungen', 'Zitate', 'Definitionen', 'Theoreme', 'Korollare', 'Lemmas',
+     'Propositionen', 'Axiome', 'Vermutungen', 'Behauptungen', 'Identitäten', 'Paradoxien', 'Meta'],
+
+    'en':
+    ['problems', 'content', 'courses', 'informal', 'summaries', 'formal', 'fragments',
+     'remarks', 'citations', 'definitions', 'theorems', 'corollaries', 'lemmas',
+     'propositions', 'axioms', 'conjectures', 'claims', 'identities', 'paradoxes', 'meta']
+
+}
+
+def make_kind0(lang): 
+    '''from kind integer to kind string
+    '''
+    return {k: v for k, v in enumerate(kinds[lang])}
+
+def make_kinda(lang): 
+    '''from kind string to kind integer
+    '''
+    return {v: k for k, v in enumerate(kinds[lang])}
+
+
+CtxStrings = {
+
+    'en': ['School', 'Period', 'Teacher', 'Class', 'Student'],
+    'de': ['Schule', 'Periode', 'Lehrer', 'Klasse', 'Student']
+
+}
+
 languages = {'ab': 'Abkhazian',
              'aa': 'Afar',
              'af': 'Afrikaans',

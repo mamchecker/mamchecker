@@ -13,14 +13,17 @@ URL
 
 Das URL-Format ist ``../<sprache>/<seite>?<abfrage>``.
 
-``<sprache>`` ist ``en``, ``de``, ... (siehe ``languages.py``)
+``<sprache>`` ist ``en``, ``de``, ... (siehe ``languages.py``).
+Falls nicht angegeben, wird dein zuletzt verwendete Sprache genommen 
+oder die Browsereinstellung herangezogen.
 
 ``<seite>`` ist eine von ``content`` (Inhalt), ``done`` (Erledigt), ``todo`` (Aufträge),
 ``edits`` (Änderungen) and ``contexts`` (Kontexte/Rollen).
 ``contexts`` ist nur für registrierte Benutzer zugänglich,
-die mehrere Kontext/Rollen haben können.
+die mehrere Kontext/Rollen haben können. ``content`` wird verwendet, falls nicht angegeben.
 
-``<abfrage>`` ist eine mit ``&`` getrennte Liste. Darin kann für alle Seiten
+``<abfrage>`` beginnt nach ``?`` und ist eine mit ``&`` getrennte Liste. 
+Darin kann für alle Seiten
 ``School=<LLL>&Period=<DDD>&Teacher=<RRR>&Class=<SSS>&Student=<TTT>`` enthalten sein.
 
 content (Inhalt)

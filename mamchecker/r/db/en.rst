@@ -8,19 +8,19 @@
 .. role:: asis(raw)
     :format: html latex
 
-.. contents::
-
 URL
 ...
 
 The URL format is ``../<lang>/<page>?<request>``.
 
-``<lang>`` is ``en``, ``de``, ...  (see ``languages.py``)
+``<lang>`` is ``en``, ``de``, ...  (see ``languages.py``).
+It will remember your last language or use the browser setting, if dropped.
 
 ``<page>`` is one of ``content``, ``done``, ``todo``, ``edits`` and ``contexts``.
-``contexts`` requires a registered user. He can have more contexts/roles.
+``contexts`` requires a registered user, who can have more contexts/roles.
+``content`` is default, if dropped.
 
-``<request>`` is a ``&``-separated list, which can contain 
+``<request>`` starts after the ``?`` and it is a ``&``-separated list, which can contain 
 ``School=<LLL>&Period=<DDD>&Teacher=<RRR>&Class=<SSS>&Student=<TTT>``
 for all pages.
 

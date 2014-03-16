@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+'''
+This is the main application file.
+
+The whole application has only class derived from webapp2.RequestHandler.
+After a little analysis of the query,
+it forwards to classes derived form PageBase in util.py.
+'''
 
 # https://code.google.com/status/appengine
 
@@ -23,6 +30,7 @@ def python_path():
         modpath = os.path.join(local_dir, name)
         if modpath not in sys.path:
             sys.path.insert(0, modpath)
+
     add('bottle')
     add('sympy')
     # there is oauth2 and httplib2 and simpleauth symlink
@@ -45,19 +53,17 @@ from bottle import template
 import webapp2
 from webapp2_extras import sessions
 
-from mamchecker.hlp import import_module
+from mamchecker.hlp import import_module, PAGES
 from mamchecker.util import AuthUser
 from mamchecker.model import stored_secret, set_student
 
 # this will fill Index
 # initdb is generate via `doit -k initdb`
-import mamchecker.initdb
-from mamchecker.kinds import kinds, Error
+from mamchecker.initdb import available_langs
+from mamchecker.languages import kinds
 
 # conftest.py will set this to False for py.test2 run
 debug = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')
-
-cached_lang = 'en'
 
 from simpleauth import SimpleAuthHandler
 
@@ -65,6 +71,13 @@ from simpleauth import SimpleAuthHandler
 class PageHandler(webapp2.RequestHandler, SimpleAuthHandler, AuthUser):
 
     '''http://mamchecker.appspot.com/<lang>/[<pagename>]?<query_string>
+
+    pagename defaults to 'content'
+
+    The handler class derived from PageBase
+    is in a python package module of name "pagename",
+    of which it calls ``get_response()`` or ``post_response()``.
+
     '''
 
     def dispatch(self):
@@ -74,6 +87,10 @@ class PageHandler(webapp2.RequestHandler, SimpleAuthHandler, AuthUser):
         # self.session.update({})#modifies session to re-put/re-send
         try:
             webapp2.RequestHandler.dispatch(self)
+            try:
+                self.session['lang'] = self.request.lang
+            except AttributeError: #for auth
+                pass
         finally:
             self.session_store.save_sessions(self.response)
 
@@ -181,36 +198,51 @@ class PageHandler(webapp2.RequestHandler, SimpleAuthHandler, AuthUser):
                     auth_id, **_attrs)
                 if ok:
                     self.auth.set_session(self.auth.store.user_to_dict(user))
-        self.redirect(self.uri_for('entry_lang', lang=cached_lang))
+        try:
+            lang = self.session['lang']
+        except KeyError:
+            lang = 'en'
+        self.redirect(self.uri_for('entry_lang', lang=lang))
 
-    def logout(self, lang=cached_lang):
+    def logout(self, lang):
         self.auth.unset_session()
         self.redirect(self.uri_for('entry_lang', lang=lang))
 
     def arguments_ok(self, kwargs):
         #kwargs = {}
         self.request.lang = kwargs.get('lang', None)
-        global cached_lang
-        cached_lang = self.request.lang
         self.request.pagename = kwargs.get('pagename', None)
 
         if not self.request.lang or not self.request.lang in kinds:
-            # TODO:
-            # http://stackoverflow.com/questions/8514017/how-to-decide-the-language-from-cookies-headers-session-in-webapp2
-            self.request.lang = 'en'
-            redirect_address = self.uri_for(
-                'entry_lang',
-                lang=self.request.lang)
-            self.redirect(redirect_address)
-            return False
-        else:
-            if not self.request.pagename:
-                self.request.pagename = 'content'
-            studentres = set_student(self.request, self.user, self.session)
-            if isinstance(studentres, str):
-                self.redirect(studentres)
-            else:
-                return True
+            try:
+                lng = self.session['lang']
+            except KeyError:
+                langs = self.request.headers.get('Accept-Language')
+                if langs:
+                    langs = langs.split(',')
+                else:
+                    langs = []
+                #langs = ['en-US', 'en;q=0.8']
+                accepted = set([x.split(';q=')[0].split('-')[0] for x in langs])
+                #accepted = set(['en'])
+                candidates = accepted & available_langs
+                if candidates:
+                    lng = list(candidates)[0]
+                else:
+                    lng = 'en'
+            if self.request.lang and not self.request.lang in kinds:
+                self.request.pagename = self.request.lang
+            self.request.lang = lng
+        if not self.request.pagename:
+            self.request.pagename = 'content'
+        if self.request.pagename not in PAGES:
+            self.redirect(self.uri_for('entry_lang',lang=self.request.lang))
+            return
+        studentres = set_student(self.request, self.user, self.session)
+        if isinstance(studentres, str):
+            self.redirect(studentres)
+            return
+        return True
 
     def forward(self, kwargs, toforward):
         if self.arguments_ok(kwargs):
@@ -249,11 +281,8 @@ app_config = {
 
 def _error(request, response, exception, status):
     logging.exception(exception)
-    lang = filter(lambda k: '/' + k in request.url, Error.keys())
-    lang = lang and lang[0] or 'en'
     response.write(
-        Error[lang] +
-        ' ' +
+        'Error ' +
         str(status) +
         ' (' +
         exception.message +
@@ -267,9 +296,13 @@ def make_app(debug=debug):
         webapp2.Route('/', handler=PageHandler, name='entry_'),
         webapp2.Route('/<lang:[^/]+>', handler=PageHandler, name='entry_lang'),
         webapp2.Route('/<lang:[^/]+>/', handler=PageHandler, name='entry_lang_'),
-        webapp2.Route('/<lang:[^/]+>/logout', handler='mamchecker.app.PageHandler:logout', name='logout'),
-        webapp2.Route('/auth/<provider>', handler='mamchecker.app.PageHandler:_simple_auth', name='authlogin'),
-        webapp2.Route('/auth/<provider>/callback', handler='mamchecker.app.PageHandler:_auth_callback', name='callback'),
+        webapp2.Route('/<lang:[^/]+>/logout',
+            handler='mamchecker.app.PageHandler:logout', name='logout'),
+        webapp2.Route('/auth/<provider>',
+            handler='mamchecker.app.PageHandler:_simple_auth', name='authlogin'),
+        #no lang for auth callback, therefore lang is also in the session
+        webapp2.Route('/auth/<provider>/callback',
+            handler='mamchecker.app.PageHandler:_auth_callback', name='callback'),
         webapp2.Route('/<lang:[^/]+>/<pagename:[^?]+>', handler=PageHandler, name='page'),
     ], config=app_config, debug=debug)
     app.error_handlers[400] = lambda q, a, e: _error(q, a, e, 400)

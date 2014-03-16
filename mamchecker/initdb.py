@@ -2,6 +2,7 @@
 # generated file
 from mamchecker.model import Index, index_add, delete_all
 delete_all(Index.query())
+
 index_add(u"r.i", u"de", "0", "10",
         u"Mathematik/Funktionen/Funktionsgraphen")
 index_add(u"r.i", u"en", "0", "10",
@@ -338,3 +339,6 @@ index_add(u"r.r", u"de", "0", "10",
         u"Mathematik/LGS/Kosten")
 index_add(u"r.r", u"en", "0", "10",
         u"maths/linear system/costs")
+
+available_langs = set(['de',
+     'en'])

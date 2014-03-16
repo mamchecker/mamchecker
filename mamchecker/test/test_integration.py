@@ -50,7 +50,7 @@ def test_more():
 
 
 def _test_content(q, lang):
-    # q,lang='r.a&r.b','de'
+    # q,lang='r.a&r.b','en'
     self = newuserpage(q, lang)
     self.problem = None
     rr1 = self.load_content(rebase=False)  # via _new
@@ -76,11 +76,11 @@ def _test_content(q, lang):
 
 
 def test_r_ab():  # mix problem and non-problem
-    _test_content('r.a&r.b', 'de')
+    _test_content('r.a&r.b', 'en')
 
 
 def test_r_bb():  # more non-problems
-    _test_content('r.b=2', 'de')
+    _test_content('r.b=2', 'en')
 
 # see allcontent in ../conftest.py
 

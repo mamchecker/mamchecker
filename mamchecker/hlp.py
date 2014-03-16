@@ -372,8 +372,7 @@ def mklookup(lang):
 
 datefmt = lambda dt: dt.isoformat(' ').split('.')[0]
 
-
-_no_test = [
+PAGES = [
     'content',
     'contexts',
     'done',
@@ -389,4 +388,4 @@ _no_test = [
     'verification']
 
 author_folder = lambda fn, withtest=False: (
-    fn not in _no_test + (['test'] if withtest else []) and not fn.startswith('_') and '.' not in fn)
+    fn not in PAGES + (['test'] if withtest else []) and not fn.startswith('_') and '.' not in fn)

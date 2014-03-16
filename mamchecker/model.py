@@ -1,36 +1,40 @@
 # -*- coding: utf-8 -*-
+'''
+This file contains functions and classes doing DB access,
+especially the models.
+
+'''
 
 import datetime
 import uuid
-import hashlib
-import re
 import time
-import logging
 from itertools import chain
 from bottle import SimpleTemplate
 from urlparse import parse_qsl
 
 from mamchecker.hlp import int_to_base26, datefmt
-from mamchecker.kinds import make_kind0
+from mamchecker.languages import make_kind0
 
 from google.appengine.api.datastore_errors import BadKeyError
 
-import webapp2
 # http://blog.abahgat.com/2013/01/07/user-authentication-with-webapp2-on-google-app-engine/
 import webapp2_extras.appengine.auth.models
 from webapp2_extras import security
 
-
 from google.appengine.ext import ndb
-delete_all = lambda query: ndb.delete_multi(query.iter(keys_only=True))
+
+
+def delete_all(query):
+    'delete_all(entity.query(entity.field==value))'
+    ndb.delete_multi(query.iter(keys_only=True))
 
 
 def copy_all(model, oldkey, newkey):
+    '''copy all instances of a model from an old parent to a new one'''
     computed = [
         k for k,
         v in model._properties.iteritems() if isinstance(
-            v,
-            ndb.ComputedProperty)]
+            v, ndb.ComputedProperty)]
     for entry in model.query(ancestor=oldkey).iter():
         cpy = model(id=entry.key.string_id(), parent=newkey)
         cpy.populate(
@@ -39,16 +43,19 @@ def copy_all(model, oldkey, newkey):
 
 
 class User(webapp2_extras.appengine.auth.models.User):
+    '''extension of webapp2 user model'''
 
     current_student = ndb.KeyProperty(kind='Student')
 
     def set_password(self, raw_password):
+        'only the hash is stored'
         self.password = security.generate_password_hash(
             raw_password,
             length=12)
 
     @classmethod
     def get_by_auth_token(cls, user_id, token, subject='auth'):
+        'user by token'
         token_key = cls.token_model.get_key(user_id, subject, token)
         user_key = ndb.Key(cls, user_id)
         valid_token, user = ndb.get_multi([token_key, user_key])
@@ -59,13 +66,22 @@ class User(webapp2_extras.appengine.auth.models.User):
 
 
 class Secret(ndb.Model):  # root
+    '''this is filled separately::
+
+        $remote_api_shell.py -s mamchecker.appspot.com
+    '''
     secret = ndb.StringProperty()
 
-make_secret = lambda: str(uuid.uuid5(
+def make_secret():
+    'generate a secret'
+    return str(uuid.uuid5(
     uuid.UUID(bytes=datetime.datetime.now().isoformat()[:16]),
     datetime.datetime.now().isoformat()))
-stored_secret = lambda name: str(
-    Secret.get_or_insert(
+
+def stored_secret(name):
+    'get secret if there, else generate one'
+    return str(
+        Secret.get_or_insert(
         name,
         secret=make_secret()).secret)
 
@@ -78,16 +94,17 @@ def gen_student_path(seed=None):
         seed = datetime.datetime.now().isoformat()
     while len(seed) < 16:
         seed = seed + datetime.datetime.now().isoformat().split(':')[-1]
-    un = str(
+    student_path = str(
         uuid.uuid5(
             uuid.UUID(
                 bytes=seed[
                     :16]),
             datetime.datetime.now().isoformat()))
-    return un
+    return student_path
 
 
 class Base(ndb.Model):  # root
+    'common fields'
     userkey = ndb.KeyProperty(kind='User')
     created = ndb.DateTimeProperty(auto_now_add=True)
 
@@ -95,23 +112,28 @@ class Base(ndb.Model):  # root
 # a user can have more such roles
 
 
-class School(Base):  # root
+class School(Base):
+    'root'
     pass
 
 
-class Period(Base):  # parent:School
+class Period(Base):
+    'parent:School'
     pass
 
 
-class Teacher(Base):  # parent:Period
+class Teacher(Base):
+    'parent:Period'
     pass
 
 
-class Class(Base):  # parent: Teacher
+class Class(Base):
+    'parent: Teacher'
     pass
 
 
-class Student(Base):  # parent: Class
+class Student(Base):
+    'parent: Class'
     color = ndb.StringProperty()
 
 myschool = School.get_or_insert('myschool')
@@ -122,6 +144,7 @@ myself = Student.get_or_insert('myself', parent=myclass.key)
 
 
 def add_student(studentpath, color=None, user=None):
+    'defaults to myxxx for empty roles'
     school_, period_, teacher_, class_, student_ = studentpath
     school = School.get_or_insert(
         school_ or 'myschool',
@@ -151,7 +174,8 @@ def add_student(studentpath, color=None, user=None):
 #dict(filter(lambda x:isinstance(x[1],ndb.ComputedProperty),Problem._properties.iteritems()))
 
 
-class Problem(Base):  # parent: Student
+class Problem(Base):
+    'parent: Student'
     query_string = ndb.StringProperty()
     lang = ndb.StringProperty()
     # the numbers randomly chosen, in python dict format
@@ -172,10 +196,13 @@ class Problem(Base):  # parent: Student
     allempty = ndb.ComputedProperty(lambda self: ''.join(self.answers) == '')
 
     def link(self):
+        'creates url to this problem'
         return '/' + self.lang + '/?' + self.query_string
 
     @classmethod
     def from_resolver(cls, rsv, nr, parentkey):
+        '''create a problem from a resolver (see hlp.py)
+        '''
         d = rsv.load()
         g = d.given()
         r = d.norm(d.calc(g))
@@ -196,51 +223,74 @@ class Problem(Base):  # parent: Student
                          v in cls._properties.items() if s in pkwargs})
         return problem, pkwargs
 
-# e=myself.key
-keyparams = lambda k: '&'.join([r + '=' + str(v) for r, v in k.pairs()])
-# keyparams(e)
-ctxkey = lambda x: ndb.Key(*list(chain(*zip(problemCtx[:len(x)], x))))
+
+def keyparams(k):
+    '''
+    >>> e=myself.key
+    >>> keyparams(e)
+    'School=myschool&Period=myperiod&Teacher=myteacher&Class=myclass&Student=myself'
+
+    '''
+    return '&'.join([r + '=' + str(v) for r, v in k.pairs()])
+
+
+def ctxkey(x):
+    '''
+    >>> x = ['myschool','myperiod','myteacher','myclass','myself']
+    >>> isinstance(ctxkey(x),ndb.Key)
+    True
+
+    '''
+    return ndb.Key(*list(chain(*zip(problemCtx[:len(x)], x))))
+
+
 studentCtx = [k for k, v in myself.key.pairs()]
 problemCtx = studentCtx + ['Problem']
 problemCtxObjs = [School, Period, Teacher, Class, Student, Problem]
 
 
-def table_entry(s):
-    if isinstance(s, Problem) and s.answered:
+def table_entry(e):
+    'what of entity e is used to render html tables'
+    if isinstance(e, Problem) and e.answered:
         problem_set = Problem.query(
-            Problem.collection == s.key).order(
+            Problem.collection == e.key).order(
             Problem.nr)
         if problem_set.count():
-            return [datefmt(s.answered), s.answers]
+            return [datefmt(e.answered), e.answers]
         else:
-            return [datefmt(s.answered), s.oks, s.answers, s.results]
-    elif isinstance(s, Student):
-        return ['', '', '', '', s.key.string_id()]
-    elif isinstance(s, Class):
-        return ['', '', '', s.key.string_id()]
-    elif isinstance(s, Teacher):
-        return ['', '', s.key.string_id()]
-    elif isinstance(s, Period):
-        return ['', s.key.string_id()]
-    elif isinstance(s, School):
-        return [s.key.string_id()]
-    elif isinstance(s, Assignment):
+            return [datefmt(e.answered), e.oks, e.answers, e.results]
+    elif isinstance(e, Student):
+        return ['', '', '', '', e.key.string_id()]
+    elif isinstance(e, Class):
+        return ['', '', '', e.key.string_id()]
+    elif isinstance(e, Teacher):
+        return ['', '', e.key.string_id()]
+    elif isinstance(e, Period):
+        return ['', e.key.string_id()]
+    elif isinstance(e, School):
+        return [e.key.string_id()]
+    elif isinstance(e, Assignment):
         now = datetime.datetime.now()
-        overdue = now > s.due
-        return [(datefmt(s.created), s.query_string), datefmt(s.due), overdue]
-    # elif s is None:
+        overdue = now > e.due
+        return [(datefmt(e.created), e.query_string), datefmt(e.due), overdue]
+    # elif e is None:
     #    return ['no such object or no permission']
     return []
 
 
 class Index(ndb.Model):
-    # name = <query id>:<lang>, like 'r.i:de'
+    '''holds the index of the content.
+
+    entity name = <query id>:<lang>, like 'r.i:de'
+    '''
     path = ndb.StringProperty()
     knd = ndb.IntegerProperty()
     level = ndb.IntegerProperty()
 
 
 def index_add(query, lang, kind, level, path):
+    '''used in the generated initdb.py to fill the index (see dodo.py)
+    '''
     Index.get_or_insert(
         query + ':' + lang,
         knd=int(kind),
@@ -250,13 +300,13 @@ def index_add(query, lang, kind, level, path):
 def kvld(p_ll):  # key_value_leaf_depth
     '''
     >>> p_ll = [('a/b','ab'),('n/b','nb'),('A/c','ac')]
-    >>> list(kvld(p_ll))
-    [('a', 'ab', False, '1a'), ('b', 'ab', True, '2a'), ('c', 'ac', True, '2b'), ('n', 'nb', False, '1b'), ('b', 'nb', True, '2a')]
+    >>> [(a,d) for a, b, c, d in list(kvld(p_ll))]
+    [('a', '1a'), ('b', '2a'), ('c', '2b'), ('n', '1b'), ('b', '2a')]
 
     '''
     previous = []
     depths = []
-    for p, ll in sorted(p_ll,key=lambda v:v[0].lower()):
+    for p, ll in sorted(p_ll, key=lambda v:v[0].lower()):
         keypath = p.split('/')
         this = []
         nkeys = len(keypath)
@@ -274,9 +324,24 @@ def kvld(p_ll):  # key_value_leaf_depth
                 previous = this[:]
 
 
-def filteredcontent(lang, opt=[]):
-    # opt = [] #[('level', '2'), ('kind', 'exercise')]
-    #lang = 'en'
+def filteredcontent(lang, opt):
+    ''' filters the index by lang and optional by
+
+        - level
+        - kind
+        - path
+        - link
+
+    >>> import initdb
+    >>> lang = 'en'
+    >>> opt1 = [] #[('level', '2'), ('kind', 'exercise')]
+    >>> cnt1 = sum([len(list(gen[1])) for gen in filteredcontent(lang, opt1)])
+    >>> opt2 = [('level', '10'),('kind','1'),('path','maths'),('link','r')]
+    >>> cnt2 = sum([len(list(gen[1])) for gen in filteredcontent(lang, opt2)])
+    >>> cnt1 != 0 and cnt2 != 0 and cnt1 > cnt2
+    True
+
+    '''
     optd = dict(opt)
     knd_pathlink = {}
     itr = Index.query().iter()
@@ -302,18 +367,20 @@ def filteredcontent(lang, opt=[]):
 def keysOmit(path):
     "[name1,name2,nonstr,...]->[key2,key2]"
     keys = []
-    pth = map(lambda x: isinstance(x, str), path)
+    pth = [isinstance(x, str) for x in path]
     ipth = pth.index(False) if False in pth else len(pth)
     if ipth > 0:
         keys = [ctxkey(path[:ipth])] * ipth
     return keys
 
-
-def depth_1st(path=[], keys=[]  # start keys, keysOmit(path) to skip initial hierarchy
-              , models=problemCtxObjs, permission=False, userkey=None
+# pylint: disable=W0102
+def depth_1st(path=None, keys=None  # start keys, keysOmit(path) to skip initial hierarchy
+              , models=problemCtxObjs
+              , permission=False, userkey=None
               ):
     ''' path entries are names or filters ([] for all)
     translated into keys along the levels given by **models** depth-1st-wise.
+
     >>> from mamchecker.test.hlp import problems_for
     >>> #del sys.modules['mamchecker.test.hlp']
     >>> path = ['a', 'b', 'c', 'd', 'e']
@@ -339,6 +406,8 @@ def depth_1st(path=[], keys=[]  # start keys, keysOmit(path) to skip initial hie
         path = [[]] * N
     while len(path) < N:
         path += [[]]
+    if keys is None:
+        keys = []
     i = len(keys)
     parentkey = keys and keys[-1] or None
     permission = permission or parentkey and parentkey.get().userkey == userkey
@@ -377,26 +446,29 @@ def depth_1st(path=[], keys=[]  # start keys, keysOmit(path) to skip initial hie
 
 def filter_student(qs):
     '''take out studentCtx and color
-    >>> qs = 'School=b7034ff7&Period=3986&Teacher=527e&Class=9eed&Student=0&color=#EEE&bm&ws>0,d~1&b.v=3'
+    >>> qs = 'School=b&Period=3&Teacher=5e&Class=9&Student=0&color=#E&bm&ws>0,d~1&b.v=3'
     >>> filter_student(qs)
     'bm&ws>0,d~1&b.v=3'
 
     '''
-    qfiltered = filter(
-        lambda x: x[0] not in studentCtx +
-        ['color'],
-        parse_qsl(
-            qs,
-            True))
+    qfiltered = [x  for x in
+            parse_qsl(qs, True)
+            if x[0] not in studentCtx + ['color']]
     qsfiltered = '&'.join([k + '=' + v if v else k for k, v in qfiltered])
     return qsfiltered
 
 
 def set_student(request, user=None, session=None):
     '''logic for student role
+
+    There is always a student role
+
     - there is a student role per client without user
     - there are more student roles for a user with one being current
 
+    Else a redirect string for a message is returned.
+
+    >>> import webapp2
     >>> request = webapp2.Request.blank('/')
     >>> request.response = request.get_response()
     >>> request.GET.update(dict(zip(studentCtx,[str(x) for x in range(len(studentCtx))])))
@@ -444,18 +516,21 @@ def set_student(request, user=None, session=None):
     return request.student
 
 
-class Assignment(Base):  # parent: Student
+class Assignment(Base):
+    'parent: Student'
     query_string = ndb.StringProperty()
     due = ndb.DateTimeProperty()
 
 
 def assignable(teacherkey, userkey):
+    'yield all classes and students the teacher can assign to'
     for st in depth_1st(keys=[teacherkey], models=[Teacher, Class, Student], userkey=userkey):
         yield st
 
 
 def normqs(qs):
-    '''
+    '''take away =1 from a content query
+
     >>> qs = 'r.bm=1'
     >>> normqs(qs)
     'r.bm'
@@ -477,6 +552,7 @@ def normqs(qs):
 
 
 def assign_to_student(studentkeyurlsafe, query_string, duedays):
+    'assign to a student'
     now = datetime.datetime.now()
     studentkey = ndb.Key(urlsafe=studentkeyurlsafe)
     Assignment(parent=studentkey, query_string=normqs(query_string),
@@ -484,11 +560,13 @@ def assign_to_student(studentkeyurlsafe, query_string, duedays):
 
 
 def assigntable(studentkey, userkey):
+    'yield assignment table for student'
     for e in depth_1st(keys=[studentkey], models=[Student, Assignment], userkey=userkey):
         yield e
 
 
 def done_assignment(akey):
+    'check if assignment has been answered after its creation time'
     if not akey:
         return False
     assignm = akey.get()
@@ -504,6 +582,7 @@ def done_assignment(akey):
 
 
 def remove_done_assignments(studentkey, userkey):
+    'remove all done assignments for a student'
     for s in assigntable(studentkey, userkey):
         if done_assignment(s):
             s.delete()

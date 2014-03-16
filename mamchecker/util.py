@@ -12,7 +12,7 @@ from webapp2_extras import auth
 from bottle import SimpleTemplate, template
 
 from mamchecker.hlp import listable, mklookup, counter, Struct
-from mamchecker.kinds import make_kinda, make_kind0, CtxStrings
+from mamchecker.languages import make_kinda, make_kind0, CtxStrings
 from mamchecker.model import studentCtx, Student, myself
 
 
