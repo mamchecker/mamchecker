@@ -3,12 +3,8 @@
 import os
 import logging
 from mamchecker.util import PageBase
-from mamchecker.hlp import import_module
+from mamchecker.hlp import import_module, email_enabled, py_test
 from google.appengine.api import mail
-via_email = True  # !!else everybody can change the password
-
-py_test = os.environ.get('SERVER_SOFTWARE', '').startswith('py.test')
-
 
 class Page(PageBase):
 
@@ -41,7 +37,7 @@ class Page(PageBase):
         except:
             logging.warning('!! no email for password change !!')
 
-        if not py_test and via_email and email:
+        if not py_test and email_enabled and email:
             confirmation_url = self.request.application_url + \
                 '/' + self.request.lang + '/' + relative_url
             logging.info(confirmation_url)

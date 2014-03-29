@@ -97,13 +97,11 @@
     </div> 
     </div>
 
-    % elif request.pagename not in ['login','signup','forgot','verification','password']:
+    % elif request.pagename not in ['login','forgot','verification','password']:
 
     <div class="footer" style="border-top:double;background-color:{{contextcolor}}">
     <div class="grid_10">
         {{ tloginat }}
-        %#<a href="/{{request.lang}}/login">Mamchecker</a>
-        %#{{ torvia }}
     </div> 
     </div>
 
@@ -112,17 +110,17 @@
     <a href="/{{request.lang}}/login">Mamchecker</a>
     {{ torvia }}
     </div> 
+    <div class="grid_2"> 
+    <a href="/auth/facebook">Facebook</a>
+    </div> 
+    <div class="grid_2">
+    <a href="/auth/google">Google</a>
+    </div> 
     <div class="grid_2">
     <a href="/auth/linkedin2">LinkedIn</a>
     </div> 
     <div class="grid_2"> 
-    <a href="/auth/facebook">Facebook</a>
-    </div> 
-    <div class="grid_2"> 
     <a href="/auth/twitter">Twitter</a>
-    </div> 
-    <div class="grid_2">
-    <a href="/auth/google">Google</a>
     </div> 
     %#because of http://stackoverflow.com/questions/2981226/app-engine-remote-api-with-openid
     %#<div class="grid_2">

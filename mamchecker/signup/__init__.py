@@ -3,14 +3,8 @@
 import logging
 import os
 from mamchecker.util import PageBase
-from mamchecker.hlp import import_module
+from mamchecker.hlp import import_module, email_enabled, py_test
 from google.appengine.api import mail
-
-# main purpose: to allow recovering password (see forgot/__init__.py)
-via_email = True
-
-py_test = os.environ.get('SERVER_SOFTWARE', '').startswith('py.test')
-
 
 class Page(PageBase):
 
@@ -54,7 +48,7 @@ class Page(PageBase):
             user_id,
             token)
 
-        if not py_test and via_email:
+        if not py_test and email_enabled:
             confirmation_url = self.request.application_url + \
                 '/' + self.request.lang + '/' + relative_url
             logging.info(confirmation_url)

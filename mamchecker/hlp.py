@@ -14,6 +14,8 @@ from functools import wraps
 
 from sympy import sstr, Rational as R, S, E
 
+# this removes forgot password, else everybody could change the password
+email_enabled = False
 
 def ziplongest(*args):
     '''zip_longest with last element as filler
@@ -377,7 +379,6 @@ PAGES = [
     'contexts',
     'done',
     'edits',
-    'forgot',
     'login',
     'main',
     'message',
@@ -386,6 +387,11 @@ PAGES = [
     'static',
     'todo',
     'verification']
+
+py_test = os.environ.get('SERVER_SOFTWARE', '').startswith('py.test')
+
+if email_enabled or py_test:
+    PAGES.append('forgot')
 
 def author_folder(fn, withtest=False):
     ''' checks whether fn is an author's content folder

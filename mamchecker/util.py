@@ -16,7 +16,7 @@ from webapp2_extras import auth
 
 from bottle import SimpleTemplate, template
 
-from mamchecker.hlp import listable, mklookup, counter, Struct
+from mamchecker.hlp import listable, mklookup, counter, Struct, email_enabled
 from mamchecker.languages import make_kinda, make_kind0, CtxStrings
 from mamchecker.model import studentCtx, Student
 
@@ -186,7 +186,8 @@ class PageBase(AuthUser):
             'util': self.util,
             'kinda': make_kinda(self.request.lang),
             'kind0': make_kind0(self.request.lang),
-            'langs': list(CtxStrings.keys())
+            'langs': list(CtxStrings.keys()),
+            'email_enabled': email_enabled
         })
         self.params = self.request.params
 

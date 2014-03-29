@@ -23,7 +23,7 @@ handlers:
 
     - url: .*
       script: mamchecker.app.app
-      secure: always
+      secure: optional
 
     #This, if below builtins remote_api is off
     #- url: /admin/.*
