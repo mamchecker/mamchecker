@@ -15,9 +15,9 @@ Du könntest Anfangsbuchstaben oder Endbuchstaben der Namen verwenden,
 zufällige Zeichen hinzufügen oder eine andere Art Verdunkelung machen,
 welche nicht einer einfachen Zuordnung für dich entgegensteht.
 
-Alle unregistrierten Benutzer fallen in eine Benutzerkategorie. 
-Deshalb können alle unregistrierten Benutzer die gemachten Übungen
-aller anderen unregistrierten Benutzer abfragen.
+Alle nicht registrierten Benutzer fallen in eine Benutzerkategorie. 
+Deshalb können alle nicht registrierten Benutzer die gemachten Übungen
+aller anderen nicht registrierten Benutzer abfragen.
 
 Wenn du dich registrierst und Instanzen
 Schule, Periode, Lehrer, Klasse und Student anlegst,

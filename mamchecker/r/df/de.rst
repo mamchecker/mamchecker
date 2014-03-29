@@ -18,7 +18,7 @@ Meinen Vorstellungen entsprechende fertige Lösung habe ich nicht gefunden,
 aber ich kam auf Google Appengine, das mir eine gute Startplattform
 für ein eigenes Projekt schien.
 
-Während der Zeit als Lehrer war die Lösung noch ziemlich unausgefeilt, aber man
+Während der Zeit als Lehrer war die Lösung noch ziemlich unausgereift, aber man
 konnte sie schon verwenden.  Während dieser Zeit habe ich vor allem Übungen,
 Zusammenfassungen oder andere Texte, die zum Thema in der Klasse passten,
 hinzugefügt.
@@ -30,7 +30,7 @@ Ab Sommer 2013 habe ich den Code neu strukturiert und das Benutzermanagement hin
 sowie die vorhandenen Texte ins Englische übersetzt.
 
 Da ich im Herbst nicht weiter unterrichtet habe, war die Hauptmotivation 
-für den zusätzlichen Aufwand, den anfängliche Aufwand anderen zugänglich zu machen. 
+für den zusätzlichen Aufwand, den anfänglichen Aufwand anderen zugänglich zu machen. 
 
 Ich hoffe, 
 

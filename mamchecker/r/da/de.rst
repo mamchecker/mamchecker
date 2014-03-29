@@ -53,7 +53,7 @@
 - Antworten zu Übungen werden in einer Datenbank gespeichert und
   beim laden mit den Texten in den jeweiligen Sprachen vereint.
 
-- Eine Studentenrolle ist gegeben durch einen ID-Pfad/Hierarchie::
+- Eine Studentenrolle ist gegeben durch einen ID-Pfad / eine Hierarchie::
 
   Schule 1-n Periode 1-n Lehrer 1-n Klasse 1-n, Student
 

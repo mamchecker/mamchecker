@@ -8,29 +8,6 @@
 .. role:: asis(raw)
     :format: html latex
 
-Mamchecker is on `appspot <https://mamchecker.appspot.com>`_ for tests within the free 
-`appengine quotas <https://developers.google.com/appengine/docs/quotas>`_.
-
-Github Links 
-............
-
-This file is the main github README file as well as part of mamchecker's ``meta`` content.
-For further background follow these links to github.
-
-- `purpose <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/cz/en.rst>`_
-
-- `ideas <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/da/en.rst>`_
-
-- `queries (this file up-to-date) <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/db/en.rst>`_
-
-- `query rights <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/de/en.rst>`_
-
-- `participate <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/dc/en.rst>`_
-
-- `history <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/df/en.rst>`_
-
-- `try in class <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/dd/en.rst>`_
-
 URL
 ...
 
@@ -80,6 +57,9 @@ allows
 - a teacher to see the exercises of his classes or students
 
 From the left, dropped entries will be filled by the corresponding current context IDs.
+Therefore a student only needs ``<exercise>``, if it should be filtered at all. 
+``<..>`` are placeholders for the actual strings.
+
 For 'no restriction' ``*`` can be used. 
 
 An entry has this format::

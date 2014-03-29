@@ -44,7 +44,7 @@ um Übungen zu beantworten. Lehrer können so gleich sehen,
 wer richtig geantwortet hat und wer noch nicht geantwortet hat.
 
 Dadurch kann der Lehrer schnell jene Schüler herausfinden, die etwas noch nicht
-memorisiert haben oder eine Konzept oder eine Beziehung noch nicht verstanden
+gelernt haben oder eine Konzept oder eine Beziehung noch nicht verstanden
 haben.
 
 Die Schüler können die Übungen gleich nach der Erklärung des Lehrers

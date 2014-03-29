@@ -49,7 +49,7 @@ Wertigkeit:
     10 ist die **Basis** des Dezimalsystems.
 
 Brüche:
-    So wie ein zehnfaches Häufchen eine Stell hat, so wird auch dem zehnten Teil eine 
+    So wie ein zehnfaches Häufchen eine Stelle hat, so wird auch dem zehnten Teil eine 
     Stelle nach dem Komma gegeben.
 
     ,1/10¹=1/10  1/10²=1/100  1/10³=1/1000 ...

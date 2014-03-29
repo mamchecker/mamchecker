@@ -22,49 +22,49 @@ Software
 --------
 
 Wenn du etwas Vertraut mit Linux bist, verwende es, vielleicht mittels
-eines virtuellen PCs wie etwa `virtualbox <https://www.virtualbox.org/wiki/Downloads>`_. 
+eines virtuellen PCs wie etwa `Virtualbox <https://www.virtualbox.org/wiki/Downloads>`_. 
 Dann kannst due ``git`` und die andere SW mit weniger Problemen betreiben
 (z.B. einfache Installation mit Packetmanagern, Unterstützung von Symlinks, ...).
 Aber auch unter Windows und Mac gibt es alle notwendigen Tools.
 
 Zur Zusammenarbeit wird `github <https://github.com/mamchecker>`_ verwendet.
-Die Übungen enthalten Python code (auch in den Templates),
+Die Übungen enthalten Python Code (auch in den Templates),
 weshalb eine Handhabung wie Code, angebracht ist.
 Dass ein zweiter den Code überprüft, ist aus Sicherheitsgründen notwendig.
 
 Auf deinem PC brauchst du
 
-- `git <http://rogerdudler.github.io/git-guide/>`_ 
+- `Git <http://rogerdudler.github.io/git-guide/>`_ 
   (`msys git <http://msysgit.github.io/>`_ unter Windows).
   `Einleitung <http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup>`_
 
-- `python <http://www.python.org/download/releases/2.7/>`_  
+- `Python <http://www.python.org/download/releases/2.7/>`_  
   mit `pip <http://stackoverflow.com/questions/4750806/how-to-install-pip-on-windows>`_
   (Python 3 wird von Google Appengine noch nicht unterstützt.)
 
-- `google appengine <https://developers.google.com/appengine/downloads>`_
+- `Google Appengine <https://developers.google.com/appengine/downloads>`_
 
-- `doit <http://pydoit.org/>`_ (``pip install doit``)
+- `Doit <http://pydoit.org/>`_ (``pip install doit``)
 
-- `pytest <http://pytest.org/latest/>`_ zum Testen (``pip install pytest``)
+- `Pytest <http://pytest.org/latest/>`_ zum Testen (``pip install pytest``)
 
 und optional
 
-- `sphinx <http://sphinx-doc.org/latest/install.html>`_,
+- `Sphinx <http://sphinx-doc.org/latest/install.html>`_,
   wenn du Restructured Text (rst) verwenden willst.
   (``pip install sphinx``). 
 - Latex (use `miktex <http://miktex.org/>`_ unter Windows) für sphinx plugins
   (`sphinxcontrib.tikz <https://bitbucket.org/philexander/tikz>`_,
   `sphinxcontrib.texfigure <https://bitbucket.org/prometheus/sphinxcontrib-texfigure>`_).
 
-- `coverage <http://nedbatchelder.com/code/coverage/>`_ (``pip install coverage``)
+- `Coverage <http://nedbatchelder.com/code/coverage/>`_ (``pip install coverage``)
 
 Als Browser hat Chrome die beste `HTML5 <http://html5test.com/results/desktop.html>`_ 
 Unterstützung und eine gute Umgebung zum Debuggen von Javascript.
 
 Zum editieren verwende einen Texteditor deiner Wahl. 
 Er sollte es ermöglichen ausgewählten Code auszuführen 
-(`pydev <http://pydev.org/manual_adv_interactive_console.html>`_, `vim <http://www.vim.org/>`_).
+(`Pydev <http://pydev.org/manual_adv_interactive_console.html>`_, `Vim <http://www.vim.org/>`_).
 
 Einsteigerhilfe
 ---------------
@@ -173,16 +173,8 @@ Mach dich bereit für das ``commit``:
       Das testet mehr als notwendig ist, wenn du nur eine Übung hinzugefügt hast.
       Aber mache es, wenn du sonstige Änderungen im Code gemacht hast.
 
-Füge deinen Betrag zu Sammlung hinzu.
+Füge deinen Betrag zur Sammlung hinzu.
 
-    - In deinem Browser kannst du eine **pull request** erzeugen,
+    - In deinem Browser kannst du einen **pull request** erzeugen,
       damit alle Beiträge zusammen kommen.
-
-Was passiert mit deinen Beitrag?
-
-    - Das Zusammenführen passiert nach einer Überprüfung des Codes und nachdem die
-      Tests durchgelaufen sind.
-
-    - Dann wird die neueste Version hochgeladen,
-      derzeit auf ``https://mamchecker.appspot.com``.
 

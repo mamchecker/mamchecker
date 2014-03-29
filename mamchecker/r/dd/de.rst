@@ -20,9 +20,9 @@ Schritt-für-Schritt für jeden in der Klasse:
 
 - Der Lehrer zuerst, dann die Schüler: 
 
-    - https://mamchecker.appspot.com/de öffnen
+    - http://www.mamchecker.eu/de öffnen
     - zu ``Änderungen`` (oben links) gehen
-    - seine IDs eingeben.  Der Lehrer ist auch eine
+    - seine IDs eingeben.  Der Lehrer ist auch ein
       Student, er kann aber das Feld Student auch leer lassen.
     - Auf [OK] drücken.
 
@@ -36,7 +36,7 @@ Schritt-für-Schritt für jeden in der Klasse:
     - von der Klasse ``<classID>``. Die tatsächliche ID der Klasse verwenden.
 
 Der Unterschied zum registrierten Benutzer: 
-Im unregistrierten Fall kann jeder Schüler Lehrer spielen,
+Im nicht registrierten Fall kann jeder Schüler Lehrer spielen,
 und anderen Aufgaben geben oder die Ergebnisse abfragen
 (weiters dazu in :lnk:`r.de`).
 

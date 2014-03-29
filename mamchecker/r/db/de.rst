@@ -37,7 +37,7 @@ eine deutsche Seite mit einer  ``r.a``-Übung und zwei ``r.by``-Übungen abrufen
 ``../de/?r.a&r.by=2``, d.h. ohne ``content``, ergibt das gleiche.
 
 Für registrierte Benutzer erlaubt eine solche Seite Klassen oder Schülern
-mit gleichem Schule-Periode-Lehrer Prefix 
+mit gleichem Schule-Periode-Lehrer Präfix 
 **Arbeitsaufträge** (assignments) zu geben.
 Die Lehrerrolle des ausgewählten Kontexts muss jedoch dem Benutzer gehören, d.h.
 von ihm erstellt worden sein.
@@ -45,7 +45,7 @@ von ihm erstellt worden sein.
 Eine Übung besteht aus mehreren Fragen und jede Frage hat Punkte (1, falls
 nicht angegeben).  Nach der Überprüfung gibt es am Anfang der Seite eine
 Zusammenfassung von erreichten Punkten/mögliche Punkte zweimal, wovon einmal die nicht
-ausgefüllte Felder nicht mitgezählt werden.
+ausgefüllten Felder nicht mitgezählt werden.
 
 done (erledigt)
 ...............
@@ -64,14 +64,17 @@ erlaubt es
 - einen Lehrer die Übungen seiner Klassen oder Schüler zu sehen.
 
 Von links werden nicht angeführte IDs mit denen vom aktuellen Kontext ersetzt.
+Deslhalb braucht ein Student nur  ``<exercise>``, wenn überhaupt gefiltert werden soll.
+``<..>`` sind Platzhalter für die tatsächlichen IDs. 
+
 Für 'alle' kann man ``*`` verwenden.
 
 Jeder Eintrag hat dieses Format:
 
     name|feld op wert[,feld op wert[,...]]
 
-- ``name`` ist der Name des Datensatzen
-- ``feld`` ist ein Feld (Variable) des Datensatzen
+- ``name`` ist der Name des Datensatzes
+- ``feld`` ist ein Feld (Variable) des Datensatzes
 
     Alle Datensätze haben einen Namen sowie ``userkey`` und ``created``.
     Schule, Periode, Lehrer und Klasse haben keine anderen Felder.
@@ -112,7 +115,7 @@ Für leer gelassene Felder werden die IDs ``myschool``, ``myperiod``, ``myteache
 ``myclass`` und ``myself`` verwendet.
 
 Werden alle IDs eines Kontextpfades schon verwendet, gibt es eine Meldung.
-Werden Pfadprefixe von anderen Verwendet erscheinen diese kursiv.
+Werden Pfadpräfixe von anderen Verwendet erscheinen diese kursiv.
 Diese anderen Benutzer können dein gemachten Übungen abfragen.
 
 
@@ -120,7 +123,7 @@ Diese anderen Benutzer können dein gemachten Übungen abfragen.
 ``Ändern`` erstellt einen neuen Kontext, kopiert alle Übungen vom alten und löscht diesen.
 ``Löschen`` löscht den Kontext mit allen Übungen.
 
-Die **Farbe** dient dazu leichter zu erkennen in welchem Kontext man sich befindet.
+Die **Farbe** dient dazu, leichter zu erkennen, in welchem Kontext man sich befindet.
 
 contexts (Kontexte)
 ...................

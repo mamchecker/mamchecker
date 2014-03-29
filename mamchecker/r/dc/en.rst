@@ -167,9 +167,3 @@ Add your contribution to the main repository.
     - In the browser you create a **pull request**.
       This way all contributions come together.
 
-What happens with your contribution.
-
-    - The code is merged after a review and after tests have run through.
-
-    - Then the newest version is uploaded, currently to ``https://mamchecker.appspot.com``.
-
