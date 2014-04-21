@@ -81,18 +81,18 @@ Notation is not the vector itself.
 Vector Operations
 -----------------
 
-.. texfigure:: vector_dot_cross.tex
-      :align: center
+.. .. texfigure:: vector_dot_cross.tex
+..       :align: center
 
-.. .. tikz:: \coordinate (0) at (0,0);
-..     \coordinate (A) at (1,3);
-..     \coordinate (B) at (4,2);
-..     \coordinate (C) at (2,1);
-..     \tikzset{->}
-..     \draw[black,very thick] (0) -- (A) node [midway,left]{$\vec{x}$};
-..     \draw[black,very thick] (0) -- (B) node [near end,right,below]{$\vec{y}$};
-..     \draw[black,very thin]  (0) -- (C) node [midway,right,below]{$x_y$};
-..     \draw[-,thin] (A) -- (C) node [midway,right]{$x_{\perp y}$};
+.. tikz:: \coordinate (0) at (0,0);
+    \coordinate (A) at (1,3);
+    \coordinate (B) at (4,2);
+    \coordinate (C) at (2,1);
+    \tikzset{->}
+    \draw[black,very thick] (0) -- (A) node [midway,left]{$\vec{x}$};
+    \draw[black,very thick] (0) -- (B) node [near end,right,below]{$\vec{y}$};
+    \draw[black,very thin]  (0) -- (C) node [midway,right,below]{$x_y$};
+    \draw[-,thin] (A) -- (C) node [midway,right]{$x_{\perp y}$};
 
 
 Apart from addition there are to other important vector operations.

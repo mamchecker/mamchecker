@@ -147,6 +147,10 @@ index_add(u"r.bl", u"de", "0", "11",
         u"Mathematik/Finanz/Zinsen/Vergleich Zinssatz")
 index_add(u"r.bl", u"en", "0", "11",
         u"maths/finance/interest/comparison")
+index_add(u"r.dg", u"de", "3", "13",
+        u"Physik/Schaltkreise/Thevenin")
+index_add(u"r.dg", u"en", "3", "13",
+        u"physics/circuits/thevenin")
 index_add(u"r.y", u"de", "0", "9",
         u"Mathematik/Potenzen/Doppelbrüche")
 index_add(u"r.y", u"en", "0", "9",

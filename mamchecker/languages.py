@@ -11,13 +11,13 @@ kinds = {
     # order must not be changed, because index is used in html files via
     # kinda()
     'de':
-    ['Übungen', 'Inhalte', 'Kurse', 'Informelles', 'Zusammenfassungen',
+    ['Übungen', 'Inhalte', 'Kurse', 'Beispiele', 'Zusammenfassungen',
         'Formelles', 'Fragmente', 'Bemerkungen', 'Zitate', 'Definitionen',
         'Theoreme', 'Korollare', 'Lemmas', 'Propositionen', 'Axiome',
         'Vermutungen', 'Behauptungen', 'Identitäten', 'Paradoxien', 'Meta'],
 
     'en':
-    ['problems', 'content', 'courses', 'informal', 'summaries', 'formal',
+    ['problems', 'content', 'courses', 'examples', 'summaries', 'formal',
         'fragments', 'remarks', 'citations', 'definitions', 'theorems',
         'corollaries', 'lemmas', 'propositions', 'axioms', 'conjectures',
         'claims', 'identities', 'paradoxes', 'meta']
