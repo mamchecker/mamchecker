@@ -1,27 +1,28 @@
 % if isinstance(content, list):
 
-    <p>{{texplain}}</p>
 
     <form action="" method="get">
-
     % for knd, lnks in content:
-       <p><b>{{knd}}</b><br>
-       % for linktext,link,leaf,depth in lnks:
+    <p><b><a href="/{{request.lang}}/?kind={{knd}}">{{knd}}</a></b><br>
+       % for linktext,lnklvl,leaf,depth in lnks:
           % if not leaf: 
-             <small>({{depth}})</small><em>{{linktext}}:</em>
+          <small>({{depth}})</small><em><a href="/{{request.lang}}/?path={{linktext}}">{{linktext}}</a>:</em>
           % else:
-             <small>({{depth}})</small><a href="/{{request.lang}}/?{{link[0]}}">
-                 {{linktext}}
-             </a>
-             % if link[1] != 0:#level
-             <small>{{link[1]}}</small>
-             % end
-             <input type="checkbox" name="choice" value="{{link[0]}}">
+             % lnk,lvl = lnklvl
+             <small>({{depth}})</small><a href="/{{request.lang}}/?{{lnk}}">{{linktext}}</a>
+             <input type="checkbox" name="choice" value="{{lnk}}">
+             % try:
+             % authid = lnk.split('.')[0]
+             (<a href="/{{request.lang}}/?link={{authid}}">{{authid}}</a>)
+             % except: pass
+             %end
+             <a href="/{{request.lang}}/?level={{lvl}}">{{lvl}}</a>
           % end
        % end
     % end
 
     <p><input type="submit" name="compose" value="{{tselected}}"/></p>
+    <p>{{texplain}}</p>
 
     </form>
 

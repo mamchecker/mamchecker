@@ -1,7 +1,7 @@
 .. raw:: html
 
     %path = "Mathematik/Funktionentheorie/Integral von 1÷z"
-    %kind = kinda["Inhalte"]
+    %kind = kinda["Texte"]
     %level = 12
     <!-- html -->
 

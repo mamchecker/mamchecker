@@ -1,7 +1,7 @@
 .. raw:: html
 
     %path = "maths/external links"
-    %kind = kinda["content"]
+    %kind = kinda["texts"]
     %level = 0
     <!-- html -->
 

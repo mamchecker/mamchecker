@@ -175,6 +175,8 @@ def task_html():
     sources = recursive_glob('*.rst')
 
     for src in sources:
+        if 'README.rst' in src:
+            continue
         srcpath,srcname = os.path.split(src)
         name = os.path.splitext(srcname)[0]
         build = os.path.join(srcpath,'_build')
@@ -364,7 +366,7 @@ def task_initdb():
                     deftext = u'\n'.join(defines)
                     lang = langcode(langfile)
                     available_langs.add(lang)
-                    defs = {'kinda':languages.make_kinda(lang)}
+                    defs = {'kinda':languages.langkindnum[lang]}
                     try:
                         exec deftext in defs
                     except KeyError:

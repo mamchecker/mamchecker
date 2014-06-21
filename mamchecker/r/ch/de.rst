@@ -1,7 +1,7 @@
 .. raw:: html
 
     %path = "Mathemtik/Folgen und Reihen"
-    %kind = kinda["Inhalte"]
+    %kind = kinda["Texte"]
     %level = 10
     <!-- html -->
 

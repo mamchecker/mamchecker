@@ -1,7 +1,7 @@
 .. raw:: html
 
     %path = "maths/informatics/komplexity"
-    %kind = kinda["content"]
+    %kind = kinda["texts"]
     %level = 9
     <!-- html -->
 

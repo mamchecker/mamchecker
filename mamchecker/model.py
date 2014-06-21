@@ -13,7 +13,7 @@ from bottle import SimpleTemplate
 from urlparse import parse_qsl
 
 from mamchecker.hlp import int_to_base26, datefmt
-from mamchecker.languages import make_kind0
+from mamchecker.languages import langkindnum, langnumkind, kindint
 
 from google.appengine.api.datastore_errors import BadKeyError
 
@@ -282,6 +282,7 @@ class Index(ndb.Model):
     '''holds the index of the content.
 
     entity name = <query id>:<lang>, like 'r.i:de'
+    This way it becomes unique in the Index table.
     '''
     path = ndb.StringProperty()
     knd = ndb.IntegerProperty()
@@ -342,24 +343,30 @@ def filteredcontent(lang, opt):
     True
 
     '''
+    def safeint(s):
+        try:
+            return int(s)
+        except:
+            return -1
+    kindnum = langkindnum[lang]
+    numkind = langnumkind[lang]
     optd = dict(opt)
-    knd_pathlink = {}
+    knd_pathlnklvl = {}
     itr = Index.query().iter()
     for e in itr:
         # e=itr.next()
-        # knd_pathlink
+        # knd_pathlnklvl
         link, lng = e.key.string_id().split(':')
         if lng == lang:
-            if 'level' not in optd or int(optd['level']) == e.level:
-                if 'kind' not in optd or int(optd['kind']) == e.knd:
+            if 'level' not in optd or safeint(optd['level']) == e.level:
+                if 'kind' not in optd or kindint(optd['kind'],kindnum) == e.knd:
                     if 'path' not in optd or optd['path'] in e.path:
                         if 'link' not in optd or optd['link'] in link:
-                            lpl = knd_pathlink.setdefault(e.knd, [])
+                            lpl = knd_pathlnklvl.setdefault(e.knd, [])
                             lpl.append((e.path, (link, e.level)))
                             lpl.sort()
-    knd0 = make_kind0(lang)
-    s_pl = sorted(knd_pathlink.items())
-    knd_pl = [(knd0[k], kvld(v)) for k, v in s_pl]
+    s_pl = sorted(knd_pathlnklvl.items())
+    knd_pl = [(numkind[k], kvld(v)) for k, v in s_pl]
     #[('Problems', <generator>), ('Content', <generator>),... ]
     return knd_pl
 

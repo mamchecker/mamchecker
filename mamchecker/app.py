@@ -57,7 +57,7 @@ from mamchecker.model import stored_secret, set_student
 # this will fill Index
 # initdb is generate via `doit -k initdb`
 from mamchecker.initdb import available_langs
-from mamchecker.languages import kinds
+from mamchecker.languages import langnumkind
 
 # conftest.py will set this to False for py.test2 run
 debug = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')
@@ -210,7 +210,7 @@ class PageHandler(webapp2.RequestHandler, SimpleAuthHandler, AuthUser):
         self.request.lang = kwargs.get('lang', None)
         self.request.pagename = kwargs.get('pagename', None)
 
-        if not self.request.lang or not self.request.lang in kinds:
+        if not self.request.lang or not self.request.lang in langnumkind:
             try:
                 lng = self.session['lang']
             except KeyError:
@@ -227,7 +227,7 @@ class PageHandler(webapp2.RequestHandler, SimpleAuthHandler, AuthUser):
                     lng = list(candidates)[0]
                 else:
                     lng = 'en'
-            if self.request.lang and not self.request.lang in kinds:
+            if self.request.lang and not self.request.lang in langnumkind:
                 self.request.pagename = self.request.lang
             self.request.lang = lng
         if not self.request.pagename:
@@ -282,7 +282,7 @@ def _error(request, response, exception, status):
         'Error ' +
         str(status) +
         ' (' +
-        exception.message +
+        str(exception.message) +
         ')')
     response.set_status(status)
 

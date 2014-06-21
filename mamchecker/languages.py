@@ -4,35 +4,74 @@
 EACH DICT MUST CONTAIN AT LEAST ALL AVAILABLE LANGUAGES (see initdb.py and dodo.py)
 '''
 
-# >= contents is content
-# >= fragments is fragment
-kinds = {
-
-    # order must not be changed, because index is used in html files via
-    # kinda()
-    'de':
-    ['Übungen', 'Inhalte', 'Kurse', 'Beispiele', 'Zusammenfassungen',
-        'Formelles', 'Fragmente', 'Bemerkungen', 'Zitate', 'Definitionen',
-        'Theoreme', 'Korollare', 'Lemmas', 'Propositionen', 'Axiome',
-        'Vermutungen', 'Behauptungen', 'Identitäten', 'Paradoxien', 'Meta'],
-
+# >= texts are texts/fragments
+# >= fragments are fragments
+langnumkind = {
     'en':
-    ['problems', 'content', 'courses', 'examples', 'summaries', 'formal',
-        'fragments', 'remarks', 'citations', 'definitions', 'theorems',
-        'corollaries', 'lemmas', 'propositions', 'axioms', 'conjectures',
-        'claims', 'identities', 'paradoxes', 'meta']
-
+    {   0:'problems',
+        1:'texts',
+        2:'courses',
+        3:'examples',
+        4:'summaries',
+        5:'formal',
+        6:'fragments',
+        7:'remarks',
+        8:'citations',
+        9:'definitions',
+        10:'theorems',
+        11:'corollaries',
+        12:'lemmas',
+        13:'propositions',
+        14:'axioms',
+        15:'conjectures',
+        16:'claims',
+        17:'identities',
+        18:'paradoxes',
+        19:'meta'},
+    'de':
+    {   0:'Übungen',
+        1:'Texte',
+        2:'Kurse',
+        3:'Beispiele',
+        4:'Zusammenfassungen',
+        5:'Formelles',
+        6:'Fragmente',
+        7:'Bemerkungen',
+        8:'Zitate',
+        9:'Definitionen',
+        10:'Theoreme',
+        11:'Korollare',
+        12:'Lemmas',
+        13:'Propositionen',
+        14:'Axiome',
+        15:'Vermutungen',
+        16:'Behauptungen',
+        17:'Identitäten',
+        18:'Paradoxien',
+        19:'Meta'},
 }
 
-def make_kind0(lang):
-    '''from kind integer to kind string
-    '''
-    return {k: v for k, v in enumerate(kinds[lang])}
+langkindnum = {lng:{v: k for k, v in langnumkind[lng].items()} for lng in langnumkind}
 
-def make_kinda(lang):
-    '''from kind string to kind integer
-    '''
-    return {v: k for k, v in enumerate(kinds[lang])}
+def kindint(knd, numkind):
+    """
+    >>> kindint('Tex',langkindnum['de'])
+    1
+    >>> kindint('meta',langkindnum['en'])
+    19
+    >>> kindint(9,langkindnum['en'])
+    9
+    """
+    try:
+        return int(knd)
+    except:
+        try:
+            return numkind[knd]
+        except:
+            for k in numkind:
+                if knd in k:
+                    return numkind[k]
+            return -1
 
 
 CtxStrings = {
