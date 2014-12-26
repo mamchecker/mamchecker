@@ -277,7 +277,7 @@ def newproblem(init_starter=init_starter,lang_starter=lang_starter):
 rst_starter = '''.. raw:: html
 
     %path = "path/goes/here"
-    %kind = kinda["<choose from languages.py/kinds[lang]>"]
+    %kind = kinda["<choose from languages.py/langnumkind[lang]>"]
     %level = 0 #in school years
     <!-- html -->
 
