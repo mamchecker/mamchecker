@@ -124,12 +124,12 @@ class Page(PageBase):
         problem_set_iter = None
 
         def _new(rsv):
-            'create new problem(s) in db'
             nr = nrs.next()
             problem, pkwargs = Problem.from_resolver(
                 rsv, nr, self.request.student.key)
             if not self.problem:
                 self.problem = problem
+                self.current = self.problem
             else:
                 problem.collection = self.problem.key
             if problem.points:
@@ -137,11 +137,11 @@ class Page(PageBase):
             # TODO: shouln't it be possible to define given() ... in the
             # template itself
             problem.put()
-            SimpleTemplate.overrides.update(pkwargs)
-            _chain[-1] = SimpleTemplate.overrides.copy()
+            if not rsv.composed():
+                SimpleTemplate.overrides.update(pkwargs)
+                _chain[-1] = SimpleTemplate.overrides.copy()
 
         def _zip(rsv):
-            'zip template with problem(s) from db'
             if not self.current or rsv.query_string != self.current.query_string:
                 ms = 'query string ' + rsv.query_string
                 ms += ' not in sync with database '
@@ -166,37 +166,31 @@ class Page(PageBase):
                 pkwargs.update({'summary': (sw, sn)})
                 withempty.__iadd__(sw)
                 noempty.__iadd__(sn)
-            SimpleTemplate.overrides.update(pkwargs)
-            _chain[-1] = SimpleTemplate.overrides.copy()
+            if not rsv.composed():
+                SimpleTemplate.overrides.update(pkwargs)
+                _chain[-1] = SimpleTemplate.overrides.copy()
             try:
                 self.current = next(problem_set_iter)
             except StopIteration:
                 self.current = None
 
-        def lookup(query_string, _in=True, to_do=None):
+        def lookup(query_string, to_do=None):
             'Template lookup. This is an extension to bottle SimpleTemplate'
-            if not _in:
-                cm1 = _chain[-1]
-                if (cm1 == query_string or
-                    isinstance(cm1, dict) and
-                    cm1['query_string'] == query_string):
-                    del _chain[-1]
-                    if _chain and isinstance(_chain[-1], dict):
-                        SimpleTemplate.overrides = _chain[-1].copy()
-                return
             if query_string in _chain:
                 return
             if any([dc['query_string'] == query_string
                 for dc in _chain if isinstance(dc, dict)]):
                 return
-            _chain.append(query_string)
             rsv = resolver(query_string, self.request.lang)
             if not rsv.templatename and re_id.match(query_string):
                 raise HTTPNotFound('✘ ' + query_string)
-            if to_do and '.' in query_string:
+            _chain.append(query_string)
+            if to_do and '.' in query_string:#. -> not for scripts
                 to_do(rsv)
-            res = rsv.templatename
-            return res
+            yield rsv.templatename
+            del _chain[-1]
+            if _chain and isinstance(_chain[-1], dict):
+                SimpleTemplate.overrides = _chain[-1].copy()
 
         env = {}
         stdout = []
@@ -210,15 +204,14 @@ class Page(PageBase):
                     'query_string': self.request.query_string,
                     'lang': self.request.lang,
                     'scripts': {}})
+                cleanup = None
                 if '\n' in tplid:
-                    lookup(self.request.query_string, True, to_do)
+                    cleanup = lookup(self.request.query_string, to_do)
+                    try: next(cleanup)
+                    except StopIteration:pass
                 tpl = get_tpl(
                     tplid,
-                    template_lookup=lambda n,
-                    i=True: lookup(
-                        n,
-                        i,
-                        to_do))
+                    template_lookup=lambda n: lookup(n, to_do))
                 try:
                     tpl.execute(stdout, env)
                 except AttributeError:
@@ -228,8 +221,9 @@ class Page(PageBase):
                     if c:
                         c.key.delete()
                     raise
-                if '\n' in tplid:
-                    lookup(self.request.query_string, False, to_do)
+                if cleanup:
+                    try: next(cleanup)
+                    except StopIteration:pass
 
             if not self.problem:
                 prebase(_new)

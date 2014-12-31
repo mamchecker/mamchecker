@@ -27,7 +27,6 @@ import pytest
 bottle.DEBUG = True
 bottle.TEMPLATES.clear()
 
-
 def test_recursive_includes():
     self = newuserpage('test.t_1', 'en')
     self.problem = None

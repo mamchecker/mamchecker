@@ -53,7 +53,7 @@
 
 - A user context/role is identified by an ID path/hierarchy::
 
-  school 1-n period 1-n teacher 1-n class 1-n, student
+  school 1-n period 1-n teacher 1-n class 1-n student
 
 - Via this hierarchy a teacher has fast access to the done exercises
   of his classes and students via an URL query.

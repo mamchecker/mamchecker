@@ -245,6 +245,9 @@
             }
     $(document).ready(sizemenu);
     $(window).bind("resize",sizemenu);
+    //FIXME:
+    //content on back button previously checked checkbox will be checked. don't know how to avoid this
+    //does not work: window.onbeforeunload = function() { $("input:checked").removeAttr("checked");};
     </script>
 
     % end

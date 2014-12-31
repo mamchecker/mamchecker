@@ -325,7 +325,7 @@ class resolver:
         #lang = 'en'
         self.lang = lang
         self.query_string = query_string
-        if '&' in query_string:
+        if self.composed():
             self.full = query_string
             self.modulename = None
             self.isdir = False
@@ -356,6 +356,9 @@ class resolver:
                     if os.path.exists(self.templatename):
                         break
 
+    def composed(self):
+        return  any([ch in self.query_string for ch in '&=%$\n'])
+
     def load(self):
         if self.modulename:
             m = import_module(self.modulename)
@@ -370,7 +373,7 @@ class resolver:
 
 
 def mklookup(lang):
-    return lambda n, i = True: resolver(n, lang).templatename
+    return lambda n: resolver(n, lang).templatename
 
 datefmt = lambda dt: dt.isoformat(' ').split('.')[0]
 
