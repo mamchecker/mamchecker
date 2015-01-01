@@ -25,7 +25,7 @@ can be done there.
 Further communication can be done via the
 `Mamchecker Mailing List <https://groups.google.com/d/forum/mamchecker>`_.
 
-``Mam`` comes from ``MAtheMathics``, but all fields allow automatic answer checking.
+``Mam`` comes from ``MAtheMathics``.
 
 You can find out more via these links
 
