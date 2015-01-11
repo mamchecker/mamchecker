@@ -261,21 +261,16 @@ The complex numbers `\mathbb{C}`
 Above we have again and again added new things to the "numbers"
 And we continue this way...
 
-`x^2` only assumes positive values. 
+`x^2` only assumes positive values. The equation `x^2+1=0` does not have a solution.
 
-- So one loses information. The value range is smaller then the definition range.
-  (We wouldn't have this problem, if we didn't introduce the negative numbers.)
-- The equation `x^2+1=0` does not have a solution.
-
-So we invent a "number" `i` that satisfies `i^2=-1`. Then with the multiples
-we get all the negative values. The above problems are solved.
+So we invent a "number" `i` that satisfies `i^2=-1`.
 
 `i` is called **imaginary unit** and its multiples are called imaginary
 numbers.  Invented and due to the above property they have nothing to do with
 the real numbers, but are at the same time a kind of copy of `\mathbb{R}`
 orthogonal to `\mathbb{R}`.  Orthogonal means that all combinations can be
 done, which corresponds to a 2-dimensional space, i.e. a plane, 
-the **komplex plane** or **Gauss number plane**.
+the **complex plane** or **Gauss number plane**.
 
     `z = a + ib \in \mathbb{C}`
 
@@ -284,7 +279,7 @@ It is also a two-dimensional vector: 2 orthogonal directions that can be added i
 There are two representations
 
 - `z = a+ib`, i.e. via the components or
-- `z = cos\varphi + i sin\varphi` via length `r` and direction `\varphi` (Argument, Phase) in radiants.
+- `z = r(\cos\varphi + i\sin\varphi)` via modulus `r` and artument `\varphi` (angle, phase) in radiants.
 
 Now consider the following:
 
@@ -294,21 +289,24 @@ Now consider the following:
 
 Generally: Multiplication with `i` produces a rotation by the right angle.
 
-Also note, that here multiplication adds an angle, i.e. multiplication leads to
-addition.  This gives a hint that there could be a representation that has the
+Note that by the trigonometric addition formulas multiplication adds the angles,
+i.e. multiplication leads to addition.  
+This gives a hint that there could be a representation that has the
 angle in the exponent.
-Developing Sin and Cos into a series and comparing with the `e^x` series 
+Developing `\sin` and `\cos` into a series and comparing with the `e^x` series 
 leads to the **Euler Formula**:
 
 - :inl:`r.cy` 
 
 `z=re^{i\varphi}` is a usual way to represent complex numbers.
 
-About Sin and Cos we know that the period is `2\pi`, therefore this is true for `e^{i\varphi}`.
-The n-te root divides the period up to `2n\pi` to below `2\pi` and so we have n different
-roots.
+About `\sin` and `\cos` we know that the period is `2\pi`, therefore this is
+true for `e^{i\varphi}`.  The nth root divides the period up to `2n\pi` to
+below `2\pi` and so we have `n` different roots.
 
-`z^{\frac{1}{n}}=r^{\frac{1}{n}}e^{i(\frac{\varphi}{n}+\frac{2k\pi}{n})}`
+.. math::
+
+    z^{1/n}=r^{1/n}e^{i(\varphi/n+2k\pi/n)}
 
 More generally: 
 
@@ -317,12 +315,12 @@ More generally:
    of roots. `\mathbb{C}` therefore is called **algebraically closed**.
 
 This means that not only `x^2`, but every polynomial maps the whole
-`\mathbb{C}` to the whole of `\mathbb{C}`. So no information gets lost.
+`\mathbb{C}` to the whole of `\mathbb{C}`.
 
 .. admonition:: Note
 
-    In the function theory one learns that this can be extended to all functions
-    that in all of `\mathbb{C}` are infinitely often differentiable
+    In function theory one learns that this can be extended to all functions
+    that are infinitely often differentiable in all of `\mathbb{C}` 
     (analytic or holomorphic) (entire functions), because they can be developed 
     into a Taylor series.
 
