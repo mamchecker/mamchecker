@@ -346,7 +346,7 @@ Concepts:
 
   - `arg(\frac{z_1}{z_2})=arg(z_1)-arg(z_2)`
 
-Applicaiton of `\mathbb{C}` 
+Application of `\mathbb{C}` 
 ...........................
 
 Since `\mathbb{C}` is a extension of `\mathbb{R}`, 

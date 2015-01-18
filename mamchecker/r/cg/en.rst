@@ -12,12 +12,12 @@ Coordinate Transformation and Inverse Matrix
 Though convenient it is not a necessity that the basis vectors are independent, 
 i.e. orthogonal. 
 
-Think of ingredients of cakes as vector space (*ingedient vector space*).
-Then every cake is a vector, an independent choice from more variable, 
+As an example think of ingredients of cakes as a vector space (*ingedient vector space*).
+Then every cake is a vector, an independent choice from more variables, 
 which in this case are the quantities for each ingredient (0 for not used at all).
 
 The ingredients can be regarded orthogonal to each other. The context does not 
-ask for a detailed comparison. *The scalar product is 0.*
+ask for a detailed comparison. *The dot product is 0.*
 
 Let's compare the cakes in detail though via their ingredients.
 Cake A and cake B surely have ingredients in common.
@@ -30,25 +30,26 @@ Every column in the matrix is the recipe of one cake.
 
 In a matrix and vector written as a set of numbers, every number means
 something.  What it means is coded by the position the number takes.  This is
-called position coding.  The same we do with our number system where the units,
+called position coding. The same we do with our number system where the units,
 the tens, the hundreds,... have their own position.
 
-In this example the cakes and ingredients do not necessarily need to exist in
-the same number of variables (=dimensions). We can have 10 ingredients and
+In this example the cake space and ingredient space do not necessarily need to 
+have the same number of variables (number of variables = dimension). 
+We can have 10 ingredients and
 3 types of cakes. Then the transformation matrix is 10x3 (10 rows, 3 columns).
 Such a `m\times n` matrix with `m\not = n` cannot be inverted, 
 i.e. one cannot infer from the ingredients how many of each type of cake are baked. 
 Said differently: Not for every combination of ingredients there
 is a combination of cakes (linear combination), which needs exactly that amount of ingredients.
 
-If we fix a number of cakes in a smaller assortment of cakes 
+If we fix a number for each cake in a smaller assortment of cakes 
 we use less information, i.e. we make fewer decisions,
 than in the bigger space of ingredients.
 
 .. note::
 
-    A non-square matrix can be pseudo-inverted, though (Moore-Penrose Pseudoinverse). 
-    For the example multiplying an ingredient vector with the pseudo-inverse 
+    A non-square matrix can be pseudo-inverted, though: Moore-Penrose Pseudoinverse. 
+    For this example multiplying an ingredient vector with the pseudo-inverse 
     would produce a cake vector, which minimizes unused quantities of ingredients
     (Method of Least Squares) or makes best use of the ingredients (Maximum Entropy Method).
 

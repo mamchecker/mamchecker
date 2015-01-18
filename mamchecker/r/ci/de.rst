@@ -286,10 +286,10 @@ zulässig sind und das entspricht einer Ebene, der **komplexen Zahlenebene** ode
 
 Das ist wie ein zweidimensionaler Vektor: 2 orthogonale Richtungen unabhängig addiert.
 
-Es gibt zwei Darstellungen 
+Es gibt drei Darstellungen 
 
 - `z = a+ib`, also über Komponenten oder
-- `z = cos\varphi + i sin\varphi` über Länge `r` und Richtung `\varphi` (Argument, Phase) in Bogenmaß. 
+- `z = r(cos\varphi + i sin\varphi)` über Länge `r` und Richtung `\varphi` (Argument, Phase) in Bogenmaß. 
 
 Aber nun folgendes: 
 
@@ -297,22 +297,24 @@ Aber nun folgendes:
   1, der **reellen Einheit**, ist. Das ist eine Drehung um den rechten Winkel nach links.
 - `i\cdot i = -1`. Wieder eine Drehung um den rechten Winkel.
 
-Allgemein: Multiplikation mit `i` macht eine Drehung um den rechten Winkel.
+Allgemein: Multiplikation mit `i` macht eine Drehung um den rechten Winkel, per Konvention nach links.
 
-Weiters: Multiplikation addiert einen Winkel dazu,
-d.h. Multiplikation führt zur Addition des Winkels.
-Das lässt einen vermuten, dass es eine Darstellung geben könnte, die den Winkel im Exponenten hat.
-Reihenentwicklung von sin und cos und `e^x` in der Analysis und Vergleich ergibt die **Eulersche Formel**:
+Weiters: Multiplikation addiert den Winkel dazu, d.h. Multiplikation führt zur
+Addition des Winkels.  Das lässt einen vermuten, dass es eine Darstellung geben
+könnte, die den Winkel im Exponenten hat.  Reihenentwicklung von `\sin` und `\cos`
+und `e^x` in der Analysis und Vergleich ergibt die **Eulersche Formel**:
 
 - :inl:`r.cy` 
 
-`z=re^{i\varphi}` heißt **Normaldarstellung** der komplexen Zahl.
+- `z=re^{i\varphi}` heißt dritte **Normaldarstellung** der komplexen Zahl.
 
-Von sin und cos weiß man, dass sie die Periode `2\pi` haben, so auch `e^{i\varphi}`.
+Von `\sin` und `\cos` weiß man, dass sie die Periode `2\pi` haben, so auch `e^{i\varphi}`.
 Die n-te Wurzel teilt alle Perioden bis `2n\pi` auf unter `2\pi` und somit zu n
 unterschiedlichen Werten:
 
-`z^{\frac{1}{n}}=r^{\frac{1}{n}}e^{i(\frac{\varphi}{n}+\frac{2k\pi}{n})}`
+.. math::
+
+    z^{1/n}=r^{1/n}e^{i(\varphi/n+2k\pi/n)}
 
 Allgemeiner:
 
@@ -330,7 +332,7 @@ Es geht keine Information verloren.
     (analytisch, holomorph) sind (ganze Funktionen), da sie sich in
     Taylorreihen entwickeln lassen.
 
-Begriffe:
+Weiteres:
 
 - a = Re(z) ist der Realteil
 
@@ -346,11 +348,12 @@ Begriffe:
   Das Quadrat über die Länge einer komplexen Zahl unabhängig von ihrer Richtung
   ergibt sich durch `z\bar{z}` und nicht durch `z^2`.
 
-- `φ = arg(z)` das Argument (oder Phase) von z. 
+- `φ = arg(z)` ist Argument (oder Phase) von z. 
 
   - `arg(z_1z_2)=arg(z_1)+arg(z_2)`
 
   - `arg(\frac{z_1}{z_2})=arg(z_1)-arg(z_2)`
+
 
 Anwendung von `\mathbb{C}` 
 ...........................
