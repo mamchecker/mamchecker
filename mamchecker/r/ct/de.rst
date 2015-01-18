@@ -44,7 +44,7 @@ Variablen die keine Richtung darstellen, aber eben Einfluss auf Addierbarkeit
 haben, auf einen Winkel umgerechnet, der dann Phase heißt.  Beispiel:
 Der Zeitpunkt `t` bei Schwingungen wird `\varphi=\frac{2\pi}{T}t` oder die
 kombinierte Zeit-, Raum-Position bei Wellen wird
-`\varphi=\frac{2\pi}{\lambda}x+\frac{2\pi}{T}t`.  `Ae^{i\varphi}` gibt dann die
+`\varphi=\frac{2\pi}{\lambda}x-\frac{2\pi}{T}t`.  `Ae^{i\varphi}` gibt dann die
 momentan addierbare Amplitude wieder.
 
 

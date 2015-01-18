@@ -36,7 +36,7 @@ Examples:
 
 - The time `t` of a vibration becomes `\varphi=\frac{2\pi}{T}t` or 
   
-- the combined time and space position of a wave becomes `\varphi=\frac{2\pi}{\lambda}x+\frac{2\pi}{T}t`. 
+- the combined time and space position of a wave becomes `\varphi=\frac{2\pi}{\lambda}x-\frac{2\pi}{T}t`. 
 
 `Re(Ae^{i\varphi})` then represents the currently addable amplitude.
 
