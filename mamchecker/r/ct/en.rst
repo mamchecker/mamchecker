@@ -5,7 +5,7 @@
     %level = 11
     <!-- html -->
 
-Variables, one normally deals with, are extensive, i.e. quantities and not points. 
+Variables one normally deals with, are extensive, i.e. quantities and not points. 
 3m means all points from 0 to 3m.
 
 Two different variables, for which all combinations are possible can be called
