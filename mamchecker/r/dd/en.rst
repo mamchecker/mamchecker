@@ -18,7 +18,7 @@ Step-by-step for everybody in class:
 
 - First the teacher, then the students do:
 
-    - open http://www.mamchecker.eu/en
+    - open http://mamchecker.appspot.com/en
     - Go to ``edits`` (top left) 
     - Enter the IDs. The teacher is a student, too, but he can also leave the
       student field empty.
