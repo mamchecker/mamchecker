@@ -9,7 +9,7 @@ Logarithm
 ---------
 
 The power operation generates a result from the basis and the exponent.
-So from the result there are two way back: either to the basis or the exponent.
+So from the result there are two ways back: either to the basis or to the exponent.
 
 - To get the basis one forms the power of the result with the reciprocal of the exponent,
   i.g. `(3^2)^{\frac{1}{2}} = 3`. This is also called root.
@@ -39,7 +39,7 @@ From the last rule it follows how to calculate any logarithm with just one logar
     x &= \frac{\log d}{\log b}
 
 
-An exponential equation, i.e. equations that has the unknown in the exponent,
+An exponential equation, i.e. an equation that has the unknown in the exponent,
 is solved best by first trying to bring it into the form `b^x = d` and then
 apply the logarithm on both sides.
 
