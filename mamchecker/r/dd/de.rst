@@ -20,7 +20,7 @@ Schritt-für-Schritt für jeden in der Klasse:
 
 - Der Lehrer zuerst, dann die Schüler: 
 
-    - http://www.mamchecker.eu/de öffnen
+    - http://mamchecker.appspot.com/de öffnen
     - zu ``Änderungen`` (oben links) gehen
     - seine IDs eingeben.  Der Lehrer ist auch ein
       Student, er kann aber das Feld Student auch leer lassen.

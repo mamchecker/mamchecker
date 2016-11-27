@@ -2,16 +2,12 @@ Mamchecker creates and checks exercises programmatically using python over the i
 
 It is available at 
 
-- http://www.mamchecker.eu
 - `appspot <http://mamchecker.appspot.com>`_ 
   
-These public sites currently are only for tests because limited by the free
-`appengine quotas <https://developers.google.com/appengine/docs/quotas>`_.
-
 It can be run locally, though, using 
-`dev_appserver <https://developers.google.com/appengine/docs/python/tools/devserver>`_, 
+`dev_appserver <https://cloud.google.com/appengine/docs/python/tools/devserver>`_, 
 which is part of the 
-`appengine SDK <https://developers.google.com/appengine/downloads>`_.
+`appengine SDK <https://cloud.google.com/appengine/downloads>`_.
 
 .. code::
 
