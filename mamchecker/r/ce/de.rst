@@ -1,6 +1,6 @@
 .. raw:: html
 
-    %path = "Mathematik/Logarithmus"
+    %path = "Mathematik/Funktionen/Log"
     %kind = kinda["Texte"]
     %level = 10
     <!-- html -->
