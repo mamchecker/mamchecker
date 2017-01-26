@@ -8,8 +8,8 @@
 .. role:: asis(raw)
     :format: html latex
 
-Basics
-------
+Grundlegendes
+-------------
 
 In der **exponentiellen Funktion**
 
@@ -23,7 +23,7 @@ nennen wir
 - `a` die **Basis**
 - `y` die **exponentielle Funktion** von `x` zur Basis `a`
 
-Der **Exponent** sagt wie oft die *Multiplikation* mit `a` wiederholt wird.
+Der **Exponent** sagt, wie oft die *Multiplikation* mit `a` wiederholt wird.
 `a` muss eine positive reelle Zahl sein : `a\in\mathbb{R}`.
 
 .. note::
@@ -68,11 +68,16 @@ oder das besonders interessante natürliche Wachstum
 
 .. math::
 
-    e^x = \lim_{n->\infty}(1+\frac{1}{n})^{nx} = \lim_{m->\infty}(1+\frac{x}{m})^m
+    e^x = \lim_{n->\infty}(1+\frac{1}{n})^{nx} = 
+    \lim_{m->\infty}(1+\frac{x}{m})^m = (1+\frac{x}{\infty})^\infty
 
+`e` ist `Eulersche Zahl <https://de.wikipedia.org/wiki/Eulersche_Zahl>`_
+deren Bedeutung auf dem gegebenen Zusammenhang beruht.
 
-Der Schlüssel zum Vestehen der Gemeinsamkeiten steckt im Interpretieren von **Information** in der Form von Bits als Wachstumsprozess.
-Jedes Bit vergößert mit `1` mal der vorhandenen Anzahl von Wertekombinationen.
+Der Schlüssel zum Vestehen der Gemeinsamkeiten steckt in der Interpretation
+von **Information** als Wachstumsprozess.
+Jedes Bit vergößert um `1` Mal die vorhandene Anzahl von Wertekombinationen.
+
 Notieren wir diesen Aspekt des Bits mit `(1+1)`, um zu betonen, dass `1` dazu kommt.
 Die Klammern machen den Ausdruck zu einem Operator, einem Element der Zahlenmenge `\mathbb Q`.
 `n` wiederholte Anwendungen von `(1+1)` erzeugen eine Vielzahl der Größe
@@ -83,44 +88,63 @@ Die Klammern machen den Ausdruck zu einem Operator, einem Element der Zahlenmeng
 
 Jedes Bit wird zur bestehenden Menge von Wertekombinationen "dazuverzinst".
 
-.. continue 
+Das Informationmaß einer realen Variablen der Größe `C` ist die Anzahl
+`n=\log_2 C` Bits, die notwendig sind, damit wir auf `C` Kombinationen kommen.
 
-Das Informationmaß einer realen Variablen der Größe `C`, bei der Verwendung von Bits, 
-ist die Anzahl `n=\log_2 C` von Bits, die notwendig sind, um die gleiche Vielzahl `C` zu erzeugen, damit wir au
-Die reale Information ist aber die Größe der tatsächlichen Variablen.
+.. note::
 
-.. note:: If we start from a *number of variables*, the *exponential function* gives the *number of value combinations*.
-  If we start from a *number of values*, the *logarithm* gives the *number of variables* needed to represent it.
+   Statt Bits könnten wir ebensogut die betrachtete Variable selbst nehmen,
+   weil diese ist physikalisch present. Kombinationen sind aber auch
+   physikalisch und auch die Auswahl von Werten, welche letztendlich Veriablen
+   erzeugt, ist ein physicalischer Prozess.  Die Anzahl der beteiligten
+   Variablen spielt dabei eine Rolle. Das bedeutet erstens, dass Information
+   physikalisch ist und zweitens, in Hinsicht auf die Quantenmechanik, dass die
+   Anzahl der beteiligten Variablen immens groß ist und die individuellen
+   Beiträge minimal sind.
 
-For **interest calculation** we look at an amount of money (the `1`), which is deposited in the bank with interest `i`.
-After `n` years the `1` has grown to 
+Wenn wir von der *Anzahl an Variablen* starten, dann gibt uns die
+*Exponentialfunktion* die *Anzahl and Wertekombinationen*. Wenn wir von der
+*Anzahl der Werte* starten, dann gibt uns der *Logarithmus* die *Anzahl der
+Variablen*, die zur Wertegenerierung notwendig ist.
+
+Bei der **Zinsrechnung** schauen wir auf die Geldmenge (die `1`), 
+welche auf der Bank `i` Prozent zinsen abgibt.
+In `n` Jahren wächst die `1` zu
 
 .. math::
 
     (1+i/100)^n = q^n
     
-`q` is not `2`, normally just a little above `1`. 
-The corresponding "information" measure in a financial context of interest `i` would be the number of years,
-or whatever unit of *compounding* period one chooses to use.
+Der *Wachstumsfaktor* `q` ist nicht `2`, sondern normalerweise nur etwas über `1`. Das
+"Informationsmaß" in diesem finanziellen Kontext würde die Anzahl
+der Jahre sein.
 
-The essential difference with respect to bit information is that what is added is a *fraction* of what is there.
-But then, fraction is actually just a matter of units.
+Der essentielle Unterschied bezüglich den Bits 
+ist, dass, was hinzugefügt wird, ein *Bruchteil* von dem ist, was da ist.
+Aber ob Bruchteil oder nicht ist nur ein Frage der Einheit.
 
-The units of living organisms are cells and the ultimate units in the real world are the quantum particles.
-Both of them are small compared to the things around us. And with such small units one can also *compound* 
-arbitrarily (infinitely) often:
+Die Einheiten von Lebewesen sind Zellen und die ultimativen Einheiten der
+realen Welt sind Quanten.  Beide sind sehr klein im Vergleich zu den Dingen
+unserer täglichen Wahrnehmung.  Mit solchen kleinen Einheiten können wir auch
+beliebig oft (= unendlich oft) "verzinsen":
 
 .. math::
 
     \lim_{m->\infty}(1+\frac{x}{m})^m = \lim_{n->\infty}(1+\frac{1}{n})^{nx} = e^x
 
-In the first equality we see that, given a certain growth, varying the *compounding steps*
-amounts to varying the *growth rate*. 
+In der ersteren Gleichung können wir sehen, dass wir mit dem Verändern der
+*Verzinsungsschritte* auch die *Wachstumsfaktor* verändern. Wegen der
+Bedeutung von `e^x` wird der Wachstumsfactor `q` in `y=q^n` oft zum Exponenten von `e`
+verlegt (`y=e^{kx}`).  `k = \ln q` heißt dann *Wachstumskonstante*.
 
-.. note:: Actually in the financial world the real compounding takes place in very small steps, just that the bank
-  forwards them to the customer in larger units of time for several reasons.
+.. note:: 
 
-`x` is the information in the **natural information** unit `nat <https://en.wikipedia.org/wiki/Nat_(unit)>`_.
-Basically we split up the size of the variable to infinitely many infinitely small fractional variables, 
-whose size are just a very little bit larger than `1`.
+  Auch in der finanziellen Welt sind die tatsächlichen 
+  Verzinsungsschritte sehr klein. Aber die Bank gibt sie ihren Kunden in
+  größeren Zeiteinheiten weiter. 
+
+`x` ist die Information in der **natürlichen Informationseinheit** 
+`nat <https://de.wikipedia.org/wiki/Nit_(Informationseinheit)>`_.
+Im Pinzip teilen wir dabei eine Variable in unendliche viele undendlich kleine Variablen auf,
+so dass der Wachstumsfaktor pro Schritt beinahe bei `1` liegt.
 

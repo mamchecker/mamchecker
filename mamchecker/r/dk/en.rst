@@ -22,7 +22,7 @@ In the **exponential function**
 - `y` is the **exponential function** of `x` on the basis `a`
 
 The **exponent** tells how often *multiplication* with `a` is repeated.
-`a` must be a positive reelle number: `a\in\mathbb{R}`.
+`a` must be a positive real number: `a\in\mathbb{R}`.
 
 .. note::
 
@@ -68,8 +68,11 @@ or the especially interesting natural growing
 
 .. math::
 
-    e^x = \lim_{n->\infty}(1+\frac{1}{n})^{nx} = \lim_{m->\infty}(1+\frac{x}{m})^m
+    e^x = \lim_{n->\infty}(1+\frac{1}{n})^{nx} 
+      = \lim_{m->\infty}(1+\frac{x}{m})^m = (1+\frac{x}{\infty})^\infty
 
+`e` is `Euler's Number <https://en.wikipedia.org/wiki/E_(mathematical_constant)>`_
+whose importance is founded on the given relation.
 
 The key to compare them is to understand **information** in the shape of bits as a growing process.
 Every bit increases the size by `1` times what is there already. 
@@ -83,42 +86,61 @@ is added to the one there already. The parentheses make this an operator, an ele
 
 Every new bit is *compounded* to the existing combinations.
 
-The information measure for a real variable of size `C`, when dealing with bits, is the
-number of bits `n=\log_2 C` needed to create the multitude of size `C`.
-The real information is the size of the actual variable we map to.
+The information measure for a real variable of size `C` is the
+number of bits `n=\log_2 C` needed to grow `C` combinations.
 
-.. note:: If we start from a *number of variables*, the *exponential function* gives the *number of value combinations*.
-  If we start from a *number of values*, the *logarithm* gives the *number of variables* needed to represent it.
+.. note::
 
-For **interest calculation** we look at an amount of money (the `1`), which is deposited in the bank with interest `i`.
-After `n` years the `1` has grown to 
+   Instead of bits we could as well use the considered variable itself because
+   that is there physically. But combinations are also physically there and the
+   selection of values, which ultimately gives birth to variables, is physical,
+   and the number of involved variables plays a role.  First this means that
+   information is physical and secondly, considering quantum mechanics, the
+   physical number of involved variables is huge and their individual
+   contributions are tiny.
+
+If we start from a *number of variables*, the *exponential function*
+gives the *number of value combinations*.  If we start from a *number of
+values*, the *logarithm* gives the *number of variables* needed to represent
+it.
+
+For **interest calculation** we look at an amount of money (the `1`), which is
+deposited in the bank with interest `i`.  After `n` years the `1` has grown to 
 
 .. math::
 
     (1+i/100)^n = q^n
     
-`q` is not `2`, normally just a little above `1`. 
-The corresponding "information" measure in a financial context of interest `i` would be the number of years,
-or whatever unit of *compounding* period one chooses to use.
+The *growth factor* `q` is not `2`, normally just a little above `1`.  The corresponding
+"information" measure in this financial context would be the
+number of years.
 
-The essential difference with respect to bit information is that what is added is a *fraction* of what is there.
-But then, fraction is actually just a matter of units.
+The essential difference with respect to bit information is that, what is added,
+is a *fraction* of what is there. But then, fraction is actually just a matter
+of units.
 
-The units of living organisms are cells and the ultimate units in the real world are the quantum particles.
-Both of them are small compared to the things around us. And with such small units one can also *compound* 
-arbitrarily (infinitely) often:
+The units of living organisms are cells and the ultimate units in the real
+world are the quantum particles.  Both of them are small compared to the things
+around us. And with such small units one can also *compound* arbitrarily
+(infinitely) often:
 
 .. math::
 
     \lim_{m->\infty}(1+\frac{x}{m})^m = \lim_{n->\infty}(1+\frac{1}{n})^{nx} = e^x
 
-In the first equality we see that, given a certain growth, varying the *compounding steps*
-amounts to varying the *growth rate*. 
+In the first equality we see that, given a certain growth, varying the
+*compounding steps* amounts to varying the *growth factor*. Due to the 
+importance of `e^x` one often moves the *growth factor* `q` in `y=q^x`
+to the exponent of `e` (`y=e^{kx}`). `k=\ln q` is called the *gowth constant*.
 
-.. note:: Actually in the financial world the real compounding takes place in very small steps, just that the bank
-  forwards them to the customer in larger units of time for several reasons.
+.. note:: 
 
-`x` is the information in the **natural information** unit `nat <https://en.wikipedia.org/wiki/Nat_(unit)>`_.
-Basically we split up the size of the variable to infinitely many infinitely small fractional variables, 
-whose size are just a very little bit larger than `1`.
+  Actually in the financial world the real compounding takes place in very
+  small steps, just that the bank forwards them to the customer in larger units
+  of time.
+
+`x` is the information in the **natural information** unit 
+`nat <https://en.wikipedia.org/wiki/Nat_(unit)>`_.  Basically we split up the size
+of the variable to infinitely many infinitely small variables, such that 
+the growth factor per step is almost `1`.
 
