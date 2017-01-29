@@ -26,7 +26,7 @@ nennen wir
 Der **Exponent** sagt, wie oft die *Multiplikation* mit `a` wiederholt wird.
 `a` muss eine positive reelle Zahl sein : `a\in\mathbb{R}`.
 
-.. note::
+.. admonition:: Multiplikaton
 
     Multiplikation ist eine Operation der realen Welt, die als
     Zahl codiert wird. In der Zahlenmenge `\mathbb{Q}`
@@ -91,7 +91,7 @@ Jedes Bit wird zur bestehenden Menge von Wertekombinationen "dazuverzinst".
 Das Informationmaß einer realen Variablen der Größe `C` ist die Anzahl
 `n=\log_2 C` Bits, die notwendig sind, damit wir auf `C` Kombinationen kommen.
 
-.. note::
+.. admonition:: Vergleich mit welcher anderen Variablen?
 
    Statt Bits könnten wir ebensogut die betrachtete Variable selbst nehmen,
    weil diese ist physikalisch present. Kombinationen sind aber auch
@@ -137,7 +137,7 @@ In der ersteren Gleichung können wir sehen, dass wir mit dem Verändern der
 Bedeutung von `e^x` wird der Wachstumsfactor `q` in `y=q^n` oft zum Exponenten von `e`
 verlegt (`y=e^{kx}`).  `k = \ln q` heißt dann *Wachstumskonstante*.
 
-.. note:: 
+.. admonition:: Natürliche Verzinsung in der Finanzwelt
 
   Auch in der finanziellen Welt sind die tatsächlichen 
   Verzinsungsschritte sehr klein. Aber die Bank gibt sie ihren Kunden in

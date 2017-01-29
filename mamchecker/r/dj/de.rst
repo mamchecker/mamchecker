@@ -41,8 +41,11 @@ Anders gesagt: Diese Längen sind **Funktionen des Winkels**.
         { \tiny $\tan\alpha=\frac{\sin\alpha}{\cos\alpha}$\\$\sin^2\alpha+\cos^2\alpha=1$ };
 
 
-.. note:: Man kann dieses Diagramm auf die Größe eines tatsächlichen rechtwinkligen Dreiecks
-    skalieren und dieses vollständig bestimmen, wenn man eine Seitenlänge und einen Winkel desselben weis.
+.. admonition:: Ähnlichkeit = Affine Abbildung
+
+    Man kann dieses Diagramm auf die Größe eines tatsächlichen rechtwinkligen
+    Dreiecks skalieren und dieses Dreieck vollständig bestimmen, wenn man eine
+    Seitenlänge und einen Winkel desselben weiß.
 
 Die Graphen der obigen **trigonometrischen Funktionen** sind die folgenden
 

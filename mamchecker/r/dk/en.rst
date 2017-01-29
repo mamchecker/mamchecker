@@ -24,7 +24,7 @@ In the **exponential function**
 The **exponent** tells how often *multiplication* with `a` is repeated.
 `a` must be a positive real number: `a\in\mathbb{R}`.
 
-.. note::
+.. admonition:: Multiplication
 
     Multiplication is an operation happening in the real world and we
     encode it with a number.  In the number set `\mathbb{Q}` the operation is
@@ -89,7 +89,7 @@ Every new bit is *compounded* to the existing combinations.
 The information measure for a real variable of size `C` is the
 number of bits `n=\log_2 C` needed to grow `C` combinations.
 
-.. note::
+.. admonition:: Which other variable to compare to?
 
    Instead of bits we could as well use the considered variable itself because
    that is there physically. But combinations are also physically there and the
@@ -133,7 +133,7 @@ In the first equality we see that, given a certain growth, varying the
 importance of `e^x` one often moves the *growth factor* `q` in `y=q^x`
 to the exponent of `e` (`y=e^{kx}`). `k=\ln q` is called the *gowth constant*.
 
-.. note:: 
+.. admonition:: Natural compounding in the finantial world
 
   Actually in the financial world the real compounding takes place in very
   small steps, just that the bank forwards them to the customer in larger units

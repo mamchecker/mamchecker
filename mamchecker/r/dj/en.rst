@@ -39,7 +39,9 @@ which is equivalent to say that the lengths are **functions of the angle**.
         { \tiny $\tan\alpha=\frac{\sin\alpha}{\cos\alpha}$\\$\sin^2\alpha+\cos^2\alpha=1$ };
 
 
-.. note:: One can scale this diagram to an actual rectangular triangles and completely
+.. admonition:: Similarity = affine mapping
+
+    One can scale this diagram to an actual rectangular triangle and completely
     determine it by knowing one sharp angle and one side.
 
 The graphs of the above **trigonometric functions** are as follows

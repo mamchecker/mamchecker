@@ -45,7 +45,7 @@ Fixiert man die Anzahl der Kuchen in einer kleinen Sortenauswahl
 wird weniger Information festgelegt, d.h. es werden weniger Auswahlentscheidungen getroffen,
 als im Zutatenraum, der im Beispiel als größer angenommen wird. 
 
-.. note::
+.. admonition:: Pseudoinverse
 
     Man kann sie aber pseudo-invertieren (Moore-Penrose Pseudoinverse).  Im
     Beispiel erzeugt letztere aus den Zutaten einen Kuchensortenvektor der
@@ -63,7 +63,7 @@ bedeutet das, dass jede Kuchensorte eine andere Zutatenkombination haben muss,
 damit man sie von den anderen unterscheiden kann und damit mit ihr zusätzliche
 Information kodiert werden kann.
 
-.. note::
+.. admonition:: Lineare Unabhängigkeit
 
     Quadratische Matrizen können invertiert werden, 
     wenn eine Spalte (oder Zeile) sich nicht aus den anderen durch Linearkombination

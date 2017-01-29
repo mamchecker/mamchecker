@@ -46,7 +46,7 @@ If we fix a number for each cake in a smaller assortment of cakes
 we use less information, i.e. we make fewer decisions,
 than in the bigger space of ingredients.
 
-.. note::
+.. admontition:: Pseudoinverse
 
     A non-square matrix can be pseudo-inverted, though: Moore-Penrose Pseudoinverse. 
     For this example multiplying an ingredient vector with the pseudo-inverse 
@@ -63,7 +63,7 @@ cake example this means that every type of cake must have a different combinatio
 ingredients, which is some extra information that distinguishes it from the
 others and that can be used to code something.
 
-.. note::
+.. admonition:: Linear Independence
 
     A square matrix can be inverted, if columns (rows) cannot be expressed as
     linear combination of the others, i.e. the rank of the matrix is equal to
