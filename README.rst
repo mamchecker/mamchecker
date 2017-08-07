@@ -1,5 +1,7 @@
 Mamchecker creates and checks exercises programmatically using python over the internet.
 
+``Mam`` comes from ``MAtheMathics``.
+
 It is available at 
 
 - `appspot <http://mamchecker.appspot.com>`_ 
@@ -12,6 +14,7 @@ which is part of the
 .. code::
 
     #serves on port :8080
+    #from above the repository
     dev_appserver.py mamchecker --host=0.0.0.0
 
 Mamchecker uses `github <https://github.com/mamchecker/mamchecker>`_
@@ -21,7 +24,14 @@ can be done there.
 Further communication can be done via the
 `Mamchecker Mailing List <https://groups.google.com/d/forum/mamchecker>`_.
 
-``Mam`` comes from ``MAtheMathics``.
+After cloning from github, before running ``dev_appserver``::
+
+    sudo pip2 install doit-0.29.0.tar.gz
+    git submodule update --init --recursive
+    cd mamchecker/mamchecker
+    doit -kd. html
+    cd ..
+    doit initdb
 
 You can find out more via these links
 

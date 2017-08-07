@@ -16,7 +16,6 @@ and linking in rst files
 
 
 from docutils import nodes
-from sphinx.util.compat import Directive
 
 
 class inl(nodes.Inline, nodes.Element):
