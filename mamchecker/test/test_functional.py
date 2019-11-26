@@ -5,7 +5,7 @@ import re
 import webapp2
 from urllib import pathname2url
 
-from webtest import TestApp
+from webtest import TestApp as TA
 
 import pytest  # conftest.py will have been parsed
 
@@ -49,8 +49,9 @@ def test_routing():
 
 
 @pytest.fixture(scope='module')
-def mamapp(request, gaetestbed):
-    return TestApp(make_app())
+def mamapp(request):#,gaetestbed): #produces PYTEST_CURRENT_TEST KeyError 
+                    # TODO remove also in conftest.py
+    return TA(make_app())
 
 # see
 # http://stackoverflow.com/questions/12538808/pytest-2-3-adding-teardowns-within-the-class
@@ -62,20 +63,16 @@ def url_lang(url):
 @pytest.mark.incremental
 class TestRunthrough(object):
     #>> self = TestRunthrough()
-    #>> self.setup(mamapp(finrequest,None))
+    #>> mamapp = mamapp(finrequest,None)
 
-    @classmethod
-    @pytest.fixture(scope='class', autouse=True)
-    def setup(cls, mamapp):
-        cls.app = mamapp
-        cls.resp = None
+    resp = None
 
     @classmethod
     def _store(cls, name, value):
         setattr(cls, name, value)
 
-    def _signup(self):
-        self._store('resp', self.app.get('/en/signup'))
+    def _signup(self,mamapp):
+        self._store('resp', mamapp.get('/en/signup'))
         assert 'POST' == self.resp.form.method
         # self.resp.showbrowser()
         self.resp.form[u'username'] = u'tusername'
@@ -88,28 +85,28 @@ class TestRunthrough(object):
         r = self.resp.form.submit()
         self._store('resp', r.follow())
 
-    def test_default_lang(self):
-        r = self.app.get('/')
+    def test_default_lang(self,mamapp):
+        r = mamapp.get('/')
         assert 'problems' in r #engish index page
 
-    def test_wrong_lang(self):
-        r = self.app.get('/wrong')
+    def test_wrong_lang(self,mamapp):
+        r = mamapp.get('/wrong')
         assert '302' in r.status
         self._store('resp', r.follow())
         assert url_lang(self.resp.request.url) in languages
 
-    def test_wrong_page(self):
-        r = self.app.get('/en/wrong')
+    def test_wrong_page(self,mamapp):
+        r = mamapp.get('/en/wrong')
         assert '302' in r.status
         self._store('resp', r.follow())
         assert url_lang(self.resp.request.url) in languages
 
-    def test_wrong_content(self):
-        r = self.app.get('/en/?wrong', status=404)
+    def test_wrong_content(self,mamapp):
+        r = mamapp.get('/en/?wrong', status=404)
         assert '404' in r.status
 
-    def test_register(self):
-        self._signup()
+    def test_register(self,mamapp):
+        self._signup(mamapp)
         #'message?msg=j' then email with link to verification
         # this is skipped via
         assert '/verification' in self.resp.request.url
@@ -120,8 +117,8 @@ class TestRunthrough(object):
         assert 'Twitter' in self.resp
         # self.resp.showbrowser()
 
-    def test_registersame(self):
-        self._signup()
+    def test_registersame(self,mamapp):
+        self._signup(mamapp)
         assert 'msg=a' in self.resp.request.url
 
     def test_anonymous(self):
@@ -137,8 +134,8 @@ class TestRunthrough(object):
         self._store('resp', self.resp.form.submit())
         assert '0P' in self.resp
 
-    def test_forgot(self):
-        self._store('resp', self.app.get('/en/forgot'))
+    def test_forgot(self,mamapp):
+        self._store('resp', mamapp.get('/en/forgot'))
         assert 'POST' == self.resp.form.method
         self.resp.form[u'username'] = u'tusername'
         r = self.resp.form.submit()
@@ -155,8 +152,8 @@ class TestRunthrough(object):
         # self.resp.showbrowser()
         assert 'msg=d' in self.resp.request.url
 
-    def test_login(self):
-        self._store('resp', self.app.get('/en/login'))
+    def test_login(self,mamapp):
+        self._store('resp', mamapp.get('/en/login'))
         assert 'POST' == self.resp.form.method
         # self.resp.showbrowser()
         self.resp.form[u'username'] = u'tusername'

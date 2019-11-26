@@ -5,6 +5,9 @@ This initializes py.test.
 The system must have py.test2, i.e. the python2 version.
 '''
 
+# ignore:
+# WARNING:root:No ssl package found. urlfetch will not be able to validate SSL certificates.
+
 # http://alex.cloudware.it/2012/02/your-app-engine-app-in-python-shell.html
 
 import sys
@@ -13,14 +16,24 @@ import os.path
 import pytest
 import re
 
+if 'google' in sys.modules:
+    del sys.modules['google']
 #not debug in app.py
 os.environ.update({'SERVER_SOFTWARE': 'py.test2'})
 
 from mamchecker.languages import languages
 from mamchecker.hlp import author_folder
 
-sys.path += ['/opt/google-appengine-python']
-sys.path += ['/opt/google-appengine-python/lib/webapp2-2.5.2/']
+gaepath = '/opt/google-appengine-python'
+if not os.path.exists(gaepath):
+    gaepath = '/opt/google-cloud-sdk/platform/google_appengine'
+    if not os.path.exists(gaepath):
+        gaepath = os.path.expanduser('~/.local/opt/google-cloud-sdk/platform/google_appengine')
+
+sys.path += [gaepath]
+sys.path += [gaepath+'/lib/webapp2-2.5.2']
+sys.path += [gaepath+'/lib/webob-1.2.3']
+#sys.path += [gaepath+'/lib/yaml-3.10']
 
 from google.appengine.ext import testbed
 
@@ -40,6 +53,7 @@ def pytest_runtest_setup(item):
     if previousfailed is not None:
         pytest.xfail("previous test failed (%s)" % previousfailed.name)
 
+
 tstbed = testbed.Testbed()
 tstbed.activate()
 tstbed.init_memcache_stub()
@@ -47,7 +61,6 @@ tstbed.init_datastore_v3_stub()
 tstbed.init_mail_stub()
 
 # init session
-
 
 @pytest.fixture(scope='session')
 def gaetestbed(request):

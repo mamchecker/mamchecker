@@ -29,7 +29,7 @@ task_included is internal.
 
 '''
 
-import os, os.path 
+import os, os.path
 import fnmatch, shutil
 from subprocess import check_output, CalledProcessError
 import sys
@@ -113,11 +113,11 @@ def task_html():
     r'''compile rst files in directory to html (body only) using sphinx
 
     From dir and dodo.py in ancestor dir:
-        doit -kd. 
+        doit -kd.
     In dodo.py directory:
-        doit /path/to/rstdir 
-    or 
-        doit 
+        doit /path/to/rstdir
+    or
+        doit
 
     conf.py and page.htm containing {{body}} must be in the base dir, i.e where dodo.py is.
 
@@ -125,7 +125,7 @@ def task_html():
 
         import os.path
         extensions = ['sphinx.ext.mathjax','sphinxcontrib.tikz','sphinxcontrib.texfigure']
-        templates_path = ['.']#i.e. same as conf.py and with page.html containing only {{body}}
+        templates_path = ['.'] # i.e. same as conf.py and with page.html containing only {{body}}
         source_suffix = '.rst'
         source_encoding = 'utf-8'
         default_role = 'math'
@@ -133,21 +133,21 @@ def task_html():
         tikz_proc_suite = 'ImageMagick'
         tikz_tikzlibraries = 'arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks'
         latex_elements = {
-        'preamble': '\usepackage{amsfonts}\usepackage{amssymb}\usepackage{amsmath}\usepackage{siunitx}\usepackage{tikz}' 
+        'preamble': '\usepackage{amsfonts}\usepackage{amssymb}\usepackage{amsmath}\usepackage{siunitx}\usepackage{tikz}'
             + """
             \usetikzlibrary{""" + tikz_tikzlibraries+ '}'
         }
 
 
     The rst file can have texfigure includes (or tikz or any other installed sphinxcontrib package)::
-        
+
         .. texfigure:: diagram.tex
              :align: center
 
     The tex file can itself include other tex files (\input{othertexfile}).
     '''
 
-    os.chdir(thisdir)#other task generators might have changed cwd
+    os.chdir(thisdir) # other task generators might have changed cwd
 
     sphinxbuild = [which_sphinx()]
     conf_py = ['-c',sphinxbase,'-Q']
@@ -181,8 +181,8 @@ def task_html():
         name = os.path.splitext(srcname)[0]
         build = os.path.join(srcpath,'_build')
         tmptgt = os.path.join(build,name+'.html')
-        #everything starting with _ is generated
-        finaltgt = os.path.join(srcpath,'_'+name+'.html') 
+        # everything starting with _ is generated
+        finaltgt = os.path.join(srcpath,'_'+name+'.html')
         yield {'name':finaltgt+'<-'+src,
             'actions':[ sphinxcmd(srcpath,name,build),
                           (move_images_if_any,[build]),
@@ -204,13 +204,13 @@ nextid_file = os.path.join(basedir,'nextids.yaml')
 authors_file = os.path.join(basedir,'authors.yaml')
 
 def author_next():
-    #get author_id
+    # get author_id
     gitemail = check_output('git config --global --get user.email',shell=True).decode('utf-8').strip()
     with open(authors_file,'r') as f:
         authors = yaml.load(f)
     author = [author for author in authors if author['gitemail'] == gitemail][0]
     author_id = author['author_id']
-    #get next_id for author
+    # get next_id for author
     with open(nextid_file,'r') as f:
         nextids = yaml.load(f)
     next_id = nextids[0][author_id]
@@ -219,7 +219,7 @@ def author_next():
     with open(nextid_file,'w') as f:
         f.write('- \n')
         for k,v in nextids[0].items():
-            #k,v = nextids[0].items()[0]
+            # k,v = nextids[0].items()[0]
             ln = '  {0}:  "{1}"\n'.format(k,v)
             f.write(ln)
     return author, next_id
@@ -228,16 +228,16 @@ init_starter = '''# -*- coding: utf-8 -*-
 
 from mamchecker.hlp import Struct
 # randomize numbers using e.g. sample and randrange
-import random 
+import random
 
 def given():
     g = Struct()
-    #fill g 
+    # fill g
     return g
 
 def calc(g):
     res = []
-    #fill res
+    # fill res
     return res
 
 # remove if default norm_rounded works fine
@@ -248,7 +248,7 @@ def calc(g):
 # def equal(a, r):
 #     return equal_eq(a, r)
 '''
-    
+
 lang_starter = '''%path = "path/goes/here"
 %kind = "kindgoeshere"
 %level = 0
@@ -268,7 +268,7 @@ def newproblem(init_starter=init_starter,lang_starter=lang_starter):
         path = new_path()
         with open(os.path.join(path,'__init__.py'),'a') as f:
             f.write(init_starter)
-        with open(os.path.join(path,'en'+'.html'),'a') as f:#author['default_lang']+'.html'),'a') as f:
+        with open(os.path.join(path,'en'+'.html'),'a') as f: # author['default_lang']+'.html'),'a') as f:
             f.write(lang_starter)
         return path
     except OSError:
@@ -278,7 +278,7 @@ rst_starter = '''.. raw:: html
 
     %path = "path/goes/here"
     %kind = kinda["<choose from languages.py/langnumkind[lang]>"]
-    %level = 0 #in school years
+    %level = 0 # in school years
     <!-- html -->
 
 .. role:: asis(raw)
@@ -292,7 +292,7 @@ rst_starter = '''.. raw:: html
 def newrst(rst_starter=rst_starter):
     try:
         path = new_path()
-        with open(os.path.join(path,'en.rst'),'a') as f:#author['default_lang']+'.rst'),'a') as f:
+        with open(os.path.join(path,'en.rst'),'a') as f:# author['default_lang']+'.rst'),'a') as f:
             f.write(rst_starter)
         return path
     except OSError:
@@ -330,31 +330,31 @@ def task_initdb():
 
         available_langs = set([])
         for author in authors:
-            #author = authors[0]
+            # author = authors[0]
             adir = author['author_id']
             authordir = os.path.join(sphinxbase,adir)
             allauthorIDs = [d for d in os.listdir(authordir) if not d.startswith('_')
                     and os.path.isdir(os.path.join(authordir,d))]
             for anid in allauthorIDs:
-                #anid = allauthorIDs[1]
-                def langcode(x): 
-                    #x = '_de.html'
-                    #x = '__pycache__'
+                # anid = allauthorIDs[1]
+                def langcode(x):
+                    # x = '_de.html'
+                    # x = '__pycache__'
                     lng_ext = x.split('.')
                     if len(lng_ext) == 2:
-                        lng,ext = lng_ext 
+                        lng,ext = lng_ext
                         return ext == 'html' and lng.strip('_')
                 problemdir = os.path.join(authordir,anid)
-                langfiles = [fl for fl in os.listdir(problemdir) 
+                langfiles = [fl for fl in os.listdir(problemdir)
                         if langcode(fl) in languages.languages]
                 for langfile in langfiles:
-                    #langfile = langfiles[0]
+                    # langfile = langfiles[0]
                     full = os.path.join(problemdir,langfile)
                     with open(full,'rb') as ff:
                         src = unicode(ff.read(),'utf-8')
                     defines = []
                     for ln in src.splitlines():
-                        #ln = src.splitlines()[0]
+                        # ln = src.splitlines()[0]
                         lnstr = ln.strip()
                         if lnstr:
                             if not lnstr.startswith('%'):
@@ -362,7 +362,7 @@ def task_initdb():
                             lnstr1 = lnstr[1:]
                             defines.append(lnstr1)
                             if lnstr1.strip().startswith('level'):
-                                break#level must be last define
+                                break # level must be last define
                     deftext = u'\n'.join(defines)
                     lang = langcode(langfile)
                     available_langs.add(lang)
@@ -388,8 +388,8 @@ def task_initdb():
             f.write(pprint.pformat(available_langs,width=1))
             f.write('\n')
 
-        #assert that languages does not need more localization
-        langdicts = [(k,o) for k,o in languages.__dict__.iteritems() 
+        # assert that languages does not need more localization
+        langdicts = [(k,o) for k,o in languages.__dict__.iteritems()
                 if not k.startswith('__') and isinstance(o,dict)]
         for k,o in langdicts:
             extendlangs = available_langs - set(o.keys())
@@ -397,17 +397,18 @@ def task_initdb():
 
     return {'actions':[make_initdb]}
 
-CODE_FILES = [os.path.join(dirpath,f) 
+CODE_FILES = [os.path.join(dirpath,f)
         for dirpath, dirnames, files in os.walk('mamchecker')
         for f in fnmatch.filter(files,'*.py')]
-TEST_FILES = [os.path.join(dirpath,f) 
+TEST_FILES = [os.path.join(dirpath,f)
         for dirpath, dirnames, files in os.walk('mamchecker')
         for f in fnmatch.filter(files,'test_*.py')]
 PY_FILES = CODE_FILES + TEST_FILES
 def run_test(test):
     return not bool(pytest.main(test))
 def task_test():
-    return {'actions':['py.test2'],
+    # TODO run `py.test mamchecker`, if py.test is the python2 version
+    return {'actions':['py.test2','mamchecker'],
             'verbosity':2}
 def task_cov():
     return {'actions':

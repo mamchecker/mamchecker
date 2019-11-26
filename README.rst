@@ -1,12 +1,18 @@
+Purpose
+=======
+
 Mamchecker creates and checks exercises programmatically using python over the internet.
 
 ``Mam`` comes from ``MAtheMathics``.
 
-It is available at 
+Servers
+=======
+
+It is available at
 
 - `appspot <http://mamchecker.appspot.com>`_ 
-  
-It can be run locally, though, using 
+
+It can be run locally, though, using
 `dev_appserver <https://cloud.google.com/appengine/docs/python/tools/devserver>`_, 
 which is part of the 
 `appengine SDK <https://cloud.google.com/appengine/downloads>`_.
@@ -17,21 +23,30 @@ which is part of the
     #from above the repository
     dev_appserver.py mamchecker --host=0.0.0.0
 
+Settings are done via the `GCP console <https://console.cloud.google.com/project/mamchecker>`_.
+
+Development
+===========
+
+Getting Started
+---------------
+
 Mamchecker uses `github <https://github.com/mamchecker/mamchecker>`_
 to exchange exercises and content. Discussion related to development
-can be done there. 
+can be done there.
 
 Further communication can be done via the
 `Mamchecker Mailing List <https://groups.google.com/d/forum/mamchecker>`_.
 
 After cloning from github, before running ``dev_appserver``::
 
-    sudo pip2 install doit-0.29.0.tar.gz
+    cd mamchecker
     git submodule update --init --recursive
-    cd mamchecker/mamchecker
+    cd mamchecker
     doit -kd. html
     cd ..
     doit initdb
+    doit test #needs py.test2, else do `py.test mamchecker`
 
 You can find out more via these links
 
@@ -49,6 +64,43 @@ You can find out more via these links
 
 - `try in class <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r/dd/en.rst>`_
 
-Also look at the example exercises in the 
+
+.. mamchecker/r/cz/en.rst
+   mamchecker/r/da/en.rst
+   mamchecker/r/db/en.rst
+   mamchecker/r/de/en.rst
+   mamchecker/r/dc/en.rst
+   mamchecker/r/df/en.rst
+   mamchecker/r/dd/en.rst
+
+
+Also look at the example exercises in the
 `r <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r>`_ folder.
+
+A setup on Linux (ArchLinux)(2019-11-26)::
+
+  cd ~/.local/opt/
+  curl -OLs https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-272.0.0-linux-x86_64.tar.gz
+  tar -xf google-cloud-sdk-272.0.0-linux-x86_64.tar.gz
+  rm google-cloud-sdk-272.0.0-linux-x86_64.tar.gz
+  cd google-cloud-sdk
+  ./install.sh
+
+  #new terminal
+  gcloud components install app-engine-python app-engine-python-extras
+
+  cd ~
+  git clone https://github.com/mamchecker/mamchecker
+  cd mamchecker
+  tar -xf doit-0.29.0.tar.gz
+  pip2 install --user doit-0.29.0/
+  rm -rf doit-0.29.0
+  pip2 install --user sympy pyyaml pytest coverage mock lxml sphinx sphinxcontrib-tikz sphinxcontrib-texfigure webtest
+
+  cd ~/mamchecker/mamchecker
+  doit -kd. html
+  cd ..
+  doit initdb
+  py.test mamchecker
+  doit cov
 
