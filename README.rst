@@ -106,3 +106,8 @@ A setup on Linux (ArchLinux)(2019-11-26)::
   cd ..
   dev_appserver.py mamchecker --host=0.0.0.0
 
+  #upload
+  cd mamchecker
+  gcloud init --console-only
+  gcloud app deploy app.yaml
+
