@@ -30,16 +30,17 @@ task_included is internal.
 '''
 
 import os, os.path
-import fnmatch, shutil
 from subprocess import check_output, CalledProcessError
 import sys
 import re
-import pytest
 import fnmatch
+import shutil
+import codecs
+
+import pytest
 
 is_win = (sys.platform == 'win32')
 
-PY2 = sys.version_info[0] == 2
 PY3 = sys.version_info[0] == 3
 def iteritems(d, **kw):
     return iter(getattr(d, "items" if PY3 else "iteritems")(**kw))
@@ -328,7 +329,7 @@ def task_initdb():
                     # langfile = langfiles[0]
                     full = os.path.join(problemdir,langfile)
                     with open(full,'rb') as ff:
-                        src = unicode(ff.read(),'utf-8')
+                        src = codecs.decode(ff.read(),'utf-8')
                     defines = []
                     for ln in src.splitlines():
                         # ln = src.splitlines()[0]
@@ -366,7 +367,7 @@ def task_initdb():
             f.write('\n')
 
         # assert that languages does not need more localization
-        langdicts = [(k,o) for k,o in languages.__dict__.iteritems()
+        langdicts = [(k,o) for k,o in iteritems(languages.__dict__)
                 if not k.startswith('__') and isinstance(o,dict)]
         for k,o in langdicts:
             extendlangs = available_langs - set(o.keys())

@@ -95,7 +95,7 @@ A setup on Linux (ArchLinux, 2019-11-26)::
   tar -xf doit-0.29.0.tar.gz
   pip2 install --user doit-0.29.0/
   rm -rf doit-0.29.0
-  sudo pip2 install numpy==1.6.1 matplotlib==1.4.3 sympy pyyaml pytest coverage mock lxml sphinx sphinxcontrib-tikz sphinxcontrib-texfigure webtest
+  sudo pip2 install numpy==1.6.1 matplotlib==1.2.0 sympy pyyaml pytest coverage mock lxml sphinx sphinxcontrib-tikz sphinxcontrib-texfigure webtest
 
   cd ~/mamchecker/mamchecker
   doit -kd. html

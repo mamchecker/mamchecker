@@ -42,7 +42,8 @@ automatic_scaling:
 #     file: error_timeout.html
 
 
-#/_ah/remote_api
+# https://cloud.google.com/appengine/docs/standard/python/tools/built-in-libraries-27
+# /_ah/remote_api
 builtins:
 
     - remote_api: on
@@ -56,7 +57,7 @@ libraries:
     #- name: jinja2
     #  version: latest
     - name: matplotlib
-      version: latest
+      version: 1.2.0
     - name: lxml
       version: latest
 
