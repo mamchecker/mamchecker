@@ -55,12 +55,11 @@ def recursive_glob(pattern):
     for root, dirnames, filenames in os.walk('.'):
         for filename in fnmatch.filter(filenames, pattern):
             matches.append(os.path.join(root, filename))
-    return filter(lambda x: not any([x.find(w)>=0 for w in ['bottle','simpleauth','sympy']]), matches)
+    return filter(lambda x: not any([x.find(w)>=0 for w in [
+        'CHANGELOG.rst','README.rst','bottle','simpleauth','sympy']]), matches)
 
 def task_included():
     '''tasks that find files (recursively) included by one rst file or tex file
-    included:<file>
-    included:recurse:<file>
     '''
     rstinclude = re.compile(r'\n\.\. (?:include|texfigure)::\s*(.*)')
     #[m.group(1) for m in rstinclude.finditer('\n\n.. texfigure:: test.tex\n')]
@@ -69,7 +68,7 @@ def task_included():
     include_rexes = {'.rst':rstinclude,'.tex':texinput}
     def includes(filename,ext,rex):
         pathn,filen = os.path.split(filename)
-        all_includes = set()
+        incs = []
         with open(filename) as f:
             for m in rex.finditer(f.read()):
                 included = m.group(1)
@@ -77,37 +76,16 @@ def task_included():
                 if not ex:#\input can go without '.tex'
                     included = fn+ext
                 included = os.path.join(pathn,included)
-                all_includes.add(included)
-        return {'file_dep':list(all_includes)}
-    def recurse(mod, task, dependencies):
-        return {'calc_dep': ["included:recurse:"+d for d in dependencies] ,
-                'file_dep': list(dependencies)}
+                incs.append(included)
+        return {'file_dep': incs,
+                'calc_dep': ['included:includes:'+x for x in incs]
+                }
     for ext, rex in iteritems(include_rexes):
-        allfn = recursive_glob('*'+ext)
-        for fn in allfn:
-            yield {'name': fn,
-                   'actions': [(includes,[fn,ext,rex])],
-                   'file_dep': [fn],
-                   }
-        for fn in allfn:
-            yield {'name': 'recurse:'+fn,
-                   'actions': [(recurse,(fn,))],
-                   'calc_dep': ["included:"+fn],
-                   'uptodate': [False],
-                   }
-
-def which_sphinx(totry = ['sphinx-build2','sphinx-build']):
-    for sphinx in totry:
-        try:
-            if is_win:
-                fndr = 'where '
-            else:
-                fndr = 'which '
-            sphinx = check_output(fndr+sphinx,shell=True)
-            return sphinx.splitlines()[0].strip()
-        except CalledProcessError:
-            pass
-    raise Exception('None of '+', '.join(totry)+' found')
+        for fn in recursive_glob('*'+ext):
+            yield {'name': 'includes:'+fn,
+               'actions': [(includes,(fn,ext,rex))],
+               'file_dep': [fn],
+               }
 
 def task_html():
     r'''compile rst files in directory to html (body only) using sphinx
@@ -149,7 +127,7 @@ def task_html():
 
     os.chdir(thisdir) # other task generators might have changed cwd
 
-    sphinxbuild = [which_sphinx()]
+    sphinxbuild = ['sphinx-build']
     conf_py = ['-c',sphinxbase,'-Q']
     dfn = lambda n,v:['-D',n+'='+v]
 
@@ -175,24 +153,23 @@ def task_html():
     sources = recursive_glob('*.rst')
 
     for src in sources:
-        if 'README.rst' in src:
-            continue
         srcpath,srcname = os.path.split(src)
         name = os.path.splitext(srcname)[0]
         build = os.path.join(srcpath,'_build')
         tmptgt = os.path.join(build,name+'.html')
         # everything starting with _ is generated
         finaltgt = os.path.join(srcpath,'_'+name+'.html')
-        yield {'name':finaltgt+'<-'+src,
+        yield {'name':finaltgt+'('+src+')',
             'actions':[ sphinxcmd(srcpath,name,build),
                           (move_images_if_any,[build]),
                           ['mv', tmptgt, finaltgt],
                           ['rm', '-rf', build]
                          ],
             'file_dep':[src],
-            'calc_dep':['included:recurse:'+src],
+            'calc_dep':['included:includes:'+src],
             'targets':[finaltgt],
             'clean':[clean_targets]}
+
 
 ### create new problem / content
 # for content delete the __init__.py
@@ -368,7 +345,7 @@ def task_initdb():
                     available_langs.add(lang)
                     defs = {'kinda':languages.langkindnum[lang]}
                     try:
-                        exec deftext in defs
+                        exec(deftext, defs)
                     except KeyError:
                         print(full)
                         raise

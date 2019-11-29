@@ -77,7 +77,7 @@ You can find out more via these links
 Also look at the example exercises in the
 `r <https://github.com/mamchecker/mamchecker/blob/master/mamchecker/r>`_ folder.
 
-A setup on Linux (ArchLinux)(2019-11-26)::
+A setup on Linux (ArchLinux, 2019-11-26)::
 
   cd ~/.local/opt/
   curl -OLs https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-272.0.0-linux-x86_64.tar.gz
@@ -95,7 +95,7 @@ A setup on Linux (ArchLinux)(2019-11-26)::
   tar -xf doit-0.29.0.tar.gz
   pip2 install --user doit-0.29.0/
   rm -rf doit-0.29.0
-  sudo pip2 install numpy==1.7.2 sympy pyyaml pytest coverage mock lxml sphinx sphinxcontrib-tikz sphinxcontrib-texfigure webtest
+  sudo pip2 install numpy==1.6.1 matplotlib==1.4.3 sympy pyyaml pytest coverage mock lxml sphinx sphinxcontrib-tikz sphinxcontrib-texfigure webtest
 
   cd ~/mamchecker/mamchecker
   doit -kd. html
