@@ -23,11 +23,11 @@ je nach betrachteter Struktur gibt es Unterbegriffe (`f\circ g (D_g) = f(g(D_g))
 
 - Monomorphismus: `f\circ g=f\circ h \implies g=h` (linkskürzbares `f`) 
   oder `f` injektiv für Mengen als Objekte
-  (`Beweis <http://www.proofwiki.org/wiki/Injection_iff_Monomorphism_in_Category_of_Sets>`_)
+  (`Beweis <https://www.proofwiki.org/wiki/Injection_iff_Monomorphism_in_Category_of_Sets>`_)
 
 - Epimorphismus: `g\circ f=h \circ f \implies g=h` (rightkürzbar es `f`) 
   oder `f` surjektiv für Mengen als Objekte
-  (`Beweis <http://www.proofwiki.org/wiki/Surjection_iff_Epimorphism_in_Category_of_Sets>`_)
+  (`Beweis <https://www.proofwiki.org/wiki/Surjection_iff_Epimorphism_in_Category_of_Sets>`_)
   
 - Isomorphismus: `f` hat ein `g` für das `f\circ g=id_{D_g}` und `g \circ f = id_{D_f}`
   (Linksinverse = Rechtsinverse) oder `f` bijektiv für Mengen als Objekte

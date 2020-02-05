@@ -13,7 +13,7 @@ Structure Analysis Problem solved with Python
 
 This pin jointed truss is the initial example take from `akabaila`_
 
-.. _akabaila: http://akabaila.pcug.org.au/StructuralAnalysis.pdf
+.. _akabaila: https://akabaila.pcug.org.au/StructuralAnalysis.pdf
 
 .. tikz:: \coordinate (A) at (0,0) (A) node [below]{0};
    \coordinate (B) at (0,3) (B) node [above]{1};

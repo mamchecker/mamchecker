@@ -34,37 +34,37 @@ Dass ein zweiter den Code überprüft, ist aus Sicherheitsgründen notwendig.
 
 Auf deinem PC brauchst du
 
-- `Git <http://rogerdudler.github.io/git-guide/>`_ 
-  (`msys git <http://msysgit.github.io/>`_ unter Windows).
-  `Einleitung <http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup>`_
+- `Git <https://rogerdudler.github.io/git-guide/>`_ 
+  (`msys git <https://msysgit.github.io/>`_ unter Windows).
+  `Einleitung <https://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup>`_
 
-- `Python <http://www.python.org/download/releases/2.7/>`_  
-  mit `pip <http://stackoverflow.com/questions/4750806/how-to-install-pip-on-windows>`_
+- `Python <https://www.python.org/download/releases/2.7/>`_  
+  mit `pip <https://stackoverflow.com/questions/4750806/how-to-install-pip-on-windows>`_
   (Python 3 wird von Google Appengine noch nicht unterstützt.)
 
 - `Google Appengine <https://developers.google.com/appengine/downloads>`_
 
-- `Doit <http://pydoit.org/>`_ (``pip install doit``)
+- `Doit <https://pydoit.org/>`_ (``pip install doit``)
 
-- `Pytest <http://pytest.org/latest/>`_ zum Testen (``pip install pytest``)
+- `Pytest <https://pytest.org/latest/>`_ zum Testen (``pip install pytest``)
 
 und optional
 
-- `Sphinx <http://sphinx-doc.org/latest/install.html>`_,
+- `Sphinx <https://sphinx-doc.org/latest/install.html>`_,
   wenn du Restructured Text (rst) verwenden willst.
   (``pip install sphinx``). 
-- Latex (use `miktex <http://miktex.org/>`_ unter Windows) für sphinx plugins
+- Latex (use `miktex <https://miktex.org/>`_ unter Windows) für sphinx plugins
   (`sphinxcontrib.tikz <https://bitbucket.org/philexander/tikz>`_,
   `sphinxcontrib.texfigure <https://bitbucket.org/prometheus/sphinxcontrib-texfigure>`_).
 
-- `Coverage <http://nedbatchelder.com/code/coverage/>`_ (``pip install coverage``)
+- `Coverage <https://nedbatchelder.com/code/coverage/>`_ (``pip install coverage``)
 
-Als Browser hat Chrome die beste `HTML5 <http://html5test.com/results/desktop.html>`_ 
+Als Browser hat Chrome die beste `HTML5 <https://html5test.com/results/desktop.html>`_ 
 Unterstützung und eine gute Umgebung zum Debuggen von Javascript.
 
 Zum editieren verwende einen Texteditor deiner Wahl. 
 Er sollte es ermöglichen ausgewählten Code auszuführen 
-(`Pydev <http://pydev.org/manual_adv_interactive_console.html>`_, `Vim <http://www.vim.org/>`_).
+(`Pydev <https://pydev.org/manual_adv_interactive_console.html>`_, `Vim <https://www.vim.org/>`_).
 
 Einsteigerhilfe
 ---------------
@@ -78,9 +78,9 @@ Fork auf github.
 
           git clone --recursive https://github.com/mamchecker/mamchecker.git
 
-      Wenn du nicht `--recursive <http://stackoverflow.com/questions/3796927/how-to-git-clone-including-submodules>`_ 
+      Wenn du nicht `--recursive <https://stackoverflow.com/questions/3796927/how-to-git-clone-including-submodules>`_ 
       verwendet hast, dann must du anschließend 
-      `git submodule update --init --recursive <http://stackoverflow.com/questions/9493645/fork-github-repo-with-submodules>`_
+      `git submodule update --init --recursive <https://stackoverflow.com/questions/9493645/fork-github-repo-with-submodules>`_
       machen.
 
 Trage dich als Author ein.
@@ -115,7 +115,7 @@ Füge Übungen hinzu. Um zu sehen, wie einfach das ist, schau dir die Beispiele 
       (siehe ``from_py`` in ``hlp.py`` und Beispiele im ``r``-Verzeichnis).
 
     - ``<sprache>.html`` ist HTML und mit ``{{'{{}}'}}`` umgebener oder mit ``%``
-      anfangende Python Code (`SimpleTemplate <http://bottlepy.org/docs/dev/stpl.html>`_).
+      anfangende Python Code (`SimpleTemplate <https://bottlepy.org/docs/dev/stpl.html>`_).
       Verwende auch das templates ``getorshow`` wie in den Beispielen im ``r``-Verzeichnis.
       Das generierte HTML wird dann mit einem ``<div>`` umgeben werden 
       (siehe ``inc`` in ``util.py``).
@@ -149,7 +149,7 @@ Füge Übungen hinzu. Um zu sehen, wie einfach das ist, schau dir die Beispiele 
 
     - Von oberhalb dem Verzeichnis, wo app.yaml ist, 
       rufe ``dev_appserver mamchecker`` auf
-      und teste deine Übung mit dem Browser (``http://localhost:8080/de/?<yourid>.<problemid>``).
+      und teste deine Übung mit dem Browser (``https://localhost:8080/de/?<yourid>.<problemid>``).
       Gib dazu unsinnige Eingaben ein, fast korrekte und korrekte.
 
 Mach dich bereit für das ``commit``:

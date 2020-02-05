@@ -42,7 +42,7 @@ Compound interest
       to get the value `n` periods later.
     - discount interests: multiply the capital with `q^{-n}` to get the value `n` periods earlier.
 
-.. http://en.wikipedia.org/wiki/Time_value_of_money
+.. https://en.wikipedia.org/wiki/Time_value_of_money
 
 Annuity
 

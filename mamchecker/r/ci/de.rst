@@ -30,7 +30,7 @@ angesehen werden.
     und **Ordinalzahlen** zum Bezeichnen einer Ordnung.
 
 Die intuitive Vorstellung von `\mathbb{N}` wird mit den
-`Peano Axiomen <http://de.wikipedia.org/wiki/Peano-Axiome>`_
+`Peano Axiomen <https://de.wikipedia.org/wiki/Peano-Axiome>`_
 formalisiert.
 
 .. admonition:: Hinweis
@@ -73,8 +73,8 @@ sondern Anzahl und Vorgang/Richtung zusammen.
 Wenn man sich unter `\mathbb{N}` nur Anzahl vorstellt, dann ist
 `\mathbb{Z}=\mathbb{N}\times\{+,-\}`. Dann ist `\mathbb{N}` keine Teilmenge
 von `\mathbb{Z}`, aber eine 
-`isomorphe <http://de.wikipedia.org/wiki/Homomorphismus#Universelle_Algebra>`_
-`Einbettung <http://de.wikipedia.org/wiki/Einbettung_(Mathematik)>`_.
+`isomorphe <https://de.wikipedia.org/wiki/Homomorphismus#Universelle_Algebra>`_
+`Einbettung <https://de.wikipedia.org/wiki/Einbettung_(Mathematik)>`_.
 
 .. admonition:: Hinweis
 

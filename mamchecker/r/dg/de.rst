@@ -12,7 +12,7 @@
 Wir werden die Übertragungsfunktion eines Bandsperre-Filters mit der Methode von Thevenin ermitteln.
 
 Wir ziehen dazu einen Schaltkreis aus 
-`Op Amps for EveryOne (5-10) <http://www.ti.com/lit/an/slod006b/slod006b.pdf>`_.
+`Op Amps for EveryOne (5-10) <https://www.ti.com/lit/an/slod006b/slod006b.pdf>`_.
 heran.
 
 .. texfigure:: c1.tex

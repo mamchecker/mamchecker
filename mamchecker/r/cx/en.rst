@@ -7,75 +7,75 @@
 
 **wikis**
 
-http://en.wikipedia.org/wiki/Portal:Mathematics
+https://en.wikipedia.org/wiki/Portal:Mathematics
 
-http://en.wikibooks.org/wiki/Wikibooks:Mathematics_bookshelf
+https://en.wikibooks.org/wiki/Wikibooks:Mathematics_bookshelf
 
-http://www.proofwiki.org/wiki/Main_Page
+https://www.proofwiki.org/wiki/Main_Page
 
-http://www.encyclopediaofmath.org/index.php/Main_Page
+https://www.encyclopediaofmath.org/index.php/Main_Page
 
-http://math.wikia.com/wiki/Math_Wiki
+https://math.wikia.com/wiki/Math_Wiki
 
 **forums and material**
 
-http://math.stackexchange.com/
+https://math.stackexchange.com/
 
-http://www.mymathforum.com/
+https://www.mymathforum.com/
 
-http://mathforum.org/dr.math/
+https://mathforum.org/dr.math/
 
-http://mathhelpboards.com/
+https://mathhelpboards.com/
 
-http://www.purplemath.com/modules/index.htm
+https://www.purplemath.com/modules/index.htm
 
-http://www.mathplanet.com/
+https://www.mathplanet.com/
 
-http://www.math.com/
+https://www.math.com/
 
-http://hyperphysics.phy-astr.gsu.edu/hbase/hframe.html
+https://hyperphysics.phy-astr.gsu.edu/hbase/hframe.html
 
-http://www.onlinemathlearning.com/
+https://www.onlinemathlearning.com/
 
-http://www.ask.com/question/science/mathematics
+https://www.ask.com/question/science/mathematics
 
-http://www.coolmath4kids.com/
+https://www.coolmath4kids.com/
 
-http://www.coolmath.com/
+https://www.coolmath.com/
 
-http://www.mathplayground.com/
+https://www.mathplayground.com/
 
 **online academies**
 
 https://www.khanacademy.org/
 
-http://www.cosmolearning.com/mathematics/
+https://www.cosmolearning.com/mathematics/
 
-http://academicearth.org/online-college-courses/mathematics/
+https://academicearth.org/online-college-courses/mathematics/
 
 **books**
 
-http://mathbooks.library.cornell.edu/
+https://mathbooks.library.cornell.edu/
 
-http://www.freebookcentre.net/SpecialCat/Free-Mathematics-Books-Download.html
+https://www.freebookcentre.net/SpecialCat/Free-Mathematics-Books-Download.html
 
-http://people.math.gatech.edu/~cain/textbooks/onlinebooks.html
+https://people.math.gatech.edu/~cain/textbooks/onlinebooks.html
 
-http://www.e-booksdirectory.com/mathematics.php
+https://www.e-booksdirectory.com/mathematics.php
 
-http://bib.tiera.ru/
+https://bib.tiera.ru/
 
 **online math tools**
 
-http://www.geogebra.org/cms/en/
+https://www.geogebra.org/cms/en/
 
-http://www.geogebratube.org/
+https://www.geogebratube.org/
 
-http://live.sympy.org/
+https://live.sympy.org/
 
-http://octave-online.net/
+https://octave-online.net/
 
-http://www.wolframalpha.com/
+https://www.wolframalpha.com/
 
 https://www.mathway.com/
 

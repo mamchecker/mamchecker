@@ -40,7 +40,7 @@ have come to the **power** operation.
 **Operation** is another name for **function** (:lnk:`r.cr`), if certain rules
 like **assoziative law** or **commutative law** apply.  An **operation** can
 easily be made to a new set by combining it with a value {(value,operation)}.
-(see Zahlen: :lnk:`r.ci` and `lambda calculus <http://en.wikipedia.org/wiki/Lambda_calculus>`_).  
+(see Zahlen: :lnk:`r.ci` and `lambda calculus <https://en.wikipedia.org/wiki/Lambda_calculus>`_).  
 These are then sets of instructions or **operators**, which can be applied to
 other values of other variables, e.g. 3m = (3,times) m, i.e. 3 = (3,times).
 

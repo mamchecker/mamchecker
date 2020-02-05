@@ -17,7 +17,7 @@ from mamchecker.languages import langkindnum, langnumkind, kindint
 
 from google.appengine.api.datastore_errors import BadKeyError
 
-# http://blog.abahgat.com/2013/01/07/user-authentication-with-webapp2-on-google-app-engine/
+# https://blog.abahgat.com/2013/01/07/user-authentication-with-webapp2-on-google-app-engine/
 import webapp2_extras.appengine.auth.models
 from webapp2_extras import security
 

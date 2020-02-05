@@ -1,3 +1,20 @@
+Archived
+========
+
+Google App Engine (GAE) is now Google Cloud Platform (GCP)
+and Python 3 is finally supported.
+
+Ndb has been ported to Python 3: https://github.com/googleapis/python-ndb
+It uses https://github.com/GoogleCloudPlatform/google-cloud-datastore
+which on its turn uses
+https://github.com/googleapis/python-firestore.
+
+Conversion and further development is done in: https://github.com/chcko/chcko
+
+- Adapt to changes in used 3rd party packages
+- Create an installer using specific versions of 3rd party packages
+- Allow using content repos from other github accounts
+
 Purpose
 =======
 
@@ -95,16 +112,16 @@ A setup on Linux (ArchLinux, 2019-11-26)::
   tar -xf doit-0.29.0.tar.gz
   pip2 install --user doit-0.29.0/
   rm -rf doit-0.29.0
-  sudo pip2 install numpy==1.6.1 matplotlib==1.2.0 sympy pyyaml pytest coverage mock lxml sphinx sphinxcontrib-tikz sphinxcontrib-texfigure webtest
+  pip2 install --user numpy==1.6.1 matplotlib==1.2.0 sympy pyyaml pytest coverage mock lxml sphinx sphinxcontrib-tikz sphinxcontrib-texfigure webtest
 
   cd ~/mamchecker/mamchecker
   doit -kd. html
   cd ..
   doit initdb
-  py.test mamchecker
+  python2 -m pytest mamchecker
   doit cov
   cd ..
-  dev_appserver.py mamchecker --host=0.0.0.0
+  python2 `which dev_appserver.py` mamchecker --host=0.0.0.0
 
   #upload
   cd mamchecker

@@ -7,9 +7,9 @@
 
 Eine Anzahl ist etwas reales und unabhängig von deren Darstellung.
 
-Hier werden nur `Stellenwertsysteme <http://de.wikipedia.org/wiki/Stellenwertsystem>`_ 
+Hier werden nur `Stellenwertsysteme <https://de.wikipedia.org/wiki/Stellenwertsystem>`_ 
 diskutiert, aber es gibt andere Systeme. Siehe 
-`Wikipedia Artikel <http://de.wikipedia.org/wiki/Zahlensystem>`_.
+`Wikipedia Artikel <https://de.wikipedia.org/wiki/Zahlensystem>`_.
 
 Darstellung von Zahlen
 ======================

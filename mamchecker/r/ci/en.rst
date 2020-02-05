@@ -29,7 +29,7 @@ That is why every natural number can be seen as **equivalence class** (:lnk:`r.c
     and **ordinal numbers** to specify the order.
 
 The intuitive idea of `\mathbb{N}` is formalized with the
-`Peano Axioms <http://de.wikipedia.org/wiki/Peano-Axiome>`_.
+`Peano Axioms <https://de.wikipedia.org/wiki/Peano-Axiome>`_.
 
 .. admonition:: Note
 
@@ -71,8 +71,8 @@ It has additionally the reversible process or direction.
 If you understand only count with `\mathbb{N}`, 
 then `\mathbb{Z}=\mathbb{N}\times\{+,-\}`. 
 Then `\mathbb{N}` is not a subset of `\mathbb{Z}`, but an
-`isomorph <http://en.wikipedia.org/wiki/Homomorphism>`_
-`embedding <http://en.wikipedia.org/wiki/Embedding>`_.
+`isomorph <https://en.wikipedia.org/wiki/Homomorphism>`_
+`embedding <https://en.wikipedia.org/wiki/Embedding>`_.
 
 .. admonition:: Note
 

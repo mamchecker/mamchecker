@@ -7,9 +7,9 @@
 
 The numbers are their own concepts independent from their representations.
 
-The `wikipedia article <http://en.wikipedia.org/wiki/Numeral_system>`_ 
+The `wikipedia article <https://en.wikipedia.org/wiki/Numeral_system>`_ 
 gives a great overview beyond the 
-`positional system <http://en.wikipedia.org/wiki/Positional_notation>`_ 
+`positional system <https://en.wikipedia.org/wiki/Positional_notation>`_ 
 described here.
 
 Positional System 

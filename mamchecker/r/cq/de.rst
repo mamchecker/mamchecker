@@ -42,7 +42,7 @@ hier Kombinationen einer Menge M `n` mal mit sich selbst.  `|M\times \dots
 **Operation** ist ein anderer Name für eine **Funktion** (:lnk:`r.cr`),
 wenn bestimmte Eigenschaften, wie **Assoziativegesetz** oder **Kommutativgesetz** erfüllt werden.
 Eine **Operation** lässt sich gut mit einem Parameter zu einer neuen Menge {(Wert,Operation)}
-vereinen (siehe Zahlen: :lnk:`r.ci` und `Lambda Kalkül <http://de.wikipedia.org/wiki/Lambda-Kalkül>`_) 
+vereinen (siehe Zahlen: :lnk:`r.ci` und `Lambda Kalkül <https://de.wikipedia.org/wiki/Lambda-Kalkül>`_) 
 Diese Mengen bestehen dann aus Anweisungen oder Vorgängen, oder besser **Operatoren**,
 die dann auf etwas angewandt werden können. Z.B. 3m = (3,mal) Meter, d.h. 3 = (3,mal).
 

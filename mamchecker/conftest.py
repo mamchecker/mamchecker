@@ -8,7 +8,7 @@ The system must have py.test2, i.e. the python2 version.
 # ignore:
 # WARNING:root:No ssl package found. urlfetch will not be able to validate SSL certificates.
 
-# http://alex.cloudware.it/2012/02/your-app-engine-app-in-python-shell.html
+# https://alex.cloudware.it/2012/02/your-app-engine-app-in-python-shell.html
 
 import sys
 import os
@@ -38,7 +38,7 @@ sys.path += [gaepath+'/lib/webob-1.2.3']
 from google.appengine.ext import testbed
 
 # mark step-wise tests with: @pytest.mark.incremental
-# http://stackoverflow.com/questions/12411431/pytest-how-to-skip-the-rest-of-tests-in-the-class-if-one-has-failed/12579625#12579625
+# https://stackoverflow.com/questions/12411431/pytest-how-to-skip-the-rest-of-tests-in-the-class-if-one-has-failed/12579625#12579625
 
 
 def pytest_runtest_makereport(item, call):

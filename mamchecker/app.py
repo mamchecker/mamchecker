@@ -67,7 +67,7 @@ from simpleauth import SimpleAuthHandler
 
 class PageHandler(webapp2.RequestHandler, SimpleAuthHandler, AuthUser):
 
-    '''http://mamchecker.appspot.com/<lang>/[<pagename>]?<query_string>
+    '''https://mamchecker.appspot.com/<lang>/[<pagename>]?<query_string>
 
     pagename defaults to 'content'
 
@@ -97,7 +97,7 @@ class PageHandler(webapp2.RequestHandler, SimpleAuthHandler, AuthUser):
         'facebook': {
             'id': lambda id: (
                 'avatar_url',
-                'http://graph.facebook.com/{0}/picture?type=large'.format(id)),
+                'https://graph.facebook.com/{0}/picture?type=large'.format(id)),
             'name': 'name',
             'link': 'link'},
         'google': {
@@ -125,7 +125,7 @@ class PageHandler(webapp2.RequestHandler, SimpleAuthHandler, AuthUser):
                 contact.get('email')),
             'id': lambda id: (
                 'link',
-                'http://foursquare.com/user/{0}'.format(id))},
+                'https://foursquare.com/user/{0}'.format(id))},
         'openid': {
             'id': lambda id: (
                 'avatar_url',
@@ -134,17 +134,17 @@ class PageHandler(webapp2.RequestHandler, SimpleAuthHandler, AuthUser):
             'email': 'link'}}
     #
     # secrets need to be uploaded manually
-    # http://stackoverflow.com/questions/1782906/how-do-i-activate-the-interactive-console-on-app-engine
+    # https://stackoverflow.com/questions/1782906/how-do-i-activate-the-interactive-console-on-app-engine
     # https://developers.google.com/appengine/docs/adminconsole/
     # https://developers.google.com/appengine/articles/remote_api
-    # remote_api_shell.py #http://mamchecker.appspot.com/admin/interactive is off
+    # remote_api_shell.py #https://mamchecker.appspot.com/admin/interactive is off
     #$remote_api_shell.py -s mamchecker.appspot.com
     #>> import mamchecker.model as mdl
     #>> mdl.Secret.query().fetch()
     #>> mdl.Secret.get_or_insert("test", secret = "test secret")
     #
     # client ids need to be registed:
-    # http://code.google.com/apis/console
+    # https://code.google.com/apis/console
     # https://developers.facebook.com/apps
     # https://www.linkedin.com/secure/developer
     # https://dev.twitter.com/apps

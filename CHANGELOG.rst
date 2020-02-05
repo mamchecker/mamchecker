@@ -2,18 +2,6 @@
 CHANGELOG
 =========
 
-The Changelog works as project log.
-Top entry is `[TODO]`.
-Entries have a short description and a link to documents with further detail.
-
-TODO
-====
-
-- Adapt to changes in used 3rd party packages
-- Create an installer using specific versions of 3rd party packages
-- Allow using content repos from other github accounts
-- Make client apps
-
 1.0.0
 =====
 

@@ -21,11 +21,11 @@ depending on the structure the morphisms have special names (`f\circ g (D_g) = f
 
 - Monomorphism: `f\circ g=f\circ h \implies g=h` (left cancellation of `f`) 
   or `f` injective for set objects 
-  (`proof <http://www.proofwiki.org/wiki/Injection_iff_Monomorphism_in_Category_of_Sets>`_)
+  (`proof <https://www.proofwiki.org/wiki/Injection_iff_Monomorphism_in_Category_of_Sets>`_)
 
 - Epimorphism: `g\circ f=h \circ f \implies g=h` (right cancellation) 
   or `f` surjective for set objects 
-  (`proof <http://www.proofwiki.org/wiki/Surjection_iff_Epimorphism_in_Category_of_Sets>`_)
+  (`proof <https://www.proofwiki.org/wiki/Surjection_iff_Epimorphism_in_Category_of_Sets>`_)
   
 - Isomorphism: `f` has `g` such that `f\circ g=id_{D_g}` and `g \circ f = id_{D_f}`
   (left inverse = right inverse) or `f` bijektive for set objects 

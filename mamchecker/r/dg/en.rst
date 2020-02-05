@@ -12,7 +12,7 @@
 We will derive the gain of a band-stop filter using Thevenin's method.
 
 Our starting circuit is the following from 
-`Op Amps for EveryOne (5-10) <http://www.ti.com/lit/an/slod006b/slod006b.pdf>`_.
+`Op Amps for EveryOne (5-10) <https://www.ti.com/lit/an/slod006b/slod006b.pdf>`_.
 
 
 .. texfigure:: c1.tex

@@ -16,31 +16,31 @@ from mamchecker.model import problemCtx
 
 def test_routing():
     match = app.router.match(
-        webapp2.Request.blank('http://mamchecker.appspot.com'))
+        webapp2.Request.blank('https://mamchecker.appspot.com'))
     assert match[0].name == 'entry'
     assert match[1:][1] == {}
     match = app.router.match(
-        webapp2.Request.blank('http://mamchecker.appspot.com/'))
+        webapp2.Request.blank('https://mamchecker.appspot.com/'))
     assert match[0].name == 'entry_'
     assert match[1:][1] == {}
-    bl = webapp2.Request.blank('http://mamchecker.appspot.com/en')
+    bl = webapp2.Request.blank('https://mamchecker.appspot.com/en')
     assert bl.query_string == ''
     match = app.router.match(bl)
     assert match[0].name == 'entry_lang'
     assert match[1:][1] == {'lang': 'en'}
-    bl = webapp2.Request.blank('http://mamchecker.appspot.com/en/?b')
+    bl = webapp2.Request.blank('https://mamchecker.appspot.com/en/?b')
     match = app.router.match(bl)
     assert match[0].name == 'entry_lang_'
     assert match[1:][1] == {'lang': 'en'}
     bl = webapp2.Request.blank(
-        'http://mamchecker.appspot.com/en/content?r.a=2&r.b=3')
+        'https://mamchecker.appspot.com/en/content?r.a=2&r.b=3')
     match = app.router.match(bl)
     assert match[0].name == 'page'
     assert match[1:][1] == {'lang': 'en', 'pagename': 'content'}
     assert bl.query_string == 'r.a=2&r.b=3'
     assert int(bl.params['r.a']) == 2 and int(bl.params['r.b']) == 3
     bl = webapp2.Request.blank(
-        'http://mamchecker.appspot.com/en/test/sub?r.a=2&r.b=3')
+        'https://mamchecker.appspot.com/en/test/sub?r.a=2&r.b=3')
     match = app.router.match(bl)
     assert match[0].name == 'page'
     assert match[1:][1] == {'lang': 'en', 'pagename': 'test/sub'}
@@ -54,7 +54,7 @@ def mamapp(request):#,gaetestbed): #produces PYTEST_CURRENT_TEST KeyError
     return TA(make_app())
 
 # see
-# http://stackoverflow.com/questions/12538808/pytest-2-3-adding-teardowns-within-the-class
+# https://stackoverflow.com/questions/12538808/pytest-2-3-adding-teardowns-within-the-class
 # but cleanup is not necessary if testbed is in-memory
 
 def url_lang(url):

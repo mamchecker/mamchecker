@@ -34,36 +34,36 @@ reasons.
 
 On your PC you will need
 
-- `git <http://rogerdudler.github.io/git-guide/>`_ 
-  (use `msys git <http://msysgit.github.io/>`_ on Windows).
-  `Introduction <http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup>`_
+- `git <https://rogerdudler.github.io/git-guide/>`_ 
+  (use `msys git <https://msysgit.github.io/>`_ on Windows).
+  `Introduction <https://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup>`_
 
-- `python <http://www.python.org/download/releases/2.7/>`_  
-  with `pip <http://stackoverflow.com/questions/4750806/how-to-install-pip-on-windows>`_
+- `python <https://www.python.org/download/releases/2.7/>`_  
+  with `pip <https://stackoverflow.com/questions/4750806/how-to-install-pip-on-windows>`_
   (Python 3 is not yet supported by Google Appengine)
 
 - `google appengine <https://developers.google.com/appengine/downloads>`_
 
-- `doit <http://pydoit.org/>`_ (``pip install doit``)
+- `doit <https://pydoit.org/>`_ (``pip install doit``)
 
-- `pytest <http://pytest.org/latest/>`_ for testing  (``pip install pytest``)
+- `pytest <https://pytest.org/latest/>`_ for testing  (``pip install pytest``)
 
 and optionally
 
-- `sphinx <http://sphinx-doc.org/latest/install.html>`_ if you want to use restructured text (rst)
+- `sphinx <https://sphinx-doc.org/latest/install.html>`_ if you want to use restructured text (rst)
   (``pip install sphinx``). 
 
-- latex (use `miktex <http://miktex.org/>`_ on Windows) for sphinx plugins
+- latex (use `miktex <https://miktex.org/>`_ on Windows) for sphinx plugins
   (`sphinxcontrib.tikz <https://bitbucket.org/philexander/tikz>`_,
   `sphinxcontrib.texfigure <https://bitbucket.org/prometheus/sphinxcontrib-texfigure>`_).
 
-- `coverage <http://nedbatchelder.com/code/coverage/>`_ (``pip install coverage``)
+- `coverage <https://nedbatchelder.com/code/coverage/>`_ (``pip install coverage``)
 
-As browser Chrome has the best `HTML5 <http://html5test.com/results/desktop.html>`_ support
+As browser Chrome has the best `HTML5 <https://html5test.com/results/desktop.html>`_ support
 and a good debugging environment for Javascript.
 
 For editing use your editor of choice. It should allow you to execute selected python code 
-(`pydev <http://pydev.org/manual_adv_interactive_console.html>`_, `vim <http://www.vim.org/>`_).
+(`pydev <https://pydev.org/manual_adv_interactive_console.html>`_, `vim <https://www.vim.org/>`_).
 
 Get Started
 -----------
@@ -77,8 +77,8 @@ Fork it on github.
 
         git clone --recursive https://github.com/mamchecker/mamchecker.git
 
-      If you didn't use `--recursive <http://stackoverflow.com/questions/3796927/how-to-git-clone-including-submodules>`_ 
-      you have to additionally do `git submodule update --init --recursive <http://stackoverflow.com/questions/9493645/fork-github-repo-with-submodules>`_).
+      If you didn't use `--recursive <https://stackoverflow.com/questions/3796927/how-to-git-clone-including-submodules>`_ 
+      you have to additionally do `git submodule update --init --recursive <https://stackoverflow.com/questions/9493645/fork-github-repo-with-submodules>`_).
 
 Add yourself as author.
 
@@ -105,7 +105,7 @@ Add exercises. To see how easy that is, look at the examples in the existing ``r
       (see ``from_py`` in ``hlp.py`` and examples in the ``r``-folder).
 
     - ``<lang>.html`` is html and ``{{'{{}}'}}``-enclosed or ``%``-started python 
-      (`SimpleTemplate <http://bottlepy.org/docs/dev/stpl.html>`_) just for the one exercise.
+      (`SimpleTemplate <https://bottlepy.org/docs/dev/stpl.html>`_) just for the one exercise.
       Also use the template ``getorshow`` as done in the examples in the ``r``-folder.
       The generated HTML will be enclosed in a ``<div>`` 
       (see ``inc`` in ``util.py``).
@@ -139,7 +139,7 @@ Add exercises. To see how easy that is, look at the examples in the existing ``r
         |
 
     - From above the mamchecker folder (where app.yaml is) do ``dev_appserver mamchecker``
-      and test your exercise on the browser (``http://localhost:8080/en/?<yourid>.<problemid>``).
+      and test your exercise on the browser (``https://localhost:8080/en/?<yourid>.<problemid>``).
       Check different nonsense,  almost correct and correct inputs.
 
 Ready for commit.
